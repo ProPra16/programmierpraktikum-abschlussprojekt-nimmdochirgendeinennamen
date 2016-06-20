@@ -1,0 +1,15 @@
+Organisation:
+	Planung erster Treffen
+	Klären offener Fragen (IDE, interne Termine, etc)
+
+Projekt:
+	Vorbereiten des ersten Treffen:
+		Caro 	arbeitet sich in Gradle ein
+		Dominik setzte GitHub auf
+		Kai C. 	schaut sich Travis an
+		Jule 	bereitet eine allgemeine Projektstruktur vor
+		Kai H. 	überlegt sich ein Design
+
+GitHub:
+	Erstellung einer Gruppe
+	Comitten von Lizens, Readme und Skelett (.gitignore, src, etc)
