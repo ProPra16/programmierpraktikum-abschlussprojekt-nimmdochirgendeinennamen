@@ -1,0 +1,10 @@
+Offene Fragen:
+
+Welche Bibliotheken außerhalb des JDK und der virtual-kata-lib sind erlaubt?
+Alle
+
+Wie wird der Katalog aufgebaut?
+Der Katalog selber wird als Ordner dargestellt und jedes Textdokument innerhalb ist eine Aufgabe
+
+Wie und wann wird der Katalog geladen?
+Beim Starten wird nach dem Pfad des Kataloges gefragt. Der Katalog kann also innerhalb einer laufenden Instanz nicht mehr geändert werden.
