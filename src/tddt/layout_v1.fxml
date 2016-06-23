@@ -16,6 +16,8 @@
                      <items>
                         <MenuItem mnemonicParsing="false" text="ON" />
                         <MenuItem mnemonicParsing="false" text="OFF" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Set time" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Tracker">
@@ -56,7 +58,7 @@
                   <Label text="Refactor" GridPane.rowIndex="4" />
                   <Label text="Active Problem: X + (if Babysteps)Time Left" wrapText="true" GridPane.rowIndex="5" />
                   <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Next Step" />
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Previous Step" GridPane.rowIndex="1" />
+                  <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Previous Step" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <TextArea maxHeight="Infinity" maxWidth="Infinity" text="// tests here" wrapText="true" GridPane.vgrow="ALWAYS" />
