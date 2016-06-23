@@ -1,3 +1,7 @@
+Erweiterungen:
+
+Babysteps und Tracking
+
 Offene Fragen:
 
 Welche Bibliotheken außerhalb des JDK und der virtual-kata-lib sind erlaubt?
@@ -7,4 +11,14 @@ Wie wird der Katalog aufgebaut?
 Der Katalog selber wird als Ordner dargestellt und jedes Textdokument innerhalb ist eine Aufgabe
 
 Wie und wann wird der Katalog geladen?
-Beim Starten wird nach dem Pfad des Kataloges gefragt. Der Katalog kann also innerhalb einer laufenden Instanz nicht mehr geändert werden.
+Beim Starten wird nach dem Pfad des Kataloges gefragt(FileChooser). Der Katalogumfang kann also innerhalb einer laufenden Instanz nicht mehr geändert werden.
+
+Wo und wann wird der Inhalt eines Kataloges geladen?
+Um Overhead zu minimieren, werden die Kataloge innerhalb der GUI geladen und in die TextAreas eingefügt.
+
+Was ist der Inhalt einer Übung?
+Vorlagen für die Klasse und Vorlagen für die Tests. Die Konfiguration der Erweiterungen ist ausgelagert.
+
+Wo konfiguriert man die Erweiterungen?
+Tracking ist nicht abstellbar, da nicht erwähnt und Grundfunktionalitäten gewährleistet werden
+Babysteps kann über das Menü unter "Options/Babysteps" an und ausgeschaltet werden und per TextInputDialog eine Zeit gesetzt werden.
