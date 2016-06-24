@@ -36,3 +36,5 @@ Zwischen 1 bis 180 Sekunden.
 
 Wie wird das Tracking realisiert? Welche Verfügbarkeit wird erwartet?
 Informationen werden pro Sitzung in einfachen Textdateien gespeichert. Die Chart (Analyse) wertet die Textdateien einfach aus. Weitere Details dem implementierenden überlassen.
+
+
