@@ -16,9 +16,23 @@ Beim Starten wird nach dem Pfad des Kataloges gefragt(FileChooser). Der Katalogu
 Wo und wann wird der Inhalt eines Kataloges geladen?
 Um Overhead zu minimieren, werden die Kataloge innerhalb der GUI geladen und in die TextAreas eingefügt.
 
+Welches Format haben Übungen?
+<code>
+...
+<test>
+
+Wo befindet sich die Aufgabenstellung?
+Nicht die Zuständigkeit des Programmes. Datei Header als comment
+
 Was ist der Inhalt einer Übung?
 Vorlagen für die Klasse und Vorlagen für die Tests. Die Konfiguration der Erweiterungen ist ausgelagert.
 
 Wo konfiguriert man die Erweiterungen?
 Tracking ist nicht abstellbar, da nicht erwähnt und Grundfunktionalitäten gewährleistet werden
 Babysteps kann über das Menü unter "Options/Babysteps" an und ausgeschaltet werden und per TextInputDialog eine Zeit gesetzt werden.
+
+Welche Werte in welcher Form können für Babysteps angegeben werden?
+Zwischen 1 bis 180 Sekunden.
+
+Wie wird das Tracking realisiert? Welche Verfügbarkeit wird erwartet?
+Informationen werden pro Sitzung in einfachen Textdateien gespeichert. Die Chart (Analyse) wertet die Textdateien einfach aus. Weitere Details dem implementierenden überlassen.

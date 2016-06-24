@@ -1,0 +1,23 @@
+Main-Flow:
+TDDT creates FileChooser
+FileChooser gets Path
+TDDT does basic javafx stuff
+Controller waits for user input
+
+everything else is eventhandling, wrapping and dependency-juggling
+----------------------------------------------------------
+Katalog structure:
+<code>
+...
+<test>
+----------------------------------------------------------
+
+Structure classes:
+TDDT extends Application, loads TDDT_layout.fxml, CSS, initialize
+Controller , onInitialize creates FileChooser for getting KatalogPath, displaying GUI, holding (String)KatalogPath, (int)/(enum)Phase, boolean Babysteps, (long)/(TimeObject)PhaseStarted
+Tracker, dumps Information into Textfiles, can display Chart
+Chart extends Application, reads Tracker-files and displays a Pie chart
+
+Utility classes:
+KatalogLoader taking Path and taskname, getting task, holding code and test of each task, "getter" for code and test part
+
