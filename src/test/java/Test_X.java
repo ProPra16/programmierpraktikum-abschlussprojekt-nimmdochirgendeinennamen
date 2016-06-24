@@ -7,6 +7,6 @@ import org.junit.Test;
 public class Test_X {
 	@Test
 	public void AlwaysTrue() {
-		assertEquals(0, 1);
+		assertEquals(0, 0);
 	}
 }
