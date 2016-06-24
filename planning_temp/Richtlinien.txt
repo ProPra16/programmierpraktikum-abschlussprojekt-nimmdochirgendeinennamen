@@ -1,0 +1,38 @@
+Projektrichtlinien
+
+Inhalt:
+├── planning_temp
+├── protokolle
+├── resources
+└── src
+    ├── tddt
+    │   ├── layout_v1.fxml
+    │   └── TDDT.java
+    └── test
+        └── Test_X.java
+
+	test:
+		Jeder schreibt eine Test-Klasse für seine Funktionalität
+
+	tddt:
+		Beinhaltet alle erzeugten Klassen (samt Interfaces).
+		Nacher wird formatiert
+
+	resources:
+		Bilder, Fonts, Styles, etc
+
+	protokolle:
+		Form:    TT_MM_JJ.txt
+		Vorlage: template.txt
+
+GitHub:
+	Interfaces werden nicht außerhalb eines Treffens geändert
+	Jeder arbeitet auf seinen eigenen Branch und mergt nur getesteten und dokumentierten Code
+
+Aufteilung:
+	Caro 	: Chart-Utility-Klassen (TrackerLoader) + Bilder für Phasendarstellung + CSS
+	Dominik : Controller und GUI
+	Kai C. 	: Chart-Klasse
+	Jule 	: Tracker
+	Kai H. 	: KatalogLoader
+
