@@ -27,7 +27,7 @@ Inhalt:
 
 GitHub:
 	Interfaces werden nicht außerhalb eines Treffens geändert
-	Jeder arbeitet auf seinen eigenen Branch und mergt nur getesteten und dokumentierten Code
+	Jeder arbeitet auf einen Branch und mergt nur getesteten und dokumentierten Code
 
 Aufteilung:
 	Caro 	: Chart-Utility-Klassen (TrackerLoader) + Bilder für Phasendarstellung + CSS
