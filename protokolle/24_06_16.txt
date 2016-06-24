@@ -1,0 +1,17 @@
+Review der letzten Woche:
+	Erreichte Ziele:
+		Grobe Struktur steht
+		Aufgaben eingeteilt
+	Unerreichte Ziele:
+		-
+
+Projektziele/TODO:
+	Schnittstellen bis Sonntag zur TDDT-Klasse einreichen
+	Anfangen zu implementieren
+
+Individuelle Ziele:
+	Caro 	: Chart-Utility-Klassen (TrackerLoader) + Bilder für Phasendarstellung
+	Dominik : Controller und GUI
+	Kai C. 	: Chart-Klasse
+	Jule 	: Tracker
+	Kai H. 	: KatalogLoader
