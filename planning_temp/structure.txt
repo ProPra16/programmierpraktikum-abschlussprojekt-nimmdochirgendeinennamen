@@ -1,7 +1,7 @@
 Main-Flow:
-TDDT creates FileChooser
-FileChooser gets Path
 TDDT does basic javafx stuff
+Controller initialize calls FileChooser
+FileChooser gets path
 Controller waits for user input
 
 everything else is eventhandling, wrapping and dependency-juggling
@@ -19,5 +19,6 @@ Tracker, dumps Information into Textfiles, can display Chart
 Chart extends Application, reads Tracker-files and displays a Pie chart
 
 Utility classes:
-KatalogLoader taking Path and taskname, getting task, holding code and test of each task, "getter" for code and test part
+KatalogLoader, taking Path and taskname, getting task, holding code and test of each task, "getter" for code and test part
+TrackerLoader, loading and formating Tracker-files
 
