@@ -7,9 +7,9 @@ Controller waits for user input
 everything else is eventhandling, wrapping and dependency-juggling
 ----------------------------------------------------------
 Katalog structure:
-<code>
 ...
-<test>
+<Code-Test-Border, do not remove>
+...
 ----------------------------------------------------------
 
 Structure classes:

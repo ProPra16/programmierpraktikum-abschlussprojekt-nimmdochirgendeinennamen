@@ -11,18 +11,18 @@ Wie wird der Katalog aufgebaut?
 Der Katalog selber wird als Ordner dargestellt und jedes Textdokument innerhalb ist eine Aufgabe
 
 Wie und wann wird der Katalog geladen?
-Beim Starten wird nach dem Pfad des Kataloges gefragt(FileChooser). Der Katalogumfang kann also innerhalb einer laufenden Instanz nicht mehr geändert werden.
+Über einen FileChooser, der über das Menü unter "Task/Open" aufgerufen werden kann.
 
 Wo und wann wird der Inhalt eines Kataloges geladen?
-Um Overhead zu minimieren, werden die Kataloge innerhalb der GUI geladen und in die TextAreas eingefügt.
+Über eine Task-Klasse, die das Lesen und Formatieren übernimmt
 
 Welches Format haben Übungen?
-<code>
-...
-<test>
+...//code
+<Code-Test-Border, do not remove>
+...//test
 
 Wo befindet sich die Aufgabenstellung?
-Nicht die Zuständigkeit des Programmes. Datei Header als comment
+Nicht die Zuständigkeit des Programmes. Datei Header als comment bietet sich an
 
 Was ist der Inhalt einer Übung?
 Vorlagen für die Klasse und Vorlagen für die Tests. Die Konfiguration der Erweiterungen ist ausgelagert.
@@ -36,5 +36,7 @@ Zwischen 1 bis 180 Sekunden.
 
 Wie wird das Tracking realisiert? Welche Verfügbarkeit wird erwartet?
 Informationen werden pro Sitzung in einfachen Textdateien gespeichert. Die Chart (Analyse) wertet die Textdateien einfach aus. Weitere Details dem implementierenden überlassen.
+
+
 
 
