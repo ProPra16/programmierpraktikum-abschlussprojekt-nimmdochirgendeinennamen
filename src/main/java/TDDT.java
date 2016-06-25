@@ -14,9 +14,9 @@ public class TDDT extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/tddt/layout_v1.fxml"));
-
-			Scene scene = new Scene(root, 600, 600);
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/main/java/layout_v1.fxml"));
+			Parent root = fxmlLoader.load();
+			Scene scene = new Scene(root, 800, 500);
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
