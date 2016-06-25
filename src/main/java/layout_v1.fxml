@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="619.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" prefHeight="476.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Controller">
    <children>
       <MenuBar layoutX="175.0" prefHeight="29.0" prefWidth="189.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
+            <Menu mnemonicParsing="false" text="Task">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#newTask" text="Open" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Options">
                <items>
                   <Menu mnemonicParsing="false" text="Babysteps">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="ON" />
-                        <MenuItem mnemonicParsing="false" text="OFF" />
+                        <MenuItem mnemonicParsing="false" onAction="#turnBabystepsOn" text="ON" />
+                        <MenuItem mnemonicParsing="false" onAction="#turnBabystepsOff" text="OFF" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Set time" />
+                        <MenuItem mnemonicParsing="false" onAction="#setBabystepsTime" text="Set time" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Tracker">
@@ -26,7 +33,6 @@
                       <MenuItem mnemonicParsing="false" text="Show all" />
                     </items>
                   </Menu>
-                  <MenuItem mnemonicParsing="false" text="Quit" />
                </items></Menu>
         </menus>
       </MenuBar>
@@ -47,22 +53,32 @@
               <rowConstraints>
                   <RowConstraints maxHeight="61.0" minHeight="46.0" prefHeight="48.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="24.0" minHeight="9.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="-Infinity" minHeight="118.0" prefHeight="118.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="118.0" prefHeight="118.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="118.0" prefHeight="118.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="118.0" prefHeight="118.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Write a failing test" wrapText="true" GridPane.rowIndex="2" />
-                  <Label text="Make test pass" wrapText="true" GridPane.rowIndex="3" />
-                  <Label text="Refactor" GridPane.rowIndex="4" />
-                  <Label text="Active Problem: X + (if Babysteps)Time Left" wrapText="true" GridPane.rowIndex="5" />
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Next Step" />
-                  <Button disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Previous Step" GridPane.rowIndex="1" />
+                  <Button fx:id="btnNextStep" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#nextPhase" text="Next Step" />
+                  <Button fx:id="btnPrevStep" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#prevPhase" text="Previous Step" GridPane.rowIndex="1" />
+                  <ImageView fx:id="imgTest" cache="true" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../../pictures/WriteFailingTest_v2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgCode" fitHeight="120.0" fitWidth="120.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@../../../pictures/MakeTestPass_v2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgRefactor" fitHeight="120.0" fitWidth="120.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../../pictures/Refactor_v2.png" />
+                     </image>
+                  </ImageView>
                </children>
             </GridPane>
-            <TextArea maxHeight="Infinity" maxWidth="Infinity" text="// tests here" wrapText="true" GridPane.vgrow="ALWAYS" />
-            <TextArea disable="true" maxHeight="Infinity" maxWidth="Infinity" text="// code here" GridPane.columnIndex="1" />
+            <TextArea fx:id="txtCode" disable="true" maxHeight="Infinity" maxWidth="Infinity" text="// code here" GridPane.vgrow="ALWAYS" />
+            <TextArea fx:id="txtTest" maxHeight="Infinity" maxWidth="Infinity" text="// test here" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>
