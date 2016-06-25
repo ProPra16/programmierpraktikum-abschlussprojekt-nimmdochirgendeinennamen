@@ -1,0 +1,17 @@
+public class task2 {
+	//Task: Print out "World Hello!"
+	public static void main(String[] args) {
+
+	}
+}
+<Code-Test-Border, do not remove>
+package test.java;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class Task2Test {
+	@Test
+	public void test() {
+		
+	}
+}
