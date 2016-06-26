@@ -47,7 +47,7 @@ public class Controller {
 			if (phase < 2) phase++;
 			else 		   phase = 0;
 
-			updatePictures(phase);
+			updateGUIElements(phase);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class Controller {
 			if (phase == 0)
 				btnPrevStep.setDisable(true);
 		}
-		updatePictures(phase);
+		updateGUIElements(phase);
 	}
 
 	@FXML
@@ -111,37 +111,48 @@ public class Controller {
 	private boolean checkTest() {
 
 		//return if not succeeded
+		//settings for next phase
 		btnPrevStep.setDisable(false);
+		txtTest.setDisable(true);
+		txtCode.setDisable(false);
 		babysteps.startPhase();
 		return true;
 	}
 
 	private boolean checkCode() {
 		//return if not succeeded
+		//settings for next phase
 		babysteps.startPhase();
 		return true;
 	}
 
 	private boolean checkRefactor() {
 		//return if not succeeded
+		//settings for next phase
 		btnPrevStep.setDisable(true);
 		babysteps.startPhase();
 		return true;
 	}
 
-	private void updatePictures(int phase) {
+	private void updateGUIElements(int phase) {
 		switch (phase) {
 			case 0: imgTest.setOpacity(1.0);
 					imgCode.setOpacity(0.2);
 					imgRefactor.setOpacity(0.2);
+					txtTest.setDisable(false);
+					txtCode.setDisable(true);
 					break;
 			case 1: imgTest.setOpacity(0.2);
 					imgCode.setOpacity(1.0);
 					imgRefactor.setOpacity(0.2);
+					txtTest.setDisable(true);
+					txtCode.setDisable(false);
 					break;
 			case 2: imgTest.setOpacity(0.2);
 					imgCode.setOpacity(0.2);
 					imgRefactor.setOpacity(1.0);
+					txtTest.setDisable(true);
+					txtCode.setDisable(false);
 					break;
 		}
 	}
