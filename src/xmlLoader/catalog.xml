@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <exercises>
     <exercise id="0">
-        <name>Römische Zahlen</name>
-        <description>Konvertiert arabische in römische Zahlen.</description>
+        <name></name>
+        <description></description>
         <classes>
-            <class name ="RomanNumberConverter">
-                public class RomanNumberConverter{
+            <class name ="">
+                public class Test1{
 
                 }
             </class>
         </classes>
         <tests>
-            <test name ="RomanNumberConverterTest">
+            <test name ="">
                 import static org.junit.Assert.*;
                 import org.junit.Test;
 
-                public class RomanNumbersTest{
+                public class Test{
 
                     @Test
                     public void testSomething(){
