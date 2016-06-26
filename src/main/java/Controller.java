@@ -110,24 +110,22 @@ public class Controller {
 
 	private boolean checkTest() {
 
-		//return if not succeeded
+		//return false if not succeeded
 		//settings for next phase
 		btnPrevStep.setDisable(false);
-		txtTest.setDisable(true);
-		txtCode.setDisable(false);
 		babysteps.startPhase();
 		return true;
 	}
 
 	private boolean checkCode() {
-		//return if not succeeded
+		//return false if not succeeded
 		//settings for next phase
 		babysteps.startPhase();
 		return true;
 	}
 
 	private boolean checkRefactor() {
-		//return if not succeeded
+		//return false if not succeeded
 		//settings for next phase
 		btnPrevStep.setDisable(true);
 		babysteps.startPhase();
