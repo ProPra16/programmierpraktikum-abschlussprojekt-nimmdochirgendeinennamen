@@ -1,0 +1,22 @@
+Die Klasse Tracking misst, wie viel Zeit in den einzelnen Phasen verbracht wird. 
+Mit den Methoden nextPhase() und greenBack() wird beim wechseln der Phase in eine Textdatei geschrieben, wie viele Sekunden bisher (seit der TDDT gestartet wurde) in jeder Phase verbracht wurden. Die in Millisekunden gemessene Zeit wird dazu auf Sekunden abgerundet.
+Die Textdatei kann dann zum erstellen eines Charts zu einem beliebigen Zeitpunkt ausgewertet werden.
+
+Um Tracking zu starten wird zu Beginn der ersten RED-Phase ein Tracker-Objekt erstellt.
+Die Klasse verfolgt selbst, in welcher Phase sich der Nutzer befindet.
+
+Konstruktor:
+Tracker tracker = new Tracker();
+
+nextPhase() wechselt in die nächste Phase
+greenBack() wechselt von GREEN zurück nach RED
+
+Format der Textdatei:
+red
+[(int)bis jetzt in RED verbrachte Sekunden]
+green
+[(int)bis jetzt in GREEN verbrachte Sekunden]
+refactor
+[(int)bis jetzt in REFACTOR verbrachte Sekunden]
+
+
