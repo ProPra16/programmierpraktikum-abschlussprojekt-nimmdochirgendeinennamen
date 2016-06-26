@@ -14,10 +14,10 @@ greenBack() wechselt von GREEN zurück nach RED
 
 Format der Textdatei:
 red
-[(int)bis jetzt in RED verbrachte Sekunden]
+(int)bis jetzt in RED verbrachte Sekunden
 green
-[(int)bis jetzt in GREEN verbrachte Sekunden]
+(int)bis jetzt in GREEN verbrachte Sekunden
 refactor
-[(int)bis jetzt in REFACTOR verbrachte Sekunden]
+(int)bis jetzt in REFACTOR verbrachte Sekunden
 
 
