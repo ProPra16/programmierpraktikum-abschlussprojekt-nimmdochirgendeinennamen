@@ -3,7 +3,7 @@ Mit den Methoden nextPhase() und greenBack() wird beim wechseln der Phase in ein
 Die in Millisekunden gemessene Zeit wird dazu auf Sekunden abgerundet.
 Die Textdatei kann dann zum erstellen eines Charts zu einem beliebigen Zeitpunkt ausgewertet werden.
 
-Um Tracking zu starten wird zu Beginn der ersten RED-Phase ein Tracker-Objekt erstellt.
+Um Tracking zu starten wird zu Beginn der ersten RED-Phase (nach dem Laden aus dem Katalog) ein Tracker-Objekt erstellt.
 Die Klasse verfolgt selbst, in welcher Phase sich der Nutzer befindet.
 
 Konstruktor:
