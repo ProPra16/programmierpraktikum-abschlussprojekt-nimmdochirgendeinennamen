@@ -5,9 +5,6 @@ public interface LoaderInterface {
     //load a catalog from an xml file.
     void loadCatalog();
 
-    //@return ID of current node
-    int getID();
-
     //@return Name of the node with passed ID
     String getNameByID(int id);
 
