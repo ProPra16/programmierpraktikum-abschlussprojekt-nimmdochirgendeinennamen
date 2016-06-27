@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <exercises>
-    <exercise id="0">
-        <name></name>
+    <exercise name="0">
         <description></description>
         <classes>
             <class name ="">
