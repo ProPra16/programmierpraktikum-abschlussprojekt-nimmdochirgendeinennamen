@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <exercises>
     <exercise name="0">
-        <description></description>
+        <description>Description of exercise</description>
         <classes>
             <class name ="">
                 public class Test1{
