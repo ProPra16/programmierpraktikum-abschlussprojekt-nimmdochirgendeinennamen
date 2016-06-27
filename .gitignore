@@ -4,6 +4,7 @@
 .metadata
 bin/
 tmp/
+lib/
 *.tmp
 *.bak
 *.swp
