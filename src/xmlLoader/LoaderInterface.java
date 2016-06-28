@@ -8,16 +8,16 @@ public interface LoaderInterface {
     void loadCatalog(File file);
 
     //@return name of the class at passed IDX
-    String getClassName(int idx);
+    String getClassName(int idx, int idx2);
 
     //@return name of the test at passed IDX
-    String getTestName(int idx);
+    String getTestName(int idx, int idx2);
 
     //@return  class at passed IDX
-    String getClass(int idx);
+    String getClass(int idx, int idx2);
 
     //@return test at passed IDX
-    String getTest(int idx);
+    String getTest(int idx, int idx2);
 
     //@return  name of the exercise at passed idx
     String getExerciseName(int idx);

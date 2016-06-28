@@ -5,30 +5,25 @@
         <!-- Enter classes needed for the exercise, each class needs to be surrounded by a class tag with a name value -->
         <classes>
             <class name ="TestClass">
-public class TestClass{
-    public String getTest(){
-        return "Test Klasse!";
-    }
-}
+                testable ClassCode
+            </class>
+            <class name ="TestClass2">
+                testable ClassCode2
             </class>
         </classes>
         <!-- Here comes the test code. -->
-        <test name ="TestExTester">
-import static org.junit.Assert.*;
-import org.junit.Test;
-
-public class TestExTester{
-
-    @Test
-    public void testSomething(){
-        assertEquals(null,null);
-    }
-}
-        </test>
+        <tests>
+            <test name ="TestExTester">
+                Testable testtext
+            </test>
+            <test name ="TestExTester2">
+                Testable testtext2
+            </test>
+        </tests>
         <!-- Set config values for the exercise. -->
         <config>
             <!-- value may only contain a boolean value [TRUE / FALSE]. Time is measured in seconds. -->
-            <babysteps value ="False" time="10"/>
+            <babysteps value ="true" time="10"/>
             <!-- value may only contain a boolean value [TRUE / FALSE] -->
             <timetracking value="True"/>
         </config>
@@ -36,36 +31,24 @@ public class TestExTester{
 
     <!-- Exercise 2 -->
     <exercise name="TestEx2">
-        <description>Description comes here</description>
+        <description>Description comes here2</description>
 
         <classes>
-            <class name ="TestClass2">
-public class TestClass2{
-    public String getTest(){
-        return "Test Klasse!";
-    }
-}
+            <class name ="TestClass2.1">
+                Testable classcode2.1
             </class>
         </classes>
-
-        <test name ="TestExTester2">
-import static org.junit.Assert.*;
-import org.junit.Test;
-
-public class TestExTester{
-
-    @Test
-    public void testSomething(){
-        assertEquals(null,null);
-    }
-}
-        </test>
+        <tests>
+            <test name ="ex2test">
+                Testable testtext2.1
+            </test>
+        </tests>
 
         <config>
             <!-- value may only contain a boolean value [TRUE / FALSE]. Time is measured in seconds. -->
-            <babysteps value ="False" time="10"/>
+            <babysteps value ="False" time="20"/>
             <!-- value may only contain a boolean value [TRUE / FALSE] -->
-            <timetracking value="True"/>
+            <timetracking value="false"/>
         </config>
     </exercise>
 
