@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class XMLLoader implements LoaderInterface{
 
-    NodeList exercises;
+    private NodeList exercises;
 
     public XMLLoader(File file){
         loadCatalog(file);
