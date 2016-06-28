@@ -16,6 +16,9 @@ public interface LoaderInterface {
     //@return  class at passed IDX
     String getClass(int idx);
 
+    //@return test at passed IDX
+    String getTest(int idx);
+
     //@return  name of the exercise at passed idx
     String getExerciseName(int idx);
 
