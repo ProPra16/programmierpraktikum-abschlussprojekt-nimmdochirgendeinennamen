@@ -1,24 +1,32 @@
 package xmlLoader;
 
+import java.io.File;
+
 public interface LoaderInterface {
 
     //load a catalog from an xml file.
-    void loadCatalog();
+    void loadCatalog(File file);
 
-    //@return Name of the node with passed IDX
-    String getName(int idx);
+    //@return name of the class at passed IDX
+    String getClassName(int idx);
+
+    //@return name of the test at passed IDX
+    String getTestName(int idx);
+
+    //@return  class at passed IDX
+    String getClass(int idx);
+
+    //@return  name of the exercise at passed idx
+    String getExerciseName(int idx);
 
     //@return description of the node with passed IDX
     String getDescription(int idx);
 
-    //@return all classes to be found for the node with passed IDX
-    String[] getClasses(int idx);
-
-    //@return all tests to be found for the node with passed IDX
-    String[] getTests(int idx);
-
     //@return true if babysteps is active for the node with passed IDX
     boolean isBabystepsActive(int idx);
+
+    //@return available time if babysteps is active
+    int getBabyStepsTime(int idx);
 
     //@return true if timetracker is active for the node with passed IDX
     boolean isTimetrackerActive(int idx);
