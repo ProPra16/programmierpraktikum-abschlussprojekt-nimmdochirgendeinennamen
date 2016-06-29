@@ -14,12 +14,14 @@ public class TDDTTask {
 
 		//check if selected file is a Task
 		if (splitContent.length != 2) {
-			new TDDTDialog("alert", "The chosen file is not a Task");
+			codeCode = null;
+			testCode = null;
 			return;
 		}
 
 		this.codeCode = splitContent[0];
-		this.testCode = splitContent[1];
+		//trim \n from the deleted border
+		this.testCode = splitContent[1].substring(1, splitContent[1].length());
 	}
 
 	public String getCode() {
