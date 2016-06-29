@@ -10,7 +10,7 @@ import main.java.TDDTFileReader;
 
 public class TDDTFileReaderTest {
 
-	//NoSuchFile
+	//NoSuchFileException is covered from FileChooser
 
 	@Test
 	public void readAll_basicFile() {
