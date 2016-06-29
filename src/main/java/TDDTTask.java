@@ -2,30 +2,19 @@ package main.java;
 
 import java.io.File;
 
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
 public class TDDTTask {
 
 	private String codeCode;
 	private String testCode;
 
-	public TDDTTask(Stage stage) {
-		FileChooser fc = new FileChooser();
-		fc.setTitle("Choose a catalog-folder");
-		File file = fc.showOpenDialog(stage);
-		if (file == null) {
-			new Dialogs("alert", "File could not get read properly");
-			return;
-		}
-
+	public TDDTTask(File file) {
 		TDDTFileReader reader = new TDDTFileReader();
-		String content = reader.read(file);
+		String content = reader.readAll(file);
 		String[] splitContent = content.toString().split("<Code-Test-Border, do not remove>");
 
 		//check if selected file is a Task
 		if (splitContent.length != 2) {
-			new Dialogs("alert", "The chosen file is not a Task");
+			new TDDTDialog("alert", "The chosen file is not a Task");
 			return;
 		}
 
