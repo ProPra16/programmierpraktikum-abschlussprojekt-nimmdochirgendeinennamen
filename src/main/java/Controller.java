@@ -63,7 +63,7 @@ public class Controller {
 
 	@FXML
 	public void newTask() {
-		Task task = new Task((Stage) pane.getScene().getWindow());
+		TDDTTask task = new TDDTTask((Stage) pane.getScene().getWindow());
 		txtCode.setText(task.getCode());
 		txtTest.setText(task.getTest());
 		babysteps.startPhase();
@@ -90,6 +90,7 @@ public class Controller {
 	
 	@FXML
 	public void turnBabystepsOff() {
+		//t.kill
 		babysteps.disable();
 	}
 	
@@ -153,5 +154,26 @@ public class Controller {
 					txtCode.setDisable(false);
 					break;
 		}
+	}
+
+	public void test() {
+		/*
+		//CompilationUnit cuCode = new CompilationUnit("task1", txtCode.getText(), false);
+		CompilationUnit cuTest = new CompilationUnit("task1", txtTest.getText(), true);
+
+		//JavaStringCompiler jscCode = CompilerFactory.getCompiler(cuCode);
+		JavaStringCompiler jscTest = CompilerFactory.getCompiler(cuTest);
+
+		//jscCode.compileAndRunTests();
+		jscTest.compileAndRunTests();
+
+		//CompilerResult cr = jscCode.getCompilerResult();
+		TestResult tr = jscTest.getTestResult();
+		CompilerResult cr = jscTest.getCompilerResult();
+
+		int error = tr.getNumberOfSuccessfulTests();
+		boolean bool = cr.hasCompileErrors();
+		System.out.println(error + " " + bool);
+		*/
 	}
 }

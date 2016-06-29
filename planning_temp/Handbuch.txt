@@ -1,1 +1,5 @@
-//TODO all
+Katalog
+Ein Katalog ist ein beliebiger Ordner der Übungen enthält
+
+Übungen
+Eine Übung ist eine seperate Textdatei. Der Name dieser Datei muss mit der innenliegenden Klasse übereinstimmen. Code und Test sind durch den String "<Code-Test-Border, do not remove>" getrennt.

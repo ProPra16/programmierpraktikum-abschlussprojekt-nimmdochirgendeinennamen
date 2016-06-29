@@ -38,5 +38,6 @@ local.properties
 # Code Recommenders
 .recommenders/
 
-# Code Recommenders
+# Gradle stuff
 .gradle/
+build/
