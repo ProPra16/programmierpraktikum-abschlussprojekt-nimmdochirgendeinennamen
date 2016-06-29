@@ -11,13 +11,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Controller {
-	//TODO thinking about a Phase manager class
+	//TODO thinking about ExceptionHandler
+	//TODO thinking about a Phase manager class (probably not worth it)
 	//for Babysteps backup and state at the same time
 	//might aswell take Tracker for backup tho
 
 	int  	  phase; //0 = Test, 1 = Code, 2 = Refactor
 	Babysteps babysteps;
 	Thread 	  t;
+	TDDTCompiler compiler;
 
 	@FXML private Pane pane;
 	@FXML private TextArea txtCode;
@@ -31,6 +33,7 @@ public class Controller {
 	@FXML
 	public void initialize() {
 		phase = 0;
+		compiler = new TDDTCompiler();
 		babysteps = new Babysteps();
 	}
 	
@@ -76,6 +79,11 @@ public class Controller {
 		}
 
 		TDDTTask task = new TDDTTask(file);
+
+		if (task.getCode() == null && task.getCode() == null) {
+			new TDDTDialog("alert", "The chosen file is not a Task");
+		}
+
 		txtCode.setText(task.getCode());
 		txtTest.setText(task.getTest());
 		babysteps.startPhase();
@@ -122,8 +130,8 @@ public class Controller {
 	}
 
 	private boolean checkTest() {
-
-		//return false if not succeeded
+		boolean passed = compiler.compile(txtTest.getText(), true);
+		if (!passed) return false;
 		//settings for next phase
 		btnPrevStep.setDisable(false);
 		babysteps.startPhase();
@@ -131,14 +139,18 @@ public class Controller {
 	}
 
 	private boolean checkCode() {
-		//return false if not succeeded
+		boolean passed = compiler.compile(txtCode.getText(), false);
+		if (!passed) return false;
 		//settings for next phase
 		babysteps.startPhase();
 		return true;
 	}
 
 	private boolean checkRefactor() {
-		//return false if not succeeded
+		boolean passed = compiler.compile(txtCode.getText(), false);
+		if (!passed) return false;
+		passed = compiler.compile(txtTest.getText(), true);
+		if (!passed) return false;
 		//settings for next phase
 		btnPrevStep.setDisable(true);
 		babysteps.startPhase();
