@@ -1,10 +1,13 @@
 package main.java;
 
+import java.io.File;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Controller {
@@ -63,7 +66,16 @@ public class Controller {
 
 	@FXML
 	public void newTask() {
-		TDDTTask task = new TDDTTask((Stage) pane.getScene().getWindow());
+
+		FileChooser fc = new FileChooser();
+		fc.setTitle("Choose a catalog-folder");
+		File file = fc.showOpenDialog( (Stage) pane.getScene().getWindow() );
+		if (file == null) {
+			new TDDTDialog("alert", "File could not get read properly");
+			return;
+		}
+
+		TDDTTask task = new TDDTTask(file);
 		txtCode.setText(task.getCode());
 		txtTest.setText(task.getTest());
 		babysteps.startPhase();
@@ -96,7 +108,7 @@ public class Controller {
 	
 	@FXML
 	public void setBabystepsTime() {
-		Dialogs dialog = new Dialogs(
+		TDDTDialog dialog = new TDDTDialog(
 				"textInput", "babysteps duration in sec. (Between  1 and 180):"
 		);
 		int result = Integer.parseInt( (String)dialog.getValue() );
@@ -104,7 +116,7 @@ public class Controller {
 		if (result >= 1 && result <= 180) {
 			babysteps.setDuration(result);
 		} else {
-			new Dialogs("alert", "Input not acceptet. It has to be between 1 and 180");
+			new TDDTDialog("alert", "Input not acceptet. It has to be between 1 and 180");
 			return;
 		}
 	}

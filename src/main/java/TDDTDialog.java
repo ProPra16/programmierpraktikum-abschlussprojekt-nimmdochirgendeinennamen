@@ -6,11 +6,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
 
-public class Dialogs {
+public class TDDTDialog {
 
 	Object value;
 
-	public Dialogs(String type, String message) {
+	public TDDTDialog(String type, String message) {
 		switch (type){
 			case "alert": 		 showAlert(message);
 								 break;
@@ -51,7 +51,7 @@ public class Dialogs {
 			if (!input.get().isEmpty()) {
 				return input.get();
 			} else {
-				new Dialogs("alert", "Missing input");
+				new TDDTDialog("alert", "Missing input");
 			}
 		}
 		return "-1";

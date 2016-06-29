@@ -10,6 +10,8 @@ import main.java.TDDTFileReader;
 
 public class TDDTFileReaderTest {
 
+	//NoSuchFile
+
 	@Test
 	public void readAll_basicFile() {
 		String expected = "Dis is\nfile\n!\n\n";
