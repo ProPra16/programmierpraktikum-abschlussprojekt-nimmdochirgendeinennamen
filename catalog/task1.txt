@@ -1,4 +1,4 @@
-public class task1 {
+public class Task1 {
 	//Task: Print out "Hello World!"
 	public static void main(String[] args) {
 
