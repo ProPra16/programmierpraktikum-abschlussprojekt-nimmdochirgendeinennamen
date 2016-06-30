@@ -87,6 +87,7 @@ public class Controller {
 		txtCode.setText(task.getCode());
 		txtTest.setText(task.getTest());
 		babysteps.startPhase();
+		phase = 0;
 	}
 
 	@FXML
