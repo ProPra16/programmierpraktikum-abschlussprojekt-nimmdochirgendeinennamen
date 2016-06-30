@@ -4,7 +4,10 @@ import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 public class TDDTDialog {
 
@@ -14,8 +17,10 @@ public class TDDTDialog {
 		switch (type){
 			case "alert": 		 showAlert(message);
 								 break;
-			case "exception": 	 showException(message);
+			case "testFail": 	 showTestFails(message);
 								 break;
+			case "compileError": showCompileError(message);
+			 					 break;
 			case "textInput":	 value = showTextInput(message);
 			default:			 return;
 		}
@@ -33,13 +38,50 @@ public class TDDTDialog {
 		alert.showAndWait();
 	}
 	
-	private void showException(String message) {
-		/*
-        TODO [SomeDialog].showException(new FileNotFoundException("Blub"));
-		*/
-		return;
+	private void showTestFails(String info) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Test failed!");
+		alert.setHeaderText(null);
+
+		TextArea textArea = new TextArea(info);
+		textArea.setEditable(false);
+		textArea.setWrapText(true);
+
+		textArea.setMaxWidth(Double.MAX_VALUE);
+		textArea.setMaxHeight(Double.MAX_VALUE);
+		GridPane.setVgrow(textArea, Priority.ALWAYS);
+		GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+		GridPane pane = new GridPane();
+		pane.setMaxWidth(Double.MAX_VALUE);
+		pane.add(textArea, 0, 1);
+
+		alert.getDialogPane().setContent(pane);
+		alert.showAndWait();
 	}
-	
+
+	private void showCompileError(String info) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Compile Error!");
+		alert.setHeaderText(null);
+
+		TextArea textArea = new TextArea(info);
+		textArea.setEditable(false);
+		textArea.setWrapText(true);
+
+		textArea.setMaxWidth(Double.MAX_VALUE);
+		textArea.setMaxHeight(Double.MAX_VALUE);
+		GridPane.setVgrow(textArea, Priority.ALWAYS);
+		GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+		GridPane pane = new GridPane();
+		pane.setMaxWidth(Double.MAX_VALUE);
+		pane.add(textArea, 0, 1);
+
+		alert.getDialogPane().setContent(textArea);
+		alert.showAndWait();
+	}
+
 	private String showTextInput(String message) {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Please input a value");
