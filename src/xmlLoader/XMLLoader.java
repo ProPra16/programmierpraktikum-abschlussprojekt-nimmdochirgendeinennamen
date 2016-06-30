@@ -2,7 +2,6 @@ package xmlLoader;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -29,15 +28,27 @@ public class XMLLoader implements LoaderInterface{
             Document d = db.parse(xmlCatalog);
             d.getDocumentElement().normalize();
             exercises = d.getElementsByTagName("exercise");
-        } catch (ParserConfigurationException | SAXException | IOException e){}
+        } catch (ParserConfigurationException | SAXException | IOException ignored){}
+    }
+
+    //@return n-th exercise tree
+    private Element getExercise(int n){
+        return (Element) exercises.item(n);
+    }
+
+    //@return Element n contained in the passed exercise tree
+    private Element goToNode(Element exerciseElement, String n){
+        return (Element) exerciseElement.getElementsByTagName(n).item(0);
+    }
+
+    //@return Element-tree n2 contained inside Element-tree n1 contained in the passed exercise tree
+    private Element goToNode(Element exerciseElement, String n1, String n2){
+        return goToNode(goToNode(exerciseElement,n1),n2);
     }
 
     //@return amount of classes for current exercise
     public int getClassAmount(int idx){
-        Node node = exercises.item(idx);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("classes").item(0);
-        NodeList nl = element.getElementsByTagName("class");
+        NodeList nl = (goToNode(getExercise(idx),"classes")).getElementsByTagName("class");
         return nl.getLength();
     }
 
@@ -47,10 +58,7 @@ public class XMLLoader implements LoaderInterface{
      */
     @Override
     public String getClassName(int exerciseIDX, int classIDX) {
-        Node node = exercises.item(exerciseIDX);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("classes").item(0);
-        element = (Element) element.getElementsByTagName("class").item(classIDX);
+        Element element = (Element) goToNode(getExercise(exerciseIDX),"classes").getElementsByTagName("class").item(classIDX);
         return element.getAttribute("name");
     }
 
@@ -60,10 +68,7 @@ public class XMLLoader implements LoaderInterface{
      */
     @Override
     public String getTestName(int exerciseIDX, int testIDX) {
-        Node node = exercises.item(exerciseIDX);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("tests").item(0);
-        element = (Element) element.getElementsByTagName("test").item(testIDX);
+        Element element = (Element) goToNode(getExercise(exerciseIDX),"tests").getElementsByTagName("test").item(testIDX);
         return element.getAttribute("name");
     }
 
@@ -73,10 +78,7 @@ public class XMLLoader implements LoaderInterface{
      */
     @Override
     public String getClass(int exerciseIDX, int classIDX) {
-        Node node = exercises.item(exerciseIDX);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("classes").item(0);
-        element = (Element) element.getElementsByTagName("class").item(classIDX);
+        Element element = (Element) goToNode(getExercise(exerciseIDX),"classes").getElementsByTagName("class").item(classIDX);
         return element.getTextContent().trim();
     }
 
@@ -86,58 +88,38 @@ public class XMLLoader implements LoaderInterface{
      */
     @Override
     public String getTest(int exerciseIDX, int testIDX) {
-        Node node = exercises.item(exerciseIDX);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("tests").item(0);
-        element = (Element) element.getElementsByTagName("test").item(testIDX);
+        Element element = (Element) goToNode(getExercise(exerciseIDX),"tests").getElementsByTagName("test").item(testIDX);
         return element.getTextContent().trim();
     }
 
     //@return name of selected exercise
     @Override
     public String getExerciseName(int idx) {
-        Node node = exercises.item(idx);
-        Element element = (Element) node;
-        return element.getAttribute("name");
+        return getExercise(idx).getAttribute("name");
     }
 
     //@return the description of the selected exercise
     @Override
     public String getDescription(int idx) {
-        Node node = exercises.item(idx);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("description").item(0);
-        return element.getTextContent();
+        return goToNode(getExercise(idx),"description").getTextContent();
     }
 
     //@return true if babystep value == true
     @Override
     public boolean isBabystepsActive(int idx) {
-        Node node = exercises.item(idx);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("config").item(0);
-        element = (Element) element.getElementsByTagName("babysteps").item(0);
-        return (element.getAttribute("value").equalsIgnoreCase("true"));
+        return goToNode(getExercise(idx),"config","babysteps").getAttribute("value").equalsIgnoreCase("true");
     }
 
     //@return time window if babysteps is turned on
     @Override
     public int getBabyStepsTime(int idx) {
-        Node node = exercises.item(idx);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("config").item(0);
-        element = (Element) element.getElementsByTagName("babysteps").item(0);
-        return Integer.parseInt(element.getAttribute("time"));
+        return Integer.parseInt(goToNode(getExercise(idx),"config","babysteps").getAttribute("time"));
     }
 
     //@return true if timetracking == true
     @Override
     public boolean isTimetrackerActive(int idx) {
-        Node node = exercises.item(idx);
-        Element element = (Element) node;
-        element = (Element) element.getElementsByTagName("config").item(0);
-        element = (Element) element.getElementsByTagName("timetracking").item(0);
-        return (element.getAttribute("value").equalsIgnoreCase("True"));
+        return goToNode(getExercise(idx),"config","timetracking").getAttribute("value").equalsIgnoreCase("true");
     }
 
     //@return the total amount of exercises
