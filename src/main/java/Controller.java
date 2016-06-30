@@ -12,10 +12,11 @@ import javafx.stage.Stage;
 
 public class Controller {
 	//TODO thinking about ExceptionHandler
-	//TODO thinking about a Phase manager class (probably not worth it)
+	//TODO String backup Wrapper, used for GUI-flow and Babysteps aswell.
 	//for Babysteps backup and state at the same time
 	//might aswell take Tracker for backup tho
 
+	String	  backup;  //backup of Phase 1 code for prevPhase() on phase = 2;
 	Phase	  phase;
 	Babysteps babysteps;
 	Thread 	  t;
@@ -50,6 +51,7 @@ public class Controller {
 		}
 
 		if (passed) {
+			if (phase.get() == 0) backup = txtCode.getText();
 			phase.next();
 			updateGUIElements(phase);
 		}
@@ -57,13 +59,15 @@ public class Controller {
 
 	@FXML
 	public void prevPhase() {
+		if (phase.get() == 1) {
+			txtCode.setText(backup);
+		}
 		phase.previous();
 		updateGUIElements(phase);
 	}
 
 	@FXML
 	public void newTask() {
-
 		FileChooser fc = new FileChooser();
 		fc.setTitle("Choose a catalog-folder");
 		File file = fc.showOpenDialog( (Stage) pane.getScene().getWindow() );
@@ -116,7 +120,6 @@ public class Controller {
 				"textInput", "babysteps duration in sec. (Between  1 and 180):"
 		);
 		int result = Integer.parseInt( (String)dialog.getValue() );
-		System.out.println(result);
 		if (result >= 1 && result <= 180) {
 			babysteps.setDuration(result);
 		} else {
@@ -126,8 +129,7 @@ public class Controller {
 	}
 
 	private boolean checkTest() {
-		boolean passed = compiler.compile(txtTest.getText(), true);
-		if (!passed) return false;
+		compiler.compile(txtTest.getText(), true);
 		//settings for next phase
 		btnPrevStep.setDisable(false);
 		babysteps.startPhase();
@@ -136,6 +138,8 @@ public class Controller {
 
 	private boolean checkCode() {
 		boolean passed = compiler.compile(txtCode.getText(), false);
+		if (!passed) return false;
+		passed = compiler.compile(txtTest.getText(), true);
 		if (!passed) return false;
 		//settings for next phase
 		babysteps.startPhase();
