@@ -1,0 +1,26 @@
+Review der letzten Woche:
+	Erreichte Ziele:
+		fertiggestellt:
+			Controller
+			GUI
+			Chart-Utility-Klassen
+			KatalogLoader
+			Chart
+			Compiler
+		offen:
+			Tracker
+	Unerreichte Ziele:
+		-
+
+Projektziele/TODO:
+	Refactor
+	Tests fertigstellen
+	Dokumentation anfangen
+	Aufgaben versuchen zu finden, da wir schon fast fertig sind
+
+Individuelle Ziele:
+	Caro 	: Babysteps
+	Dominik : Refactor/Struktur
+	Kai C. 	: Refactor/Struktur
+	Jule 	: Tracker
+	Kai H. 	: Merge leiten/ Qualitätskontrolle
