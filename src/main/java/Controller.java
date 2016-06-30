@@ -37,7 +37,7 @@ public class Controller {
 		compiler = new TDDTCompiler();
 		babysteps = new Babysteps();
 	}
-	
+
 	@FXML
 	public void nextPhase() {
 		boolean passed = false;
@@ -107,13 +107,13 @@ public class Controller {
   		*/
 		babysteps.enable();
 	}
-	
+
 	@FXML
 	public void turnBabystepsOff() {
 		//t.kill
 		babysteps.disable();
 	}
-	
+
 	@FXML
 	public void setBabystepsTime() {
 		TDDTDialog dialog = new TDDTDialog(
