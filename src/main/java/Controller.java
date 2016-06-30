@@ -16,7 +16,7 @@ public class Controller {
 	//for Babysteps backup and state at the same time
 	//might aswell take Tracker for backup tho
 
-	int  	  phase; //0 = Test, 1 = Code, 2 = Refactor
+	Phase	  phase;
 	Babysteps babysteps;
 	Thread 	  t;
 	TDDTCompiler compiler;
@@ -32,7 +32,7 @@ public class Controller {
 
 	@FXML
 	public void initialize() {
-		phase = 0;
+		phase = new Phase();
 		compiler = new TDDTCompiler();
 		babysteps = new Babysteps();
 	}
@@ -40,7 +40,7 @@ public class Controller {
 	@FXML
 	public void nextPhase() {
 		boolean passed = false;
-		switch (phase) {
+		switch (phase.get()) {
 			case 0: passed = checkTest();
 					break;
 			case 1: passed = checkCode();
@@ -50,20 +50,14 @@ public class Controller {
 		}
 
 		if (passed) {
-			if (phase < 2) phase++;
-			else 		   phase = 0;
-
+			phase.next();
 			updateGUIElements(phase);
 		}
 	}
 
 	@FXML
 	public void prevPhase() {
-		if (phase > 0) {
-			phase--;
-			if (phase == 0)
-				btnPrevStep.setDisable(true);
-		}
+		phase.previous();
 		updateGUIElements(phase);
 	}
 
@@ -87,7 +81,8 @@ public class Controller {
 		txtCode.setText(task.getCode());
 		txtTest.setText(task.getTest());
 		babysteps.startPhase();
-		phase = 0;
+		phase.reset();
+		updateGUIElements(phase);
 	}
 
 	@FXML
@@ -153,18 +148,18 @@ public class Controller {
 		passed = compiler.compile(txtTest.getText(), true);
 		if (!passed) return false;
 		//settings for next phase
-		btnPrevStep.setDisable(true);
 		babysteps.startPhase();
 		return true;
 	}
 
-	private void updateGUIElements(int phase) {
-		switch (phase) {
+	private void updateGUIElements(Phase phase) {
+		switch (phase.get()) {
 			case 0: imgTest.setOpacity(1.0);
 					imgCode.setOpacity(0.2);
 					imgRefactor.setOpacity(0.2);
 					txtTest.setDisable(false);
 					txtCode.setDisable(true);
+					btnPrevStep.setDisable(true);
 					break;
 			case 1: imgTest.setOpacity(0.2);
 					imgCode.setOpacity(1.0);
@@ -179,26 +174,5 @@ public class Controller {
 					txtCode.setDisable(false);
 					break;
 		}
-	}
-
-	public void test() {
-		/*
-		//CompilationUnit cuCode = new CompilationUnit("task1", txtCode.getText(), false);
-		CompilationUnit cuTest = new CompilationUnit("task1", txtTest.getText(), true);
-
-		//JavaStringCompiler jscCode = CompilerFactory.getCompiler(cuCode);
-		JavaStringCompiler jscTest = CompilerFactory.getCompiler(cuTest);
-
-		//jscCode.compileAndRunTests();
-		jscTest.compileAndRunTests();
-
-		//CompilerResult cr = jscCode.getCompilerResult();
-		TestResult tr = jscTest.getTestResult();
-		CompilerResult cr = jscTest.getCompilerResult();
-
-		int error = tr.getNumberOfSuccessfulTests();
-		boolean bool = cr.hasCompileErrors();
-		System.out.println(error + " " + bool);
-		*/
 	}
 }
