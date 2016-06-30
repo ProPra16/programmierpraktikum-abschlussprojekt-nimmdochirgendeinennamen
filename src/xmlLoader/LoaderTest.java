@@ -29,6 +29,12 @@ public class LoaderTest {
     }
 
     @Test
+    public void testTestAmount() {
+        assertEquals("Must be 2.", 2, testLoader.getTestAmount(0));
+        assertEquals("Must be 1.", 1, testLoader.getTestAmount(1));
+    }
+
+    @Test
     public void testClassNames() {
         assertEquals("Must be TestClass.", "TestClass", testLoader.getClassName(0,0));
         assertEquals("Must be TestClass2.", "TestClass2", testLoader.getClassName(0,1));

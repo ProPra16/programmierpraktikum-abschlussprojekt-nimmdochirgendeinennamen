@@ -16,6 +16,12 @@ public interface LoaderInterface {
     //@return  class at passed IDX
     String getClass(int idx, int idx2);
 
+    //@return amount of classes for current exercise
+    public int getClassAmount(int idx);
+
+    //@return amount of classes for current exercise
+    public int getTestAmount(int idx);
+
     //@return test at passed IDX
     String getTest(int idx, int idx2);
 
