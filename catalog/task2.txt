@@ -5,7 +5,6 @@ public class Task2 {
 	}
 }
 <Code-Test-Border, do not remove>
-package test.java;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
