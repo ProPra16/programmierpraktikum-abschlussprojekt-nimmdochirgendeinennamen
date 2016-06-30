@@ -13,6 +13,7 @@ public class TDDTDialog {
 
 	Object value;
 
+	//TODO think about chaning it to a static method wrapper class
 	public TDDTDialog(String type, String message) {
 		switch (type){
 			case "alert": 		 showAlert(message);
@@ -37,50 +38,6 @@ public class TDDTDialog {
 		alert.setContentText(message);
 		alert.showAndWait();
 	}
-	
-	private void showTestFails(String info) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Test failed!");
-		alert.setHeaderText(null);
-
-		TextArea textArea = new TextArea(info);
-		textArea.setEditable(false);
-		textArea.setWrapText(true);
-
-		textArea.setMaxWidth(Double.MAX_VALUE);
-		textArea.setMaxHeight(Double.MAX_VALUE);
-		GridPane.setVgrow(textArea, Priority.ALWAYS);
-		GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-		GridPane pane = new GridPane();
-		pane.setMaxWidth(Double.MAX_VALUE);
-		pane.add(textArea, 0, 1);
-
-		alert.getDialogPane().setContent(pane);
-		alert.showAndWait();
-	}
-
-	private void showCompileError(String info) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Compile Error!");
-		alert.setHeaderText(null);
-
-		TextArea textArea = new TextArea(info);
-		textArea.setEditable(false);
-		textArea.setWrapText(true);
-
-		textArea.setMaxWidth(Double.MAX_VALUE);
-		textArea.setMaxHeight(Double.MAX_VALUE);
-		GridPane.setVgrow(textArea, Priority.ALWAYS);
-		GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-		GridPane pane = new GridPane();
-		pane.setMaxWidth(Double.MAX_VALUE);
-		pane.add(textArea, 0, 1);
-
-		alert.getDialogPane().setContent(textArea);
-		alert.showAndWait();
-	}
 
 	private String showTextInput(String message) {
 		TextInputDialog dialog = new TextInputDialog();
@@ -97,5 +54,34 @@ public class TDDTDialog {
 			}
 		}
 		return "-1";
+	}
+
+	private void showTestFails(String message) {
+		spawnTextAreaAlert("Test failed!", message);
+	}
+
+	private void showCompileError(String message) {
+		spawnTextAreaAlert("Compile Error!", message);
+	}
+
+	private void spawnTextAreaAlert(String title, String message) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setResizable(true);
+
+		TextArea text = new TextArea(message);
+		text.setEditable(false);
+		text.setWrapText(true);
+
+		GridPane.setHgrow(text, Priority.ALWAYS);
+		GridPane.setVgrow(text, Priority.ALWAYS);
+
+		GridPane pane = new GridPane();
+		pane.setMaxWidth(Double.MAX_VALUE);
+		pane.add(text, 0, 0);
+
+		alert.getDialogPane().setContent(pane);
+		alert.showAndWait();
 	}
 }
