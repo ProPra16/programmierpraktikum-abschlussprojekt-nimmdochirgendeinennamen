@@ -59,7 +59,7 @@ public class TDDTCompiler {
 
 		if (cr.hasCompileErrors()) {
 			displayCompileErrors(cr, cu);
-			return true;
+			return false;
 		}
 
 		TestResult tr = jsc.getTestResult();
