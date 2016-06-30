@@ -40,5 +40,8 @@ Informationen werden pro Sitzung in einfachen Textdateien gespeichert. Die Chart
 Wie erlangt die Compiler Bibliothek ihren Parameter "ClassName" in der CompilationUnit?
 Durch die Festlegung gleicher Namensgebung der einzelnen Übungen und ihren enthaltenen Klassen. ("Euler.txt" => public class Euler {...})
 
+Sollen RuntimeExceptions behandelt bzw. angezeigt werden?
+Nein
+
 
 
