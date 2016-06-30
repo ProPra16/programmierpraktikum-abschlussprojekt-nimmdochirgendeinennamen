@@ -21,7 +21,11 @@ public class TDDTCompiler {
 
 	private boolean compileCode(String code) {
 		//checking if className can be determined
-		if (!code.contains("class") & !code.contains("{")) return false;
+		if (!code.contains("class") & !code.contains("{")) {
+			new TDDTDialog("alert", "Could not recognize compilable java classes.");
+			return false;
+		}
+
 		String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, false);
 		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
@@ -40,9 +44,12 @@ public class TDDTCompiler {
 
 	private boolean compileAndRunTests(String code) {
 		//checking if className can be determined
-		if (!code.contains("class") & !code.contains("{")) return false;
+		if (!code.contains("class") & !code.contains("{")) {
+			new TDDTDialog("alert", "Could not recognize compilable java classes.");
+			return false;
+		}
+
 		String className       = findClassName(code).trim();
-		System.out.println(className);
 		CompilationUnit cu     = new CompilationUnit(className, code, true);
 		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
 
@@ -52,7 +59,7 @@ public class TDDTCompiler {
 
 		if (cr.hasCompileErrors()) {
 			displayCompileErrors(cr, cu);
-			return false;
+			return true;
 		}
 
 		TestResult tr = jsc.getTestResult();
@@ -71,17 +78,26 @@ public class TDDTCompiler {
 	}
 
 	private void displayCompileErrors(CompilerResult cr, CompilationUnit cu) {
+		StringBuilder output = new StringBuilder();
 		Collection<CompileError> errorList = cr.getCompilerErrorsForCompilationUnit(cu);
-		CompileError error = errorList.iterator().next();
-		//TODO implement and use Dialog for Exceptions
-		new TDDTDialog("alert", error.toString());
+		//CompileError error = errorList.iterator().next();
+		for (CompileError error : errorList) {
+			output.append(error.toString());
+		}
+		new TDDTDialog("compileError", output.toString());
 	}
 	
 	private void displayFailingTests(TestResult tr, CompilationUnit cu) {
+		StringBuilder output = new StringBuilder();
 		Collection<TestFailure> failureList = tr.getTestFailures();
-		TestFailure failure = failureList.iterator().next();
-		//TODO implement and use Dialog for Exceptions
-		new TDDTDialog("alert", failure.toString());
+		//TestFailure failure = failureList.iterator().next();
+		for (TestFailure failure : failureList) {
+			output.append(failure.getMethodName());
+			output.append(": ");
+			output.append(failure.getMessage());
+			output.append("\n");
+		}
+		new TDDTDialog("testFail", output.toString());
 	}
 
 }
