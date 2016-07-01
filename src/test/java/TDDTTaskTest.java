@@ -61,10 +61,8 @@ public class TDDTTaskTest {
 		TDDTTask task = new TDDTTask(file);
 		String actualCode = task.getCode();
 		String actualTest = task.getTest();
-		String expectedCode = "";
-		String expectedTest = "";
-		assertEquals(expectedCode, actualCode);
-		assertEquals(expectedTest, actualTest);
+		assertEquals(null, actualCode);
+		assertEquals(null, actualTest);
 	}
 
 	@Test
