@@ -43,10 +43,13 @@ public class Controller {
 		boolean passed = false;
 		switch (phase.get()) {
 			case 0: passed = checkTest();
+					//tracker.dump(txtTest.getText());
 					break;
 			case 1: passed = checkCode();
+					//tracker.dump(txtCode.getText());
 					break;
 			case 2: passed = checkRefactor();
+					//tracker.dump(txtCode.getText());
 					break;
 		}
 
