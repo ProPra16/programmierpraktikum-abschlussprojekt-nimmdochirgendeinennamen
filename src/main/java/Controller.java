@@ -11,7 +11,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Controller {
-	//TODO thinking about ExceptionHandler
+	//TODO thinking about ExceptionHandler for Dialogspawning and way smaller Controller and Compiler class
 	//TODO String backup Wrapper, used for GUI-flow and Babysteps aswell.
 	//for Babysteps backup and state at the same time
 	//might aswell take Tracker for backup tho
@@ -129,7 +129,11 @@ public class Controller {
 	}
 
 	private boolean checkTest() {
-		compiler.compile(txtTest.getText(), true);
+		String code = txtTest.getText();
+		//check if compilable
+		if (!checkIfCompilableClass(code)) return false;
+		//try to compile and run test
+		compiler.compile(code, true);
 		//settings for next phase
 		btnPrevStep.setDisable(false);
 		babysteps.startPhase();
@@ -137,22 +141,55 @@ public class Controller {
 	}
 
 	private boolean checkCode() {
+		String code = txtTest.getText();
+		//check if compilable
+		if (!checkIfCompilableClass(code)) return false;
+		//try to compile code
 		boolean passed = compiler.compile(txtCode.getText(), false);
-		if (!passed) return false;
+		if (!passed) {
+			new TDDTDialog("compileError", compiler.getInfo());
+			return false;
+		}
+		//try to compile and run test
 		passed = compiler.compile(txtTest.getText(), true);
-		if (!passed) return false;
+		//display in Dialog if failed
+		if (!passed) {
+			new TDDTDialog("testFail", compiler.getInfo());
+			return false;
+		}
 		//settings for next phase
 		babysteps.startPhase();
 		return true;
 	}
 
 	private boolean checkRefactor() {
+		String code = txtTest.getText();
+		//check if compilable
+		if (!checkIfCompilableClass(code)) return false;
+		//try to compile code
 		boolean passed = compiler.compile(txtCode.getText(), false);
-		if (!passed) return false;
+		if (!passed) {
+			new TDDTDialog("compileError", compiler.getInfo());
+			return false;
+		}
+		//try to compile and run test
 		passed = compiler.compile(txtTest.getText(), true);
-		if (!passed) return false;
+		//display in Dialog if failed
+		if (!passed) {
+			new TDDTDialog("testFail", compiler.getInfo());
+			return false;
+		}
 		//settings for next phase
 		babysteps.startPhase();
+		return true;
+	}
+
+	private boolean checkIfCompilableClass(String code) {
+		//checking if className can be determined
+		if (!code.contains("class") & !code.contains("{")) {
+			new TDDTDialog("alert", "Could not recognize compilable java classes.");
+			return false;
+		}
 		return true;
 	}
 

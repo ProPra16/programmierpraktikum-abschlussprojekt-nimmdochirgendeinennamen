@@ -12,30 +12,29 @@ import vk.core.api.TestResult;
 
 public class TDDTCompiler {
 
+	String info;
+
 	public boolean compile(String code, boolean isTest) {
 		if (isTest)
 			return compileAndRunTests(code);
 		else
 			return compileCode(code);
 	}
+	
+	public String getInfo() {
+		return this.info;
+	}
 
 	private boolean compileCode(String code) {
-		//checking if className can be determined
-		if (!code.contains("class") & !code.contains("{")) {
-			new TDDTDialog("alert", "Could not recognize compilable java classes.");
-			return false;
-		}
-
 		String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, false);
 		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
 
 		jsc.compileAndRunTests();
-
 		CompilerResult cr = jsc.getCompilerResult();
 
 		if (cr.hasCompileErrors()) {
-			displayCompileErrors(cr, cu);
+			info = formatCompileErrors(cr, cu);
 			return false;
 		}
 
@@ -43,29 +42,22 @@ public class TDDTCompiler {
 	}
 
 	private boolean compileAndRunTests(String code) {
-		//checking if className can be determined
-		if (!code.contains("class") & !code.contains("{")) {
-			new TDDTDialog("alert", "Could not recognize compilable java classes.");
-			return false;
-		}
-
 		String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, true);
 		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
 
 		jsc.compileAndRunTests();
-
 		CompilerResult cr = jsc.getCompilerResult();
 
 		if (cr.hasCompileErrors()) {
-			displayCompileErrors(cr, cu);
+			info = formatCompileErrors(cr, cu);
 			return false;
 		}
 
 		TestResult tr = jsc.getTestResult();
 
 		if (tr.getNumberOfFailedTests() != 0) {
-			displayFailingTests(tr, cu);
+			info = formatFailingTests(tr, cu);
 			return false;
 		}
 
@@ -77,27 +69,26 @@ public class TDDTCompiler {
 		return text.substring(text.indexOf("class") + 6, text.indexOf(" {"));
 	}
 
-	private void displayCompileErrors(CompilerResult cr, CompilationUnit cu) {
+	private String formatCompileErrors(CompilerResult cr, CompilationUnit cu) {
 		StringBuilder output = new StringBuilder();
 		Collection<CompileError> errorList = cr.getCompilerErrorsForCompilationUnit(cu);
-		//CompileError error = errorList.iterator().next();
 		for (CompileError error : errorList) {
 			output.append(error.toString());
+			output.append("\n");
 		}
-		new TDDTDialog("compileError", output.toString());
+		return output.toString();
 	}
 	
-	private void displayFailingTests(TestResult tr, CompilationUnit cu) {
+	private String formatFailingTests(TestResult tr, CompilationUnit cu) {
 		StringBuilder output = new StringBuilder();
 		Collection<TestFailure> failureList = tr.getTestFailures();
-		//TestFailure failure = failureList.iterator().next();
 		for (TestFailure failure : failureList) {
 			output.append(failure.getMethodName());
 			output.append(": ");
 			output.append(failure.getMessage());
 			output.append("\n");
 		}
-		new TDDTDialog("testFail", output.toString());
+		return output.toString();
 	}
 
 }
