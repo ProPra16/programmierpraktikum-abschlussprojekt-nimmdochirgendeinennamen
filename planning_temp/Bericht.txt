@@ -37,6 +37,11 @@ Zwischen 1 bis 180 Sekunden.
 Wie wird das Tracking realisiert? Welche Verfügbarkeit wird erwartet?
 Informationen werden pro Sitzung in einfachen Textdateien gespeichert. Die Chart (Analyse) wertet die Textdateien einfach aus. Weitere Details dem implementierenden überlassen.
 
+Wie erlangt die Compiler Bibliothek ihren Parameter "ClassName" in der CompilationUnit?
+Durch die Festlegung gleicher Namensgebung der einzelnen Übungen und ihren enthaltenen Klassen. ("Euler.txt" => public class Euler {...})
+
+Sollen RuntimeExceptions behandelt bzw. angezeigt werden?
+Nein
 
 
 
