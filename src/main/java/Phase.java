@@ -1,24 +1,34 @@
 package main.java;
 
+/**
+ * Phase class for controlling
+ *
+ */
 public class Phase {
 	int phase;
+	int start;
+	int end;
+	int step;
 
-	public Phase() {
+	public Phase(int start, int end, int step) {
 		phase = 0;
+		this.start = start;
+		this.end = end;
+		this.step = step;
 	}
 
 	public void next() {
-		if (phase < 2) phase++;
-		else 		   phase = 0;
+		if (phase < end) phase = phase + step;
+		else 			 phase = start;
 	}
 
 	public void previous() {
-		if (phase > 0)
-			phase--;
+		if (phase > start)
+			phase = phase - step;
 	}
 
 	public void reset() {
-		phase = 0;
+		phase = start;
 	}
 	
 	public int get() {

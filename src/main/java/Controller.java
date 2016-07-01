@@ -18,7 +18,7 @@ public class Controller {
 
 	String	  backup;  //backup of Phase 1 code for prevPhase() on phase = 2;
 	Phase	  phase;
-	Babysteps babysteps;
+	//#### Babysteps babysteps;
 	Thread 	  t;
 	TDDTCompiler compiler;
 
@@ -33,9 +33,9 @@ public class Controller {
 
 	@FXML
 	public void initialize() {
-		phase = new Phase();
+		phase = new Phase(0, 2, 1);
 		compiler = new TDDTCompiler();
-		babysteps = new Babysteps();
+		//#### babysteps = new Babysteps();
 	}
 
 	@FXML
@@ -43,13 +43,13 @@ public class Controller {
 		boolean passed = false;
 		switch (phase.get()) {
 			case 0: passed = checkTest();
-					//tracker.dump(txtTest.getText());
+					//#### tracker.dump(txtTest.getText());
 					break;
 			case 1: passed = checkCode();
-					//tracker.dump(txtCode.getText());
+					//#### tracker.dump(txtCode.getText());
 					break;
 			case 2: passed = checkRefactor();
-					//tracker.dump(txtCode.getText());
+					//#### tracker.dump(txtCode.getText());
 					break;
 		}
 
@@ -87,7 +87,7 @@ public class Controller {
 
 		txtCode.setText(task.getCode());
 		txtTest.setText(task.getTest());
-		babysteps.startPhase();
+		//#### babysteps.startPhase();
 		phase.reset();
 		updateGUIElements(phase);
 	}
@@ -108,13 +108,13 @@ public class Controller {
   			}
   		);
   		*/
-		babysteps.enable();
+		//#### babysteps.enable();
 	}
 
 	@FXML
 	public void turnBabystepsOff() {
-		//t.kill
-		babysteps.disable();
+		//#### t.kill
+		//#### babysteps.disable();
 	}
 
 	@FXML
@@ -124,7 +124,7 @@ public class Controller {
 		);
 		int result = Integer.parseInt( (String)dialog.getValue() );
 		if (result >= 1 && result <= 180) {
-			babysteps.setDuration(result);
+			//####babysteps.setDuration(result);
 		} else {
 			new TDDTDialog("alert", "Input not acceptet. It has to be between 1 and 180");
 			return;
@@ -139,7 +139,7 @@ public class Controller {
 		compiler.compile(code, true);
 		//settings for next phase
 		btnPrevStep.setDisable(false);
-		babysteps.startPhase();
+		//#### babysteps.startPhase();
 		return true;
 	}
 
@@ -161,7 +161,7 @@ public class Controller {
 			return false;
 		}
 		//settings for next phase
-		babysteps.startPhase();
+		//#### babysteps.startPhase();
 		return true;
 	}
 
@@ -183,7 +183,7 @@ public class Controller {
 			return false;
 		}
 		//settings for next phase
-		babysteps.startPhase();
+		//#### babysteps.startPhase();
 		return true;
 	}
 
