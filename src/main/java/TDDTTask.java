@@ -10,7 +10,7 @@ public class TDDTTask {
 	public TDDTTask(File file) {
 		TDDTFileReader reader = new TDDTFileReader();
 		String content = reader.readAll(file);
-		String[] splitContent = content.toString().split("<Code-Test-Border, do not remove>");
+		String[] splitContent = content.toString().split("<Code-Test-Border, do not remove>\n");
 
 		//check if selected file is a Task
 		if (splitContent.length != 2) {
@@ -20,8 +20,7 @@ public class TDDTTask {
 		}
 
 		this.codeCode = splitContent[0];
-		//trim \n from the deleted border
-		this.testCode = splitContent[1].substring(1, splitContent[1].length());
+		this.testCode = splitContent[1];
 	}
 
 	public String getCode() {
