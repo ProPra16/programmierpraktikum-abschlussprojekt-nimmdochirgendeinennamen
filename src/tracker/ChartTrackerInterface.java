@@ -4,7 +4,7 @@
 */
 package tracker;
 
-public interface TrackerInterface {
+public interface ChartTrackerInterface {
     
     //call when changing to next phase
     public void nextPhase();

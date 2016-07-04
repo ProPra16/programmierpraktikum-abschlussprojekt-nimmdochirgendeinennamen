@@ -1,96 +1,67 @@
-/*
-*Measures time spent in a certain phase. 
-*When the phase is ended, writes the time (in seconds) to a textfile.
-*
-*Call constructor to start, nextPhase() to change to the next phase, 
-*greenBack() to go back from GREEN to RED.
-*Time will be measured and written automatically.
-*/
+
 package tracker;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalTime;
 
-public class Tracker implements TrackerInterface {
-    //seconds spent in each phase so far
-    int greenSeconds;
-    int redSeconds; 
-    int refactorSeconds;
+import org.apache.commons.lang3.StringUtils;
+
+public class Tracker {
+
+    public LocalTime time;
     
-    //system time when phase is entered
-    long greenStartTime;
-    long redStartTime;
-    long refactorStartTime;
-    
-    //current phase (0 = RED, 1 = GREEN, 2 = REFACTOR)
-    int phase;
-           
-    public Tracker() {
-        //initialise times to 0
-        this.greenSeconds = 0;
-        this.redSeconds = 0;
-        this.refactorSeconds = 0;
+    String oldCode;
+    String oldTest;
+
+    public Tracker(String code, String test) {
+        time = LocalTime.now();
+        oldCode = code;
+        oldTest = test;
+    }
+
+    public void dump(String code, String test) {
+        String output = getDiff(code, test, oldCode, oldTest);
+        time = LocalTime.now();
         
-        //start in RED phase
-        this.phase = 0;
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("TrackerData.txt", true))) {
+        	out.write(time.toString() + "\n" + output + "\n\n");
+        } catch (IOException e) {}
         
-        redStartTime = System.currentTimeMillis();
-    }
-    
-    //change to next phase, automatically updates phase
-    //and writes times to textfile
-    public void nextPhase() {
-        if (phase == 0) redToGreen();
-        if (phase == 1) greenToRefactor();
-        if (phase == 2) refactorToRed();
-        
-        writeToFile();
-        phase++;
-    }
-    
-    //change BACK from GREEN to RED
-    public void greenBack() {
-	//will only work if currently in phase GREEN
-        if (phase == 1) {
-            long greenEndTime = System.currentTimeMillis() - greenStartTime;
-            greenSeconds += (int)greenEndTime/1000;
-            redStartTime = System.currentTimeMillis();
-
-            writeToFile();
-	    phase--;
-        }
+        oldCode = code;
+        oldTest = test;
     }
 
-    //following methods are only used by this class and should not 
-    //be called outside of it
-     
-    //@Override
-    public void redToGreen() {
-        long redEndTime = System.currentTimeMillis() - redStartTime;
-        redSeconds += (int)redEndTime/1000;
-        greenStartTime = System.currentTimeMillis();
-    }
+    private String getDiff(String code, String test, String oldCode, String oldTest) {
+    	
+    	boolean codeChanged = true;
+    	boolean testChanged = true;
     
-    public void greenToRefactor() {
-        long greenEndTime = System.currentTimeMillis() - greenStartTime;
-        greenSeconds += (int)greenEndTime/1000;
-        refactorStartTime = System.currentTimeMillis();
-    }
-    
-    public void refactorToRed() {
-        long refactorEndTime = System.currentTimeMillis() - refactorStartTime;
-        refactorSeconds += (int)refactorEndTime/1000;
-        redStartTime = System.currentTimeMillis();
-    }
+    	if (code.equals(oldCode)) codeChanged = false;
+    	if (test.equals(oldTest)) testChanged = false;
+	
+    	String diffCode;
+    	String diffTest;
+    	
+    	String testOut = "";
+    	String codeOut = "";
 
-    //write to file:
-    public void writeToFile() {
-        try (PrintWriter printFile = new PrintWriter("TrackingData.txt")) {
-            printFile.println("red\n" + redSeconds);
-	    printFile.println("green\n" + greenSeconds);
-            printFile.println("refactor\n" + refactorSeconds);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    	if (codeChanged) {
+    		diffCode = StringUtils.difference(oldCode, code);
+    		codeOut = "Changed Code:\n" + diffCode;
+    	}
+    	
+    	if (testChanged) {
+		diffTest = StringUtils.difference(oldTest, test);
+		testOut = "Changed Test:\n" + diffTest;
+    	}
+	
+    	String endResult;
+	
+    	if(codeChanged && testChanged) endResult = codeOut + "\n\n" + testOut;
+    	else endResult = codeOut + testOut;
+	
+    return endResult;   
     }
-}
+}	
