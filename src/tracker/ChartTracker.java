@@ -64,7 +64,6 @@ public class ChartTracker implements ChartTrackerInterface {
     //following methods are only used by this class and should not 
     //be called outside of it
      
-    //@Override
     public void redToGreen() {
         long redEndTime = System.currentTimeMillis() - redStartTime;
         redSeconds += (int)redEndTime/1000;
