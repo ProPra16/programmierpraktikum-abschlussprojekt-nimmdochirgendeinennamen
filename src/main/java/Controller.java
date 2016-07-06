@@ -16,6 +16,9 @@ public class Controller {
 	Babysteps babysteps;
 	Thread 	  t;
 
+	ChartTracker chartTracking;
+	Tracker tracking;
+
 	@FXML private Pane pane;
 	@FXML private TextArea txtCode;
 	@FXML private TextArea txtTest;
@@ -29,6 +32,9 @@ public class Controller {
 	public void initialize() {
 		phase = 0;
 		babysteps = new Babysteps();
+
+		//chartTracking = new ChartTracker();
+		//tracking = new Tracker(CODE FROM CATALOGUE, TEST FROM CATALOGUE);
 	}
 	
 	@FXML
@@ -44,6 +50,15 @@ public class Controller {
 		}
 
 		if (passed) {
+
+			//chartTracking.nextPhase();
+
+			//String compare;
+			//if (phase == 0) compare = TEST NOW;
+			//else compare = CODE NOW;
+			//tracking.dump(compare, phase);
+						
+
 			if (phase < 2) phase++;
 			else 		   phase = 0;
 
@@ -53,6 +68,9 @@ public class Controller {
 
 	@FXML
 	public void prevPhase() {
+
+		//chartTracking.greenBack();
+
 		if (phase > 0) {
 			phase--;
 			if (phase == 0)
