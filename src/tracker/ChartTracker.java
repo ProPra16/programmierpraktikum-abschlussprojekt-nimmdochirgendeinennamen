@@ -95,7 +95,7 @@ public class ChartTracker implements ChartTrackerInterface {
         redStartTime = System.currentTimeMillis();
     }
 
-    //write to file:
+    //write to file
     private void writeToFile() {
         try (PrintWriter printFile = new PrintWriter("TrackingData.txt")) {
             printFile.println("red\n" + redSeconds);
