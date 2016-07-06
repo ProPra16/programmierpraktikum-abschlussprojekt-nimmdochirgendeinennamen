@@ -1,4 +1,3 @@
-
 package tracker;
 
 import java.io.BufferedWriter;
@@ -15,53 +14,68 @@ public class Tracker {
     String oldCode;
     String oldTest;
 
+    //constructor
     public Tracker(String code, String test) {
         time = LocalTime.now();
         oldCode = code;
         oldTest = test;
     }
 
-    public void dump(String code, String test) {
-        String output = getDiff(code, test, oldCode, oldTest);
+    //now: current code/test
+    //phase: 0 = RED, 1 = GREEN, 2 = REFACTOR
+    public void dump(String now, int phase) {
+	//initialise Strings for output
+	String changes = "";
+	String phaseChanged = "";
+
+	//set Strings according to phase
+	if (phase == 0) {
+		changes = getDiff(now, 0);
+		phaseChanged = "Changed test in RED:\n";
+		oldTest = now;
+	}
+
+	if (phase == 1) {
+		changes = getDiff(now, 1);
+		phaseChanged = "Changed code in GREEN:\n";
+		oldCode = now;
+	}
+
+	if (phase == 2) {
+		changes = getDiff(now, 2);
+		phaseChanged = "Changed code in REFACTOR:\n";
+		oldCode = now;
+	}
+
+	//complete output String
         time = LocalTime.now();
+	String output = time.toString();
+	output += ("\n" + phaseChanged + "\n" + changes + "\n\n");
         
-        try (BufferedWriter out = new BufferedWriter(new FileWriter("TrackerData.txt", true))) {
-        	out.write(time.toString() + "\n" + output + "\n\n");
+	//write to file
+        try {
+		BufferedWriter out = new BufferedWriter(new FileWriter("TrackerData.txt", true));
+        	out.write(output);
+		out.close();
         } catch (IOException e) {}
-        
-        oldCode = code;
-        oldTest = test;
     }
 
-    private String getDiff(String code, String test, String oldCode, String oldTest) {
-    	
-    	boolean codeChanged = true;
-    	boolean testChanged = true;
-    
-    	if (code.equals(oldCode)) codeChanged = false;
-    	if (test.equals(oldTest)) testChanged = false;
-	
-    	String diffCode;
-    	String diffTest;
-    	
-    	String testOut = "";
-    	String codeOut = "";
+    //get differences
+    //not final version
+    private String getDiff(String now, int phase) {
 
-    	if (codeChanged) {
-    		diffCode = StringUtils.difference(oldCode, code);
-    		codeOut = "Changed Code:\n" + diffCode;
-    	}
+	String different;
     	
-    	if (testChanged) {
-		diffTest = StringUtils.difference(oldTest, test);
-		testOut = "Changed Test:\n" + diffTest;
-    	}
-	
-    	String endResult;
-	
-    	if(codeChanged && testChanged) endResult = codeOut + "\n\n" + testOut;
-    	else endResult = codeOut + testOut;
-	
-    return endResult;   
+    	if (phase == 0) {
+		if (now.equals(oldTest)) different = "*No changes made*";
+		else different = StringUtils.difference(oldTest, now);
+	}
+
+
+	else {
+		if (now.equals(oldCode)) different = "*No changes made*";
+		else different = StringUtils.difference(oldCode, now);
+	}
+    return different;   
     }
 }	
