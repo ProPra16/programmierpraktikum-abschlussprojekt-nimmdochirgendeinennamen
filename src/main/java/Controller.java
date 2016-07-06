@@ -16,7 +16,9 @@ public class Controller {
 	//for Babysteps backup and state at the same time
 	//might aswell take Tracker for backup tho
 
-	String	  backup;  //backup of Phase 1 code for prevPhase() on phase = 2;
+	Backup codeBackup;
+    Backup testBackup;
+	//String	  backup;  //backup of Phase 1 code for prevPhase() on phase = 2;
 	Phase	  phase;
 	//#### Babysteps babysteps;
 	Thread 	  t;
@@ -54,7 +56,8 @@ public class Controller {
 		}
 
 		if (passed) {
-			if (phase.get() == 0) backup = txtCode.getText();
+			if (phase.get() == 0) testBackup.setNewBackup(txtTest);
+			if (phase.get() == 1) codeBackup.setNewBackup(txtCode);
 			phase.next();
 			updateGUIElements(phase);
 		}
@@ -63,7 +66,7 @@ public class Controller {
 	@FXML
 	public void prevPhase() {
 		if (phase.get() == 1) {
-			txtCode.setText(backup);
+			txtCode.setText(codeBackup.getLastBackup());
 		}
 		phase.previous();
 		updateGUIElements(phase);
