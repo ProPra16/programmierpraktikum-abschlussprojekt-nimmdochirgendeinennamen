@@ -22,8 +22,8 @@ public class Controller {
 	Thread 	  t;
 	TDDTCompiler compiler;
 
-	ChartTracker chartTracking;
-	Tracker tracking;
+	//ChartTracker chartTracking;
+	//Tracker tracking;
 
 	@FXML private Pane pane;
 	@FXML private TextArea txtCode;
