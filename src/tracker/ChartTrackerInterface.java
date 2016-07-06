@@ -14,7 +14,6 @@
 package tracker;
 
 public interface ChartTrackerInterface {
-
     /*
      * Measures time spent in a certain phase. 
      * When the phase is ended, writes the time to a textfile.
