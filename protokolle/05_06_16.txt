@@ -1,0 +1,21 @@
+Review der letzten Woche:
+	Erreichte Ziele:
+			Tracker
+			Backup
+			Babysteps
+	Unerreichte Ziele:
+		-
+
+Projektziele/TODO:
+	Refactor
+	Tests fertigstellen
+	Dokumentation, Nutzerhandbuch
+	Readme
+	Komponenten verbinden: Merging, Controller anpassen
+
+Individuelle Ziele:
+	Caro 	: Refactor/Tests
+	Dominik : Refactor/Struktur
+	Kai B. 	: Refactor/Struktur
+	Jule 	: Tracker optimieren/Tests
+	Kai H. 	: Merge leiten/Qualitätskontrolle
