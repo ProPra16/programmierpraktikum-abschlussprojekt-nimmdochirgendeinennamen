@@ -73,6 +73,13 @@ public class Tracker {
         } catch (IOException e) {}
     }
 
+    //can only go back in GREEN
+    public String wentBack() {
+	time = LocalTime.now();
+	String output = time.toString();
+	output += "Changed code in GREEN:\nWent back to RED, no changes.";
+    }
+
     //get differences
     //not final version
     private String getDiff(String now, int phase) {
