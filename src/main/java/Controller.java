@@ -39,24 +39,14 @@ public class Controller {
 
 	@FXML
 	public void initialize() {
-<<<<<<< HEAD
 
 		phase = new Phase(0, 2, 1);
 		compiler = new TDDTCompiler();
 		//#### babysteps = new Babysteps();
 
-		phase = 0;
-		babysteps = new Babysteps();
-}
-=======
-		phase = new Phase(0, 2, 1);
-		compiler = new TDDTCompiler();
-		//#### babysteps = new Babysteps();
-
-		ChartTracker chartTracking = new ChartTracker();
-		Tracker tracking = new Tracker(txtCode.getText(), txtTest.getText());
+		//ChartTracker chartTracking = new ChartTracker();
+		//Tracker tracking = new Tracker(txtCode.getText(), txtTest.getText());
 	}
->>>>>>> update Controller.java
 
 	@FXML
 	public void nextPhase() {
@@ -75,8 +65,8 @@ public class Controller {
 
 			if (phase.get() == 0) {
 				backup = txtCode.getText();
-				tracking.dump(txtTest.getText(), 0);
-			} else tracking.dump(txtCode.getText(), phase.get());
+				//tracking.dump(txtTest.getText(), 0);
+			} //else tracking.dump(txtCode.getText(), phase.get());
 
 			phase.next();
 			if (phase < 2) phase++;
@@ -87,8 +77,8 @@ public class Controller {
 
 	@FXML
 	public void prevPhase() {
-		chartTracking.greenBack();
-		tracking.wentBack();
+		//chartTracking.greenBack();
+		//tracking.wentBack();
 
 		if (phase.get() == 1) {
 			txtCode.setText(backup);
