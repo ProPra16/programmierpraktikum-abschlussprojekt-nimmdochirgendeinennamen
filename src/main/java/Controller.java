@@ -52,6 +52,9 @@ public class Controller {
 		phase = new Phase(0, 2, 1);
 		compiler = new TDDTCompiler();
 		//#### babysteps = new Babysteps();
+
+		ChartTracker chartTracking = new ChartTracker();
+		Tracker tracking = new Tracker(txtCode.getText(), txtTest.getText());
 	}
 >>>>>>> update Controller.java
 
@@ -60,18 +63,21 @@ public class Controller {
 		boolean passed = false;
 		switch (phase.get()) {
 			case 0: passed = checkTest();
-					//#### tracker.dump(txtTest.getText());
 					break;
 			case 1: passed = checkCode();
-					//#### tracker.dump(txtCode.getText());
 					break;
 			case 2: passed = checkRefactor();
-					//#### tracker.dump(txtCode.getText());
 					break;
 		}
 
 		if (passed) {
-			if (phase.get() == 0) backup = txtCode.getText();
+			chartTracking.nextPhase();		
+
+			if (phase.get() == 0) {
+				backup = txtCode.getText();
+				tracking.dump(txtTest.getText(), 0);
+			} else tracking.dump(txtCode.getText(), phase.get());
+
 			phase.next();
 			if (phase < 2) phase++;
 			else 		   phase = 0;
@@ -81,6 +87,9 @@ public class Controller {
 
 	@FXML
 	public void prevPhase() {
+		chartTracking.greenBack();
+		//tracking
+
 		if (phase.get() == 1) {
 			txtCode.setText(backup);
 		if (phase > 0) {
@@ -90,6 +99,7 @@ public class Controller {
 		}
 		phase.previous();
 		updateGUIElements(phase);
+
 	}
 
 	@FXML
