@@ -30,7 +30,7 @@ public class Phase {
 	public void reset() {
 		phase = start;
 	}
-	
+
 	public int get() {
 		return phase;
 	}
