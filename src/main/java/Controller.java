@@ -69,7 +69,7 @@ public class Controller {
 	@FXML
 	public void prevPhase() {
 		chartTracking.greenBack();
-		//tracking
+		tracking.wentBack();
 
 		if (phase.get() == 1) {
 			txtCode.setText(backup);
