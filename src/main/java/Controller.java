@@ -21,12 +21,9 @@ public class Controller {
 	//#### Babysteps babysteps;
 	Thread 	  t;
 	TDDTCompiler compiler;
-<<<<<<< HEAD
 
 	//ChartTracker chartTracking;
 	//Tracker tracking;
-=======
->>>>>>> update Controller.java
 
 	@FXML private Pane pane;
 	@FXML private TextArea txtCode;
@@ -44,8 +41,8 @@ public class Controller {
 		compiler = new TDDTCompiler();
 		//#### babysteps = new Babysteps();
 
-		//ChartTracker chartTracking = new ChartTracker();
-		//Tracker tracking = new Tracker(txtCode.getText(), txtTest.getText());
+		//chartTracking = new ChartTracker();
+		//tracking = new Tracker(txtCode.getText(), txtTest.getText());
 	}
 
 	@FXML
@@ -61,7 +58,7 @@ public class Controller {
 		}
 
 		if (passed) {
-			chartTracking.nextPhase();		
+			//chartTracking.nextPhase();		
 
 			if (phase.get() == 0) {
 				backup = txtCode.getText();
