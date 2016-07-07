@@ -37,8 +37,8 @@ public class Controller {
 		compiler = new TDDTCompiler();
 		//#### babysteps = new Babysteps();
 
-		ChartTracker chartTracking = new ChartTracker();
-		Tracker tracking = new Tracker(txtCode.getText(), txtTest.getText());
+		//ChartTracker chartTracking = new ChartTracker();
+		//Tracker tracking = new Tracker(txtCode.getText(), txtTest.getText());
 	}
 
 	@FXML
@@ -54,12 +54,12 @@ public class Controller {
 		}
 
 		if (passed) {
-			chartTracking.nextPhase();		
+			//chartTracking.nextPhase();		
 
 			if (phase.get() == 0) {
 				backup = txtCode.getText();
-				tracking.dump(txtTest.getText(), 0);
-			} else tracking.dump(txtCode.getText(), phase.get());
+				//tracking.dump(txtTest.getText(), 0);
+			} else //tracking.dump(txtCode.getText(), phase.get());
 
 			phase.next();
 			updateGUIElements(phase);
@@ -68,8 +68,8 @@ public class Controller {
 
 	@FXML
 	public void prevPhase() {
-		chartTracking.greenBack();
-		tracking.wentBack();
+		//chartTracking.greenBack();
+		//tracking.wentBack();
 
 		if (phase.get() == 1) {
 			txtCode.setText(backup);
