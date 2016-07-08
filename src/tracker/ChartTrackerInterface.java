@@ -22,7 +22,7 @@ public interface ChartTrackerInterface {
     //call when changing to next phase
     public void nextPhase();
     
-    //call when changing BACK from GREEN to RED
+    //call when changing BACK
     public void greenBack();
  
     /*

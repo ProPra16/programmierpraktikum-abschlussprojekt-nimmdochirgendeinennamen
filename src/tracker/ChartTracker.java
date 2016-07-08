@@ -64,8 +64,8 @@ public class ChartTracker implements ChartTrackerInterface {
     
     //change BACK from GREEN to RED
     public void greenBack() {
-	//will only work if currently in phase GREEN
-        if (phase == 1) {
+	//
+        if (phase > 0) {
             long greenEndTime = System.currentTimeMillis() - greenStartTime;
             greenSeconds += (int)greenEndTime/1000;
             redStartTime = System.currentTimeMillis();
