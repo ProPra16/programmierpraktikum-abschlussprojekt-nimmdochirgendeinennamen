@@ -1,4 +1,4 @@
-Review der letzten Woche:
+﻿Review der letzten Woche:
 	Erreichte Ziele:
 			Tracker
 			Backup
@@ -18,4 +18,4 @@ Individuelle Ziele:
 	Dominik : Refactor/Struktur
 	Kai B. 	: Refactor/Struktur
 	Jule 	: Tracker optimieren/Tests
-	Kai H. 	: Merge leiten/Qualitätskontrolle
+	Kai H. 	: XML-Loader mergen 
