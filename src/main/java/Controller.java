@@ -36,7 +36,6 @@ public class Controller {
 
 	@FXML
 	public void initialize() {
-
 		phase = new Phase(0, 2, 1);
 		compiler = new TDDTCompiler();
 		//#### babysteps = new Babysteps();
@@ -66,8 +65,6 @@ public class Controller {
 			} //else tracking.dump(txtCode.getText(), phase.get());
 
 			phase.next();
-			if (phase < 2) phase++;
-			else 		   phase = 0;
 			updateGUIElements(phase);
 		}
 	}
@@ -79,10 +76,6 @@ public class Controller {
 
 		if (phase.get() == 1) {
 			txtCode.setText(backup);
-		if (phase > 0) {
-			phase--;
-			if (phase == 0)
-				btnPrevStep.setDisable(true);
 		}
 		phase.previous();
 		updateGUIElements(phase);
