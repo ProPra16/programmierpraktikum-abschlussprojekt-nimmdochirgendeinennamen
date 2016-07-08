@@ -1,7 +1,5 @@
 
 Die Klasse ChartTracker misst, wie viel Zeit in den einzelnen Phasen verbracht wird. 
-Mit den Methoden nextPhase() und greenBack() wird beim wechseln der Phase in eine Textdatei geschrieben, wie viele Sekunden bisher (seit der TDDT gestartet wurde) in jeder Phase verbracht wurden. Die in Millisekunden gemessene Zeit wird dazu auf Sekunden abgerundet.
-Die Klasse Tracking misst, wie viel Zeit in den einzelnen Phasen verbracht wird. 
 Mit den Methoden nextPhase() und greenBack() wird beim wechseln der Phase in eine Textdatei geschrieben, wie viele Sekunden bisher (seit der TDDT gestartet wurde) in jeder Phase verbracht wurden. 
 Die in Millisekunden gemessene Zeit wird dazu auf Sekunden abgerundet.
 Die Textdatei kann dann zum erstellen eines Charts zu einem beliebigen Zeitpunkt ausgewertet werden.
