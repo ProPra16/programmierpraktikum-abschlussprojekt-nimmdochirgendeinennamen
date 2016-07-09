@@ -77,7 +77,7 @@ public class Tracker {
     public String wentBack() {
 	time = LocalTime.now();
 	String output = time.toString();
-	output += "Changed code in GREEN:\nWent back to RED, no changes.";
+	output += "Changed code in GREEN:\nWent back to RED, no changes.\n\n";
     }
 
     //get differences
