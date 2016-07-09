@@ -6,7 +6,6 @@ import org.junit.Test;
 import tracker.Tracker;
 
 public class TrackerTest {
-	
 	//callDump is not tested since LocalTime is too exact (but was tested manually).
 	
 	//Test dump-method.
@@ -42,6 +41,4 @@ public class TrackerTest {
 	String expected = "Changed code in REFACTOR:\n*No changes made*\n\n";
 	assertEquals(expected, result);
 	}
-	
-	
 }
