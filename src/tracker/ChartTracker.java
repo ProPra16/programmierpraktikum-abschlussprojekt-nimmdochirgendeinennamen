@@ -16,10 +16,10 @@ package tracker;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class ChartTracker implements ChartTrackerInterface {
+public class ChartTracker {
     /*
      * Measures time spent in a certain phase.
-     * When the phase is ended, writes the time (in seconds) to a textfile.
+     * When the phase is ended, writes the time (in seconds) to a text file.
      *
      * Call constructor to start, nextPhase() to change to the next phase,
      * greenBack() to go back from GREEN to RED.
@@ -27,56 +27,47 @@ public class ChartTracker implements ChartTrackerInterface {
      */
 
     //seconds spent in each phase so far
-    private int greenSeconds;
-    private int redSeconds;
-    private int refactorSeconds;
+    int greenSeconds;
+    int redSeconds;
+    int refactorSeconds;
     
     //system time when phase is entered
     private long greenStartTime;
     private long redStartTime;
     private long refactorStartTime;
-    
-    //current phase (0 = RED, 1 = GREEN, 2 = REFACTOR)
-    private int phase;
-           
+               
     public ChartTracker() {
         //initialise times to 0
         this.greenSeconds = 0;
         this.redSeconds = 0;
         this.refactorSeconds = 0;
         
-        //start in RED phase
-        this.phase = 0;
-        
+        //start in RED phase        
         this.redStartTime = System.currentTimeMillis();
     }
     
-    //change to next phase, automatically updates phase
-    //and writes times to textfile
-    public void nextPhase() {
+    //change to next phase, call with current phase (0 = RED, 1 = GREEN, 2 = REFACTOR)
+    public void nextPhase(int phase) {
         if (phase == 0) redToGreen();
         if (phase == 1) greenToRefactor();
         if (phase == 2) refactorToRed();
         
         writeToFile();
-        phase++;
     }
     
     //change BACK from GREEN to RED
-    public void greenBack() {
-	//will only work if currently in phase GREEN
+    public void greenBack(int phase) {
+	//will only work in phase GREEN
 	if (phase == 1) {
             long greenEndTime = System.currentTimeMillis() - greenStartTime;
             greenSeconds += (int)greenEndTime/1000;
             redStartTime = System.currentTimeMillis();
 
             writeToFile();
-	    phase--;
-        }
+    }
     }
 
                                         /*INTERNAL METHODS*/
-
     private void redToGreen() {
         long redEndTime = System.currentTimeMillis() - redStartTime;
         redSeconds += (int)redEndTime/1000;
