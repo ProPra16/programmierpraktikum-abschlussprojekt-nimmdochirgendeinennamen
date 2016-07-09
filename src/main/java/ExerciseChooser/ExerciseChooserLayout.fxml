@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ExerciseChooser.ExerciseChooser">
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu mnemonicParsing="false" text="File">
+                    <MenuItem mnemonicParsing="false" onAction="#onOpenClicked"
+                              text="Load Catalog"/>
+                </Menu>
+            </MenuBar>
+            <Region prefHeight="7.0" prefWidth="600.0"/>
+        </VBox>
+    </top>
+    <left>
+        <HBox>
+            <Region prefHeight="355.0" prefWidth="10.0"/>
+            <VBox>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise:" GridPane.columnIndex="1"
+                      GridPane.rowIndex="1"/>
+                <Region prefHeight="4.0" prefWidth="200.0"/>
+                <ListView fx:id="exerciseList" onMouseClicked="#onExerciseClicked" prefHeight="361.0"
+                          prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            </VBox>
+        </HBox>
+    </left>
+    <right>
+        <HBox>
+            <VBox prefHeight="313.0" prefWidth="345.0" BorderPane.alignment="CENTER">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description"/>
+                <Region prefHeight="4.0" prefWidth="345.0"/>
+                <TextArea fx:id="exerciseDesc" disable="true" editable="false" prefHeight="200.0"
+                          prefWidth="200.0"/>
+                <Region prefHeight="14.0" prefWidth="345.0"/>
+                <HBox prefHeight="86.0" prefWidth="345.0">
+                    <VBox prefHeight="86.0" prefWidth="117.0">
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="92.0" text="Babysteps"/>
+                        <TextArea fx:id="babystepsDefault" disable="true" editable="false" prefHeight="20.0"
+                                  prefWidth="86.0"/>
+                        <Region prefHeight="50.0" prefWidth="86.0"/>
+                    </VBox>
+                    <Region prefHeight="86.0" prefWidth="75.0"/>
+                    <VBox prefHeight="86.0" prefWidth="117.0">
+                        <Label alignment="CENTER" text="Babysteps time"/>
+                        <TextArea fx:id="babystepsTimeDefault" disable="true" editable="false"
+                                  prefHeight="20.0" prefWidth="86.0"/>
+                        <Region prefHeight="50.0" prefWidth="86.0"/>
+                    </VBox>
+                    <Region prefHeight="200.0" prefWidth="75.0"/>
+                    <VBox prefHeight="86.0" prefWidth="117.0">
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="97.0" text="Timetracking"
+                               textAlignment="RIGHT"/>
+                        <TextArea fx:id="timetracking" disable="true" editable="false" prefHeight="20.0"
+                                  prefWidth="86.0"/>
+                        <Region prefHeight="50.0" prefWidth="86.0"/>
+                    </VBox>
+                </HBox>
+                <HBox prefHeight="25.0" prefWidth="345.0">
+                    <Region prefHeight="25.0" prefWidth="196.0"/>
+                    <Button fx:id="BtnChoose" defaultButton="true" mnemonicParsing="false"
+                            onAction="#onBtnChooseClicked" text="Choose"/>
+                    <Region prefHeight="93.0" prefWidth="28.0"/>
+                    <Button fx:id="BtnCancel" cancelButton="true" mnemonicParsing="false"
+                            onAction="#onBtnCloseClicked" text="Cancel"/>
+                </HBox>
+            </VBox>
+            <Region prefHeight="355.0" prefWidth="10.0"/>
+        </HBox>
+    </right>
+    <bottom>
+        <Region prefHeight="13.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+    </bottom>
+    <center>
+        <Region prefHeight="355.0" prefWidth="15.0" BorderPane.alignment="CENTER" />
+    </center>
+</BorderPane>

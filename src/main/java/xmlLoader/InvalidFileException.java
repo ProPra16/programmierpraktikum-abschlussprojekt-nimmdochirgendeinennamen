@@ -1,4 +1,3 @@
-package main.java;
 /*
  * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
  *
@@ -13,35 +12,12 @@ package main.java;
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import java.io.File;
+package main.java.xmlLoader;
 
-public class TDDTTask {
+public class InvalidFileException extends RuntimeException {
 
-	private String codeCode;
-	private String testCode;
-
-	public TDDTTask(File file) {
-		TDDTFileReader reader = new TDDTFileReader();
-		String content = reader.readAll(file);
-		String[] splitContent = content.split("<Code-Test-Border, do not remove>\n");
-
-		//check if selected file is a Task
-		if (splitContent.length != 2) {
-			codeCode = null;
-			testCode = null;
-			return;
-		}
-
-		this.codeCode = splitContent[0];
-		this.testCode = splitContent[1];
-	}
-
-	public String getCode() {
-		return this.codeCode;
-	}
-
-	public String getTest() {
-		return this.testCode;
-	}
+    public InvalidFileException(String message, Exception cause){
+        super(message,cause);
+    }
 
 }
