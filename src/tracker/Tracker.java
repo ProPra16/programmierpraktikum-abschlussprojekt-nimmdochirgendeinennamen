@@ -38,7 +38,7 @@ public class Tracker {
         //clear file contents from last session
         PrintWriter writer;
 		try {
-			writer = new PrintWriter("TrackerData.txt");
+			writer = new PrintWriter("Trackeranalyse.txt");
 			writer.print("");
 			writer.close();
 		} catch (FileNotFoundException e) {}
@@ -89,7 +89,7 @@ public class Tracker {
 
     public void writeToFile(String output) {
 	try {
-		BufferedWriter out = new BufferedWriter(new FileWriter("TrackerData.txt", true));
+		BufferedWriter out = new BufferedWriter(new FileWriter("TrackerAnalyse.txt", true));
         	out.write(output);
 		out.close();
         } catch (IOException e) {}
