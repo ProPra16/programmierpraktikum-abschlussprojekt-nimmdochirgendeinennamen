@@ -1,15 +1,11 @@
 <exercises>
     <!-- Exercise 1 -->
-    <exercise name="Roemische Zahlen">
+    <exercise name="TestEx">
         <description>Description comes here</description>
         <!-- Enter classes needed for the exercise, each class needs to be surrounded by a class tag with a name value -->
         <classes>
-            <class name="RomanNumbers">
-public class RomanNumbers{
-	public RomanNumbers(){
-		System.out.print("Die Roemer sind tot.");
-	}
-}
+            <class name="TestClass">
+                testable ClassCode
             </class>
             <class name="TestClass2">
                 testable ClassCode2
@@ -18,11 +14,7 @@ public class RomanNumbers{
         <!-- Here comes the test code. -->
         <tests>
             <test name="TestExTester">
-public class RomanNumbers{
-	public RomanNumbers(){
-		System.out.print("Die Roemer sind tot.");
-	}
-}
+                Testable testtext
             </test>
             <test name="TestExTester2">
                 Testable testtext2
