@@ -200,14 +200,17 @@ public class Controller {
 
 	private boolean checkRefactor() {
 		String code = txtTest.getText();
+        String classname = xmlLoader.getTestName(exerciseIDX,0);
 		//check if compilable
 		if (!checkIfCompilableClass(code)) return false;
 		//try to compile code
+		boolean passed = compiler.compile(txtCode.getText(), false, classname);
 		if (!passed) {
 			new TDDTDialog("compileError", compiler.getInfo());
 			return false;
 		}
 		//try to compile and run showStage
+		passed = compiler.compile(txtTest.getText(), true, classname);
 		//display in Dialog if failed
 		if (!passed) {
 			new TDDTDialog("testFail", compiler.getInfo());
