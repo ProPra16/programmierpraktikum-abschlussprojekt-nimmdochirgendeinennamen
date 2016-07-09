@@ -61,8 +61,8 @@ public class Controller {
 
 			if (phase.get() == 0) {
 				backup = txtCode.getText();
-				//tracking.dump(txtTest.getText(), 0);
-			} //else tracking.dump(txtCode.getText(), phase.get());
+				//tracking.callDump(txtTest.getText(), 0, false);
+			} //else tracking.callDump(txtCode.getText(), phase.get(), false);
 
 			phase.next();
 			updateGUIElements(phase);
@@ -72,7 +72,7 @@ public class Controller {
 	@FXML
 	public void prevPhase() {
 		//chartTracking.greenBack();
-		//tracking.wentBack();
+		//tracking.callDump("", "", true);
 
 		if (phase.get() == 1) {
 			txtCode.setText(backup);
