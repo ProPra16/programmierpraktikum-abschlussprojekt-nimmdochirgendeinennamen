@@ -1,4 +1,4 @@
-Erweiterungen:
+﻿Erweiterungen:
 
 Babysteps und Tracking
 
@@ -8,40 +8,36 @@ Welche Bibliotheken außerhalb des JDK und der virtual-kata-lib sind erlaubt?
 Alle
 
 Wie wird der Katalog aufgebaut?
-Der Katalog selber wird als Ordner dargestellt und jedes Textdokument innerhalb ist eine Aufgabe
+Der Katalog ist als .xml Datei aufgebaut. Die einzelnen Aufgaben sind durch das Tag 'exercise' abgetrennt.
 
 Wie und wann wird der Katalog geladen?
-Über einen FileChooser, der über das Menü unter "Task/Open" aufgerufen werden kann.
+Der Katalog wird im ExerciseChooser über einen FileChooser geladen, der über das Menü unter "File/LoadCatalog" aufgerufen werden kann.
 
 Wo und wann wird der Inhalt eines Kataloges geladen?
-Über eine Task-Klasse, die das Lesen und Formatieren übernimmt
+Der Inhalt wird im xmlLoader geladen.
 
 Welches Format haben Übungen?
-...//code
-<Code-Test-Border, do not remove>
-...//test
+Die Übungen sind im XML Format gespeichwert. Die einzelnen Werte sind durch Tags abgetrennt. Näheres ist der XML Datei zu entnehmen.
 
 Wo befindet sich die Aufgabenstellung?
-Nicht die Zuständigkeit des Programmes. Datei Header als comment bietet sich an
+Im Katalog unter dem Tag 'description'.
 
 Was ist der Inhalt einer Übung?
-Vorlagen für die Klasse und Vorlagen für die Tests. Die Konfiguration der Erweiterungen ist ausgelagert.
+Vorlagen für die Klasse und Vorlagen für die Tests. Die default-Konfiguration der Erweiterungen ist im Katalog vorzufinden, können aber während der Laufzeit an-/abgeschaltet werden.
 
 Wo konfiguriert man die Erweiterungen?
+Vorkonfiguriert im Katalog,
 Tracking ist nicht abstellbar, da nicht erwähnt und Grundfunktionalitäten gewährleistet werden
 Babysteps kann über das Menü unter "Options/Babysteps" an und ausgeschaltet werden und per TextInputDialog eine Zeit gesetzt werden.
 
 Welche Werte in welcher Form können für Babysteps angegeben werden?
-Zwischen 1 bis 180 Sekunden.
+Im Katalog beliebig, zur Laufzeit zwischen 1 bis 180 Sekunden.
 
 Wie wird das Tracking realisiert? Welche Verfügbarkeit wird erwartet?
 Informationen werden pro Sitzung in einfachen Textdateien gespeichert. Die Chart (Analyse) wertet die Textdateien einfach aus. Weitere Details dem implementierenden überlassen.
 
 Wie erlangt die Compiler Bibliothek ihren Parameter "ClassName" in der CompilationUnit?
-Durch die Festlegung gleicher Namensgebung der einzelnen Übungen und ihren enthaltenen Klassen. ("Euler.txt" => public class Euler {...})
+Der ClassName ist im Katalog gespeichert, dieser wird abgerufen und an die CompilerBibliothek weitergereicht.
 
 Sollen RuntimeExceptions behandelt bzw. angezeigt werden?
-Nein
-
-
-
+Teilweise als Dialog angezeigt (wenn z.B. ein falscher Katalog gewählt wurde).
