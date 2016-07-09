@@ -12,8 +12,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.xmlLoader;
+package test.java;
 
+import main.java.xmlLoader.InvalidFileException;
+import main.java.xmlLoader.XMLLoader;
 import org.junit.Test;
 
 import java.io.File;
@@ -21,7 +23,7 @@ import java.io.File;
 import static org.junit.Assert.assertEquals;
 
 public class LoaderTest {
-    XMLLoader testLoader = new XMLLoader(new File("src/xmlLoader/catalog.xml"));
+    XMLLoader testLoader = new XMLLoader(new File("src/main/java/xmlLoader/catalog.xml"));
 
     @Test
     public void testBabysteps() {
