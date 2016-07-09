@@ -11,14 +11,12 @@ import main.java.TDDTTask;
 public class TDDTTaskTest {
 
 	//TODO find a way to split dependencies...
+	//TDDTFileReaderTest is basically just a wrapper...is necessary?
 
 	@Test
 	public void basicTask() {
 		File file = new File("src/test/java/testResources/basicTask.txt");
 		TDDTTask task = new TDDTTask(file);
-		String actualCode = task.getCode();
-		String actualTest = task.getTest();
-		//inb4 StringBuilder/StringBuffer, its the same bytecode
 		String expectedCode = (
 			  "public class Task1 {\n"
 			+ "\t//Task: Print out Hello World!\n"
@@ -39,54 +37,40 @@ public class TDDTTaskTest {
 			+ "\t}\n"
 			+ "}\n"
 		);
-		assertEquals(expectedCode, actualCode);
-		assertEquals(expectedTest, actualTest);
+		assertEquals(expectedCode, task.getCode());
+		assertEquals(expectedTest, task.getTest());
 	}
 
 	@Test
 	public void minimalisticTask() {
 		File file = new File("src/test/java/testResources/minimalisticTask.txt");
 		TDDTTask task = new TDDTTask(file);
-		String actualCode = task.getCode();
-		String actualTest = task.getTest();
-		String expectedCode = "Dis is\n";
-		String expectedTest = "task\n";
-		assertEquals(expectedCode, actualCode);
-		assertEquals(expectedTest, actualTest);
+		assertEquals("Dis is\n", task.getCode());
+		assertEquals("task\n", task.getTest());
 	}
 
 	@Test
 	public void noContentTask() {
 		File file = new File("src/test/java/testResources/noContentTask.txt");
 		TDDTTask task = new TDDTTask(file);
-		String actualCode = task.getCode();
-		String actualTest = task.getTest();
-		assertEquals(null, actualCode);
-		assertEquals(null, actualTest);
+		assertEquals(null, task.getCode());
+		assertEquals(null, task.getTest());
 	}
 
 	@Test
 	public void notATask_missingTaskBorder() {
 		File file = new File("src/test/java/testResources/notATask_missingTaskBorder.txt");
 		TDDTTask task = new TDDTTask(file);
-		String actualCode = task.getCode();
-		String actualTest = task.getTest();
-		String expectedCode = null;
-		String expectedTest = null;
-		assertEquals(expectedCode, actualCode);
-		assertEquals(expectedTest, actualTest);
+		assertEquals(null, task.getCode());
+		assertEquals(null, task.getTest());
 	}
 
 	@Test
 	public void notATask_havingTwoTaskBorders() {
 		File file = new File("src/test/java/testResources/notATask_havingTwoTaskBorders.txt");
 		TDDTTask task = new TDDTTask(file);
-		String actualCode = task.getCode();
-		String actualTest = task.getTest();
-		String expectedCode = null;
-		String expectedTest = null;
-		assertEquals(expectedCode, actualCode);
-		assertEquals(expectedTest, actualTest);
+		assertEquals(null, task.getCode());
+		assertEquals(null, task.getCode());
 	}
 
 }
