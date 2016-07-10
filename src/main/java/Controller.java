@@ -120,7 +120,8 @@ public class Controller {
             phase.reset();
             updateGUIElements(phase);
         }else {
-            new TDDTDialog("alert", "Received an empty catalog path.");
+			//This popup is annoying as f...
+            //new TDDTDialog("alert", "Received an empty catalog path.");
         }
     }
 
