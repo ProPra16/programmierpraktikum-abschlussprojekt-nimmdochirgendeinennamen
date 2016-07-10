@@ -14,45 +14,86 @@
 package tracker;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.util.Scanner;
 
-//import org.apache.commons.lang3.StringUtils;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Tracker {
 
-    public LocalTime time;
+    public LocalDateTime time;
     
     String oldCode;
     String oldTest;
+    
+    File file;
 
     //constructor
     public Tracker(String code, String test) {
-        time = LocalTime.now();
+        time = LocalDateTime.now();
         oldCode = code;
         oldTest = test;
         
-        //clear file contents from last session
-        PrintWriter writer;
+        file = new File("TrackingAnalyse.txt");
+        FileWriter clear;
 		try {
-			writer = new PrintWriter("Trackeranalyse.txt");
-			writer.print("");
-			writer.close();
-		} catch (FileNotFoundException e) {}
+			clear = new FileWriter(file, false);
+			clear.write("");
+	        clear.close();
+		} catch (IOException e) {}
     }
     
     public void callDump(String now, int phase, boolean back) {
     	
-    	time = LocalTime.now();
+    	time = LocalDateTime.now();
     	String output = time.toString() + "\n";
     	if (!back) output += dump(now, phase);
     	
     	//if user went back from GREEN to RED
-    	else if (back) output += "Changed code in GREEN:\nWent back to RED, no changes.\n\n";
+    	else if (back) { output += "Changed code in GREEN:\nWent back to RED, no changes.\n\n"; }
     	writeToFile(output);
+    }
+    
+    public void showOutput() {
+    	
+    	Text show = new Text(output());
+    	
+    	ScrollPane window = new ScrollPane();
+        window.setContent(show);
+        window.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+        window.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+    	
+    	Scene scene = new Scene(window, 400, 600);
+    	Stage stage = new Stage();
+    	
+    	stage.setTitle("Tracking history");
+    	stage.setScene(scene);
+    	stage.show();
+    }
+    
+    									/*INTERNAL METHODS*/
+    private String output() {
+    	String output = "";
+    	
+    	Scanner scanner = null;
+    	
+    	try {
+		scanner = new Scanner(file);
+    	} catch (FileNotFoundException e) {}
+	
+	  	while (scanner.hasNextLine()) {
+			output += "\n" + scanner.nextLine();
+	  	}
+	  	scanner.close();
+    	return output;
     }
 
     //now: current code/test
@@ -89,9 +130,9 @@ public class Tracker {
 
     public void writeToFile(String output) {
 	try {
-		BufferedWriter out = new BufferedWriter(new FileWriter("TrackerAnalyse.txt", true));
+		BufferedWriter out = new BufferedWriter (new FileWriter(file, true));
         	out.write(output);
-		out.close();
+        	out.close();
         } catch (IOException e) {}
     }
 
@@ -142,4 +183,4 @@ public class Tracker {
         String[] splitted = a.split("\n");
         return splitted;
     }
-}	
+}		
