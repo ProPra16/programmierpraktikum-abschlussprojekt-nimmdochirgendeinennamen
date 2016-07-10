@@ -2,7 +2,7 @@ package main.java;
 
 public class Babysteps {
 	long startTime;
-	long duration;
+	public long duration;
 	boolean enabled;
 
 	public Babysteps() {
