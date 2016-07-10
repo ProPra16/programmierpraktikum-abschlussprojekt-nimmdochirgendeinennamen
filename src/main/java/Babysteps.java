@@ -22,7 +22,7 @@ public class Babysteps {
 		if (time < duration) return true;
 		else return false;
 	}
-	
+
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -34,17 +34,9 @@ public class Babysteps {
 	public void disable() {
 		enabled = false;
 	}
-	
+
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	
-	/*
-	  		Thread t = new Thread(() -> {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) { }
-				System.out.println(" Welt!");
-		});
-	 */
+
 }

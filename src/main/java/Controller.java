@@ -2,6 +2,7 @@ package main.java;
 
 import java.io.File;
 
+import backup.Backup;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -20,13 +21,13 @@ public class Controller {
     Backup testBackup;
 	//String	  backup;  //backup of Phase 1 code for prevPhase() on phase = 2;
 	Phase	  phase;
-	//#### Babysteps babysteps;
+	Babysteps babysteps;
 	Thread 	  t;
 	TDDTCompiler compiler;
 
 	@FXML private Pane pane;
-	@FXML private TextArea txtCode;
-	@FXML private TextArea txtTest;
+	@FXML public TextArea txtCode;
+	@FXML public TextArea txtTest;
 	@FXML private Button btnNextStep;
 	@FXML private Button btnPrevStep;
 	@FXML private ImageView imgTest;
@@ -37,7 +38,7 @@ public class Controller {
 	public void initialize() {
 		phase = new Phase(0, 2, 1);
 		compiler = new TDDTCompiler();
-		//#### babysteps = new Babysteps();
+		babysteps = new Babysteps();
 	}
 
 	@FXML
@@ -56,8 +57,8 @@ public class Controller {
 		}
 
 		if (passed) {
-			if (phase.get() == 0) testBackup.setNewBackup(txtTest);
-			if (phase.get() == 1) codeBackup.setNewBackup(txtCode);
+			if (phase.get() == 0) testBackup.setNewBackup(txtTest.getText());
+			if (phase.get() == 1) codeBackup.setNewBackup(txtCode.getText());
 			phase.next();
 			updateGUIElements(phase);
 		}
@@ -90,34 +91,40 @@ public class Controller {
 
 		txtCode.setText(task.getCode());
 		txtTest.setText(task.getTest());
-		//#### babysteps.startPhase();
+		babysteps.startPhase();
 		phase.reset();
 		updateGUIElements(phase);
 	}
 
 	@FXML
 	public void turnBabystepsOn() {
-		//TODO proper loop
-		/*
-  		t = new Thread(
-  			() -> {
-  				try {
-  					Thread.sleep(1000);
-  				} catch (InterruptedException e) {}
-  				if (babysteps.isEnabled() | babysteps.timeLeft()) { //save calc-time with | instead of ||
-  					//TODO restore Backup, maybe with Tracker
-  					prevPhase();
-  				}
-  			}
-  		);
-  		*/
-		//#### babysteps.enable();
+
+		//Was passiert, wenn Babysteps bereits on ist? -> Button sollte solange deaktiviert werden
+		 t = new Thread(new Runnable() {
+	            public void run() {
+	                try {
+	                    while (!Thread.currentThread().isInterrupted()) {
+	                        Thread.sleep(1000);
+	                    }
+	                } catch (InterruptedException e) {
+	                    Thread.currentThread().interrupt();
+	                }
+	                if (babysteps.isEnabled() & !babysteps.timeLeft() && phase.get()!=2) {
+	  					if(phase.get() == 0) txtTest.setText(testBackup.getLastBackup());
+	  					if(phase.get() == 1) txtCode.setText(codeBackup.getLastBackup());
+	  					prevPhase();
+	  				}
+	            }
+	        });
+	        t.start();
+
+		babysteps.enable();
 	}
 
 	@FXML
 	public void turnBabystepsOff() {
-		//#### t.kill
-		//#### babysteps.disable();
+		t.interrupt();
+		babysteps.disable();
 	}
 
 	@FXML
@@ -127,7 +134,7 @@ public class Controller {
 		);
 		int result = Integer.parseInt( (String)dialog.getValue() );
 		if (result >= 1 && result <= 180) {
-			//####babysteps.setDuration(result);
+			babysteps.setDuration(result);
 		} else {
 			new TDDTDialog("alert", "Input not acceptet. It has to be between 1 and 180");
 			return;
