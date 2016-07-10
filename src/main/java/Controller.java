@@ -17,8 +17,10 @@ package main.java;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import main.java.ExerciseChooser.ExerciseChooser;
 import main.java.xmlLoader.InvalidFileException;
 import main.java.xmlLoader.XMLLoader;
@@ -99,7 +101,7 @@ public class Controller {
 	@FXML
 	public void newTask() throws IOException{
         ExerciseChooser exercisechooser = new ExerciseChooser();
-        String[] x = exercisechooser.showStage();
+        String[] x = exercisechooser.showStage((Stage)txtCode.getScene().getWindow());
         if(x[0] != null) {
             try {
                 file = new File(x[0]);

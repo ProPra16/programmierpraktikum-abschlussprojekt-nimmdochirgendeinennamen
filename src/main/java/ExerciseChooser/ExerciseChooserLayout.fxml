@@ -1,112 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<BorderPane maxHeight="400" maxWidth="600" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ExerciseChooser.ExerciseChooser">
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="400" maxWidth="600" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="main.java.ExerciseChooser.ExerciseChooser">
     <top>
         <VBox>
-           <children>
-               <MenuBar>
-                  <menus>
-                      <Menu mnemonicParsing="false" text="File">
-                         <items>
-                             <MenuItem mnemonicParsing="false" onAction="#onOpenClicked" text="Load Catalog" />
-                         </items>
-                      </Menu>
-                  </menus>
-               </MenuBar>
-               <Region prefHeight="7.0" prefWidth="600.0" />
-           </children>
+            <children>
+                <MenuBar>
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#onOpenClicked" text="Load Catalog"/>
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <Region prefHeight="7.0" prefWidth="600.0"/>
+            </children>
         </VBox>
     </top>
     <left>
         <HBox>
-           <children>
-               <Region prefHeight="355.0" prefWidth="10.0" />
-               <VBox>
-                  <children>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                      <Region prefHeight="4.0" prefWidth="200.0" />
-                      <ListView fx:id="exerciseList" onMouseClicked="#onExerciseClicked" prefHeight="361.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  </children>
-               </VBox>
-           </children>
+            <children>
+                <Region prefHeight="355.0" prefWidth="10.0"/>
+                <VBox>
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise:" GridPane.columnIndex="1"
+                              GridPane.rowIndex="1"/>
+                        <Region prefHeight="4.0" prefWidth="200.0"/>
+                        <ListView fx:id="exerciseList" onMouseClicked="#onExerciseClicked" prefHeight="361.0"
+                                  prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    </children>
+                </VBox>
+            </children>
         </HBox>
     </left>
     <right>
         <HBox>
-           <children>
-               <VBox prefHeight="313.0" prefWidth="345.0" BorderPane.alignment="CENTER">
-                  <children>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-                      <Region prefHeight="4.0" prefWidth="345.0" />
-                      <TextArea fx:id="exerciseDesc" disable="true" editable="false" prefHeight="200.0" prefWidth="200.0" />
-                      <Region prefHeight="14.0" prefWidth="345.0" />
-                      <HBox prefHeight="48.0" prefWidth="345.0">
-                         <children>
-                             <VBox prefHeight="86.0" prefWidth="117.0">
-                                <children>
-                                    <Label alignment="BOTTOM_LEFT" prefHeight="17.0" prefWidth="92.0" text="Babysteps" />
-                                    <TextArea fx:id="babystepsDefault" disable="true" editable="false" maxHeight="20.0" minHeight="30.0" prefHeight="40.0">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextArea>
-                                    <Region maxWidth="40.0" />
-                                </children>
-                             </VBox>
-                             <Region prefHeight="86.0" prefWidth="75.0" />
-                             <VBox prefHeight="86.0" prefWidth="117.0">
-                                <children>
-                                    <Label text="Babysteps time" />
-                                    <TextArea fx:id="babystepsTimeDefault" disable="true" editable="false" maxHeight="20.0" minHeight="30.0" prefHeight="40.0">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextArea>
-                                    <Region />
-                                </children>
-                             </VBox>
-                             <Region prefHeight="200.0" prefWidth="75.0" />
-                             <VBox prefHeight="86.0" prefWidth="117.0">
-                                <children>
-                                    <Label prefHeight="17.0" prefWidth="97.0" text="Timetracking" textAlignment="RIGHT" />
-                                    <TextArea fx:id="timetracking" disable="true" editable="false" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefRowCount="1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextArea>
-                                    <Region />
-                                </children>
-                             </VBox>
-                         </children>
-                      </HBox>
-                  <HBox prefHeight="39.0" prefWidth="345.0">
-                     <children>
-                        <Region prefHeight="47.0" prefWidth="345.0" />
-                     </children>
-                  </HBox>
-                      <HBox prefHeight="25.0" prefWidth="345.0">
-                         <children>
-                             <Region prefHeight="25.0" prefWidth="211.0" />
-                             <Button fx:id="BtnChoose" defaultButton="true" mnemonicParsing="false" onAction="#onBtnChooseClicked" text="Choose" />
-                             <Region prefHeight="25.0" prefWidth="27.0" />
-                             <Button fx:id="BtnCancel" cancelButton="true" mnemonicParsing="false" onAction="#onBtnCloseClicked" text="Cancel" />
-                         </children>
-                      </HBox>
-                  </children>
-               </VBox>
-               <Region prefHeight="355.0" prefWidth="10.0" />
-           </children>
+            <children>
+                <VBox prefHeight="313.0" prefWidth="345.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description"/>
+                        <Region prefHeight="4.0" prefWidth="345.0"/>
+                        <TextArea fx:id="exerciseDesc" disable="true" editable="false" prefHeight="200.0"
+                                  prefWidth="200.0"/>
+                        <Region prefHeight="14.0" prefWidth="345.0"/>
+                        <HBox prefHeight="48.0" prefWidth="345.0">
+                            <children>
+                                <VBox prefHeight="86.0" prefWidth="117.0">
+                                    <children>
+                                        <Label alignment="BOTTOM_LEFT" prefHeight="17.0" prefWidth="92.0"
+                                               text="Babysteps"/>
+                                        <TextArea fx:id="babystepsDefault" disable="true" editable="false"
+                                                  maxHeight="20.0" minHeight="30.0" prefHeight="40.0">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextArea>
+                                        <Region maxWidth="40.0"/>
+                                    </children>
+                                </VBox>
+                                <Region prefHeight="86.0" prefWidth="75.0"/>
+                                <VBox prefHeight="86.0" prefWidth="117.0">
+                                    <children>
+                                        <Label text="Babysteps time"/>
+                                        <TextArea fx:id="babystepsTimeDefault" disable="true" editable="false"
+                                                  maxHeight="20.0" minHeight="30.0" prefHeight="40.0">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextArea>
+                                        <Region/>
+                                    </children>
+                                </VBox>
+                                <Region prefHeight="200.0" prefWidth="75.0"/>
+                                <VBox prefHeight="86.0" prefWidth="117.0">
+                                    <children>
+                                        <Label prefHeight="17.0" prefWidth="97.0" text="Timetracking"
+                                               textAlignment="RIGHT"/>
+                                        <TextArea fx:id="timetracking" disable="true" editable="false" maxHeight="30.0"
+                                                  minHeight="30.0" prefHeight="30.0" prefRowCount="1">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </TextArea>
+                                        <Region/>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="39.0" prefWidth="345.0">
+                            <children>
+                                <Region prefHeight="47.0" prefWidth="345.0"/>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="345.0">
+                            <children>
+                                <Region prefHeight="25.0" prefWidth="211.0"/>
+                                <Button fx:id="BtnChoose" defaultButton="true" mnemonicParsing="false"
+                                        onAction="#onBtnChooseClicked" text="Choose"/>
+                                <Region prefHeight="25.0" prefWidth="27.0"/>
+                                <Button fx:id="BtnCancel" cancelButton="true" mnemonicParsing="false"
+                                        onAction="#onBtnCloseClicked" text="Cancel"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <Region prefHeight="355.0" prefWidth="10.0"/>
+            </children>
         </HBox>
     </right>
     <bottom>
-        <Region prefHeight="13.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+        <Region prefHeight="13.0" prefWidth="600.0" BorderPane.alignment="CENTER"/>
     </bottom>
     <center>
-        <Region prefHeight="355.0" prefWidth="15.0" BorderPane.alignment="CENTER" />
+        <Region prefHeight="355.0" prefWidth="15.0" BorderPane.alignment="CENTER"/>
     </center>
 </BorderPane>

@@ -26,6 +26,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.TDDTDialog;
 import main.java.xmlLoader.InvalidFileException;
@@ -110,12 +111,14 @@ public class ExerciseChooser implements Initializable{
     }
 
     //create and show catalog chooser stage. Returns catalog path and exercise number to the main app.
-    public String[] showStage() throws IOException {
+    public String[] showStage(Stage stage) throws IOException {
         Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/ExerciseChooser/ExerciseChooserLayout.fxml"));
         Scene toExerciseChooser = new Scene(newScene);
         Stage catalog_stage = new Stage();
+        catalog_stage.initModality(Modality.WINDOW_MODAL);
+        catalog_stage.initOwner(stage);
         catalog_stage.setScene(toExerciseChooser);
-        catalog_stage.setTitle("TDDT Client - Catalog Chooser");
+        catalog_stage.setTitle("TDDT Client - Exercise Chooser");
         catalog_stage.getIcons().add(new Image("file:pictures/icon.png"));
         catalog_stage.setResizable(false);
         catalog_stage.showAndWait();
