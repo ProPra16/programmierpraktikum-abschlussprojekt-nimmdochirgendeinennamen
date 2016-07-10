@@ -51,6 +51,7 @@ public class Tracker {
 		} catch (IOException e) {}
     }
     
+    //now: current code or test, phase: phase, back: if user is going back (from GREEN)
     public void callDump(String now, int phase, boolean back) {
     	
     	time = LocalDateTime.now();
@@ -62,6 +63,7 @@ public class Tracker {
     	writeToFile(output);
     }
     
+    //opens new window to display tracking history (from file)
     public void showOutput() {
     	
     	Text show = new Text(output());
