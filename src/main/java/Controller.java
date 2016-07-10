@@ -149,7 +149,7 @@ public class Controller {
 		compiler.compile(code, true);
 		//settings for next phase
 		btnPrevStep.setDisable(false);
-		//#### babysteps.startPhase();
+		babysteps.startPhase();
 		return true;
 	}
 
@@ -171,7 +171,7 @@ public class Controller {
 			return false;
 		}
 		//settings for next phase
-		//#### babysteps.startPhase();
+		babysteps.startPhase();
 		return true;
 	}
 
@@ -193,7 +193,7 @@ public class Controller {
 			return false;
 		}
 		//settings for next phase
-		//#### babysteps.startPhase();
+		babysteps.startPhase();
 		return true;
 	}
 
