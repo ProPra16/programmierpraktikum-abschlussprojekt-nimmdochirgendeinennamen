@@ -81,7 +81,7 @@ public class Tracker {
     	stage.show();
     }
     
-    									/*INTERNAL METHODS*/
+    						/*INTERNAL METHODS*/
     private String output() {
     	String output = "";
     	
