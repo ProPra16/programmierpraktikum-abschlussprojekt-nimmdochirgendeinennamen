@@ -24,9 +24,30 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 
+/**
+ * The XMLWriter class is used to create a new or append an existing catalog of TDDT exercises.
+ * @author Kai Holzinger
+ * @version 1.0
+ */
 public class XMLWriter {
 
-
+    /**
+     * This method appends an existing XML file.
+     * @param file The XML file which is appended.
+     * @param exerciseName The name of the new exercise.
+     * @param aDescription The description of the new exercise.
+     * @param newClass The class code of the new exercise.
+     * @param classname The name of the class
+     * @param newTest The test code of the new exercise.
+     * @param testname The test name of the new exercise
+     * @param babystepsvalue Should be true or false, depending if babysteps should be turned on or not.
+     * @param babystepstime The time the user will have for each phase
+     * @param trackervalue This could be the setting for timetracker, but right now its more or less a dummy.
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     * @throws TransformerException
+     */
     public void appendXMLFile
             (File file, String exerciseName, String aDescription, String newClass, String classname, String newTest, String testname, String babystepsvalue, String babystepstime, String trackervalue)
             throws ParserConfigurationException, IOException, SAXException, TransformerException {
@@ -83,7 +104,21 @@ public class XMLWriter {
         transformer.transform(source, result);
     }
 
-
+    /**
+     * This method creates a new XML catalog.
+     * @param file The XML file which is created.
+     * @param exerciseName The name of the new exercise.
+     * @param aDescription The description of the new exercise.
+     * @param newClass The class code of the new exercise.
+     * @param classname The name of the class
+     * @param newTest The test code of the new exercise.
+     * @param testname The test name of the new exercise
+     * @param babystepsvalue Should be true or false, depending if babysteps should be turned on or not.
+     * @param babystepstime The time the user will have for each phase
+     * @param trackervalue This could be the setting for timetracker, but right now its more or less a dummy.
+     * @throws ParserConfigurationException
+     * @throws TransformerException
+     */
     public void newXMLFile(File file, String exerciseName, String aDescription, String newClass, String classname, String newTest, String testname, String babystepsvalue, String babystepstime, String trackervalue) throws ParserConfigurationException, TransformerException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
