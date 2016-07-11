@@ -88,12 +88,11 @@ public class ChartTracker {
 
     //write to file
     private void writeToFile() {
-        try (PrintWriter printFile = new PrintWriter("TrackingData.txt")) {
-            printFile.println("red\n" + redSeconds);
-	    printFile.println("green\n" + greenSeconds);
-            printFile.println("refactor\n" + refactorSeconds);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        try (BufferedWriter printFile = new BufferedWriter(new FileWriter("TrackingData.txt", false))) {
+            printFile.write("red\n" + redSeconds);
+            printFile.write("\ngreen\n" + greenSeconds);
+            printFile.write("\nrefactor\n" + refactorSeconds);
+            printFile.close();
+        } catch (IOException e) {}
     }
 }
