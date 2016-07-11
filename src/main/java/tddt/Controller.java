@@ -88,13 +88,14 @@ public class Controller {
 		}
 
 		if (passed) {
-			chartTracker.nextPhase(phase.get());
-			if (phase.get() == 0) {
+			currentPhase = phase.get();
+			chartTracker.nextPhase(currentPhase);
+			if (currentPhase == 0) {
 				testBackup.setNewBackup(txtTest.getText());
 				tracker.callDump(txtTest.getText(), 0, false);
 			} else {
 				codeBackup.setNewBackup(txtCode.getText());
-				tracker.callDump(txtCode.getText(), phase.get(), false);
+				tracker.callDump(txtCode.getText(), currentPhase, false);
 			}
 			phase.next();
 			updateGUIElements(phase);
@@ -103,14 +104,14 @@ public class Controller {
 
 	@FXML
 	public void prevPhase() {
-		tracker.callDump("", 1, true);
+		//not relying on GUI-flow
 		if (phase.get() == 1) {
 			txtCode.setText(codeBackup.getLastBackup());
 			chartTracker.greenBack();
+			tracker.callDump("", 1, true);
+			phase.previous();
+			updateGUIElements(phase);
 		}
-		phase.previous();
-		updateGUIElements(phase);
-
 	}
 
 	/*
@@ -134,8 +135,8 @@ public class Controller {
 				txtTest.setEditable(true);
 				btnNextStep.setDisable(false);
 				if (xmlLoader.isBabystepsActive(exerciseIDX)) {
-					turnBabystepsOn();
 					babysteps.setDuration(xmlLoader.getBabyStepsTime(exerciseIDX));
+					turnBabystepsOn();
 				}
 			} catch (InvalidFileException e) {
 				TDDTDialog.showException(e);
@@ -144,7 +145,6 @@ public class Controller {
 			phase.reset();
 			updateGUIElements(phase);
 		}/*else {
-			 This popup is annoying as f...
 			 new TDDTDialog("alert", "Received an empty catalog path.");
 		}*/
 		chartTracker = new ChartTracker();
@@ -155,16 +155,11 @@ public class Controller {
 
 	@FXML
 	public void turnBabystepsOn() {
-
-        babystpsOffBtn.setDisable(false);
-        babystpsOnBtn.setDisable(true);
-		// Was passiert, wenn Babysteps bereits on ist? -> Button sollte solange
-		// deaktiviert werden
 		t = new Thread(() -> {
             try {
                 while (!Thread.currentThread().isInterrupted()) {
                     Thread.sleep(1000);
-                    if (babysteps.isEnabled() & !babysteps.timeLeft() && phase.get() != 2) {
+                    if (babysteps.isEnabled() && !babysteps.timeLeft() && phase.get() != 2) {
                         if (phase.get() == 0)
                             txtTest.setText(testBackup.getLastBackup());
                         if (phase.get() == 1)
@@ -184,8 +179,6 @@ public class Controller {
 
 	@FXML
 	public void turnBabystepsOff() {
-        babystpsOffBtn.setDisable(true);
-        babystpsOnBtn.setDisable(false);
 		if (babysteps.isEnabled()) {
 			t.interrupt();
 		}
