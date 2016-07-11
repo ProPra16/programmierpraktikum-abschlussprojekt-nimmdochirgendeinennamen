@@ -146,7 +146,7 @@ public class ExerciseChooser implements Initializable{
 
     /**
      * The choosebutton is initialized as a disabled button.
-     * @see {@link #onExerciseClicked} for enable setting
+     * @see #onExerciseClicked for enable setting
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
