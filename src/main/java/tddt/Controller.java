@@ -79,26 +79,21 @@ public class Controller {
 	@FXML
 	public void nextPhase() {
 		boolean passed = false;
-		switch (phase.get()) {
-		case 0:
+		int currentPhase = phase.get();
+
+		if (currentPhase == 0) { 
 			passed = checkTest();
-			break;
-		case 1:
-			passed = checkCode();
-			break;
-		case 2:
-			passed = checkRefactor();
-			break;
+		} else if (currentPhase == 1 | currentPhase == 2) {
+			passed = checkCodeAndTest();
 		}
 
 		if (passed) {
 			chartTracker.nextPhase(phase.get());
-			if (phase.get() == 1)
-				codeBackup.setNewBackup(txtCode.getText());
 			if (phase.get() == 0) {
 				testBackup.setNewBackup(txtTest.getText());
 				tracker.callDump(txtTest.getText(), 0, false);
 			} else {
+				codeBackup.setNewBackup(txtCode.getText());
 				tracker.callDump(txtCode.getText(), phase.get(), false);
 			}
 			phase.next();
@@ -223,6 +218,12 @@ public class Controller {
             new TDDTDialog("alert", "Please first load an exercise");
 	}
 
+	@FXML
+    public void onNewExerciseClicked() throws IOException {
+        CatalogEditor ce = new CatalogEditor();
+        ce.showStage((Stage) txtCode.getScene().getWindow());
+    }
+
 	private boolean checkTest() {
 		String code = txtTest.getText();
 		String testname = xmlLoader.getTestName(exerciseIDX, 0);
@@ -237,33 +238,8 @@ public class Controller {
 		return true;
 	}
 
-	private boolean checkCode() {
+	private boolean checkCodeAndTest() {
 		String code = txtCode.getText();
-		String classname = xmlLoader.getClassName(exerciseIDX, 0);
-        String testname = xmlLoader.getTestName(exerciseIDX,0);
-		// check if compilable
-		if (!checkIfCompilableClass(code))
-			return false;
-		// try to compile code
-		boolean passed = compiler.compile(txtCode.getText(), false, classname);
-		if (!passed) {
-			new TDDTDialog("compileError", compiler.getInfo());
-			return false;
-		}
-		// try to compile and run tests
-		passed = compiler.compile(txtTest.getText(), true, testname);
-		// display in Dialog if failed
-		if (!passed) {
-			new TDDTDialog("testFail", compiler.getInfo());
-			return false;
-		}
-		// settings for next phase
-		babysteps.startPhase();
-		return true;
-	}
-
-	private boolean checkRefactor() {
-		String code = txtTest.getText();
 		String classname = xmlLoader.getClassName(exerciseIDX, 0);
         String testname = xmlLoader.getTestName(exerciseIDX,0);
 		// check if compilable
@@ -324,9 +300,4 @@ public class Controller {
 			break;
 		}
 	}
-
-    public void onNewExerciseClicked() throws IOException {
-        CatalogEditor ce = new CatalogEditor();
-        ce.showStage((Stage) txtCode.getScene().getWindow());
-    }
 }
