@@ -1,6 +1,0 @@
-red
-6
-green
-6
-refactor
-1

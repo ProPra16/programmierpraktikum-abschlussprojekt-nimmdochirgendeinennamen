@@ -19,16 +19,16 @@
                <items>
                   <Menu mnemonicParsing="false" text="Babysteps">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#turnBabystepsOn" text="ON" />
-                        <MenuItem mnemonicParsing="false" onAction="#turnBabystepsOff" text="OFF" />
+                        <MenuItem fx:id="babystpsOnBtn" mnemonicParsing="false" onAction="#turnBabystepsOn" text="ON" />
+                        <MenuItem fx:id="babystpsOffBtn" mnemonicParsing="false" onAction="#turnBabystepsOff" text="OFF" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#setBabystepsTime" text="Set time" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Tracker">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Time spend" />
-                      <MenuItem mnemonicParsing="false" text="Show all" />
+                        <MenuItem mnemonicParsing="false" onAction="#showTrackingChart" text="Time spend" />
+                      <MenuItem mnemonicParsing="false" onAction="#showTrackerLog" text="Show all" />
                     </items>
                   </Menu>
                </items></Menu>
