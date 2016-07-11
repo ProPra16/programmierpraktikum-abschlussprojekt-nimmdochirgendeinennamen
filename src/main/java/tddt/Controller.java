@@ -17,6 +17,7 @@ package main.java.tddt;
 import java.io.File;
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -25,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.java.backup.Backup;
+import main.java.catalogEditor.CatalogEditor;
 import main.java.chart.TrackingChart;
 import main.java.exerciseChooser.ExerciseChooser;
 import main.java.tracker.ChartTracker;
@@ -213,7 +215,8 @@ public class Controller {
 
 	@FXML
 	public void showTrackingChart() {
-		TrackingChart.main(null);
+		TrackingChart tc = new TrackingChart();
+        tc.showStage();
 	}
 
 	@FXML
@@ -322,4 +325,9 @@ public class Controller {
 			break;
 		}
 	}
+
+    public void onNewExerciseClicked() throws IOException {
+        CatalogEditor ce = new CatalogEditor();
+        ce.showStage((Stage) txtCode.getScene().getWindow());
+    }
 }
