@@ -1,4 +1,4 @@
-package projekt7;
+package main.java.chart;
 
 
 import javafx.scene.Scene;

@@ -12,7 +12,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java;
+package main.java.tddt;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -23,10 +27,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Optional;
 
 public class TDDTDialog {
 

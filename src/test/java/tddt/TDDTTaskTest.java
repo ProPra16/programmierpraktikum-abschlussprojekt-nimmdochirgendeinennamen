@@ -1,4 +1,4 @@
-package test.java;
+package test.java.tddt;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import main.java.TDDTTask;
+import main.java.tddt.TDDTTask;
 
 public class TDDTTaskTest {
 

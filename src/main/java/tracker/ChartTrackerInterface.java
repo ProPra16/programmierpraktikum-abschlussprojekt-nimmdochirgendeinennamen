@@ -1,4 +1,3 @@
-package main.java.tddt;
 /*
  * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
  *
@@ -12,36 +11,29 @@ package main.java.tddt;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  */
+package main.java.tracker;
 
-import java.io.File;
+public interface ChartTrackerInterface {
+    /*
+     * Measures time spent in a certain phase. 
+     * When the phase is ended, writes the time to a textfile.
+     */
+    
+    //call when changing to next phase
+    public void nextPhase();
+    
+    //call when changing BACK
+    public void greenBack();
+ 
+    /*
+    internal methods, not needed in Interface but used in implementing class:
 
-public class TDDTTask {
-
-	private String codeCode;
-	private String testCode;
-
-	public TDDTTask(File file) {
-		TDDTFileReader reader = new TDDTFileReader();
-		String content = reader.readAll(file);
-		String[] splitContent = content.split("<Code-Test-Border, do not remove>\n");
-
-		//check if selected file is a Task
-		if (splitContent.length != 2) {
-			codeCode = null;
-			testCode = null;
-			return;
-		}
-
-		this.codeCode = splitContent[0];
-		this.testCode = splitContent[1];
-	}
-
-	public String getCode() {
-		return this.codeCode;
-	}
-
-	public String getTest() {
-		return this.testCode;
-	}
-
+    public void redToGreen();
+    
+    public void greenToRefactor();
+    
+    public void refactorToRed();
+    
+    public void writeToFile();
+    */
 }

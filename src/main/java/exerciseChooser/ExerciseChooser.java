@@ -12,7 +12,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.ExerciseChooser;
+package main.java.exerciseChooser;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,14 +33,9 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import main.java.TDDTDialog;
+import main.java.tddt.TDDTDialog;
 import main.java.xmlHandler.InvalidFileException;
 import main.java.xmlHandler.XMLLoader;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class ExerciseChooser implements Initializable{
 

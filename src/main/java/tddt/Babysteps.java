@@ -1,4 +1,4 @@
-package main.java;
+package main.java.tddt;
 
 public class Babysteps {
 	long startTime;

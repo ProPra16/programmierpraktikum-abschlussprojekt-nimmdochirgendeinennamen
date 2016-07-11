@@ -12,21 +12,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java;
+package main.java.tddt;
 
-import backup.Backup;
+import java.io.File;
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.java.ExerciseChooser.ExerciseChooser;
+import main.java.backup.Backup;
+import main.java.exerciseChooser.ExerciseChooser;
 import main.java.xmlHandler.InvalidFileException;
 import main.java.xmlHandler.XMLLoader;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Controller {
 	//TODO thinking about ExceptionHandler for Dialogspawning and way smaller Controller and Compiler class

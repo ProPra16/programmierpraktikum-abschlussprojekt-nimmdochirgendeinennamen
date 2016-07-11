@@ -6,7 +6,7 @@
 //Kann man das nicht auch als StringProperty machen?
 //Waere keine extra Klasse noetig
 
-package backup;
+package main.java.backup;
 
 
 public class Backup {

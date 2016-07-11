@@ -1,7 +1,10 @@
-package backup;
+package test.java.backup;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+
+import main.java.backup.Backup;
 
 
 public class backuptest {

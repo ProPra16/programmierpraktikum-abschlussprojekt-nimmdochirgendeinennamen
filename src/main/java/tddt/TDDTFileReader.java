@@ -1,4 +1,4 @@
-package main.java;
+package main.java.tddt;
 
 import java.io.File;
 import java.nio.file.Files;

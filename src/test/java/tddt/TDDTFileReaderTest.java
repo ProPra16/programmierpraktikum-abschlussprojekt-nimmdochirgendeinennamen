@@ -1,12 +1,13 @@
-package test.java;
+package test.java.tddt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
 import org.junit.Test;
 
-import main.java.TDDTFileReader;
+import main.java.tddt.TDDTFileReader;
 
 public class TDDTFileReaderTest {
 

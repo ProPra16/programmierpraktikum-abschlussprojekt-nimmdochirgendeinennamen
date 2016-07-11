@@ -1,6 +1,6 @@
 
 
-package projekt7;
+package main.java.chart;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -91,7 +91,7 @@ public class TrackingChart extends Application{
 		return ausgabe;
 	}
 	
-	static double berechneProzente(double i, double p){
+	public static double berechneProzente(double i, double p){
 		double prozent = i * p;
 		prozent = Math.round(prozent * 1000)/1000.0;
 		return prozent;

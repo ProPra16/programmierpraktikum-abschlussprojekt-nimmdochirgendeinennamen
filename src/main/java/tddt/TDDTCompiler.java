@@ -12,7 +12,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java;
+package main.java.tddt;
+
+import java.util.Collection;
 
 import vk.core.api.CompilationUnit;
 import vk.core.api.CompileError;
@@ -21,8 +23,6 @@ import vk.core.api.CompilerResult;
 import vk.core.api.JavaStringCompiler;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
-
-import java.util.Collection;
 
 public class TDDTCompiler {
 
