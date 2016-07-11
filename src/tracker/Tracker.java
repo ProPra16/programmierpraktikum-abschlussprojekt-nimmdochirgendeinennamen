@@ -51,7 +51,6 @@ public class Tracker {
 		} catch (IOException e) {}
     }
     
-    //now: current code or test, phase: phase, back: if user is going back (from GREEN)
     public void callDump(String now, int phase, boolean back) {
     	
     	time = LocalDateTime.now();
@@ -59,11 +58,10 @@ public class Tracker {
     	if (!back) output += dump(now, phase);
     	
     	//if user went back from GREEN to RED
-    	else if (back) { output += "Changed code in GREEN:\nWent back to RED, no changes.\n\n"; }
+    	else if (back) { output += "Changed code in GREEN:\nWent back to RED, no changes.\n"; }
     	writeToFile(output);
     }
     
-    //opens new window to display tracking history (from file)
     public void showOutput() {
     	
     	Text show = new Text(output());
@@ -81,8 +79,8 @@ public class Tracker {
     	stage.show();
     }
     
-    						/*INTERNAL METHODS*/
-    private String output() {
+    									/*INTERNAL METHODS*/
+    public String output() {
     	String output = "";
     	
     	Scanner scanner = null;
@@ -185,4 +183,5 @@ public class Tracker {
         String[] splitted = a.split("\n");
         return splitted;
     }
-}		
+}	
+	
