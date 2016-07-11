@@ -156,24 +156,22 @@ public class Controller {
 
 		// Was passiert, wenn Babysteps bereits on ist? -> Button sollte solange
 		// deaktiviert werden
-		t = new Thread(new Runnable() {
-			public void run() {
-				try {
-					while (!Thread.currentThread().isInterrupted()) {
-						Thread.sleep(1000);
-					}
-				} catch (InterruptedException e) {
-					Thread.currentThread().interrupt();
-				}
-				if (babysteps.isEnabled() & !babysteps.timeLeft() && phase.get() != 2) {
-					if (phase.get() == 0)
-						txtTest.setText(testBackup.getLastBackup());
-					if (phase.get() == 1)
-						txtCode.setText(codeBackup.getLastBackup());
-					prevPhase();
-				}
-			}
-		});
+		t = new Thread(() -> {
+            try {
+                while (!Thread.currentThread().isInterrupted()) {
+                    Thread.sleep(1000);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            if (babysteps.isEnabled() & !babysteps.timeLeft() && phase.get() != 2) {
+                if (phase.get() == 0)
+                    txtTest.setText(testBackup.getLastBackup());
+                if (phase.get() == 1)
+                    txtCode.setText(codeBackup.getLastBackup());
+                prevPhase();
+            }
+        });
 		t.start();
 
 		babysteps.enable();
@@ -213,6 +211,7 @@ public class Controller {
 	private boolean checkCode() {
 		String code = txtCode.getText();
 		String classname = xmlLoader.getClassName(exerciseIDX, 0);
+        String testname = xmlLoader.getTestName(exerciseIDX,0);
 		// check if compilable
 		if (!checkIfCompilableClass(code))
 			return false;
@@ -223,7 +222,7 @@ public class Controller {
 			return false;
 		}
 		// try to compile and run tests
-		passed = compiler.compile(txtTest.getText(), true, classname);
+		passed = compiler.compile(txtTest.getText(), true, testname);
 		// display in Dialog if failed
 		if (!passed) {
 			new TDDTDialog("testFail", compiler.getInfo());
@@ -236,7 +235,8 @@ public class Controller {
 
 	private boolean checkRefactor() {
 		String code = txtTest.getText();
-		String classname = xmlLoader.getTestName(exerciseIDX, 0);
+		String classname = xmlLoader.getClassName(exerciseIDX, 0);
+        String testname = xmlLoader.getTestName(exerciseIDX,0);
 		// check if compilable
 		if (!checkIfCompilableClass(code))
 			return false;
@@ -247,7 +247,7 @@ public class Controller {
 			return false;
 		}
 		// try to compile and run tests
-		passed = compiler.compile(txtTest.getText(), true, classname);
+		passed = compiler.compile(txtTest.getText(), true, testname);
 		// display in Dialog if failed
 		if (!passed) {
 			new TDDTDialog("testFail", compiler.getInfo());
