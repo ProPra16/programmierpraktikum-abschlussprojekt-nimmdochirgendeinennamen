@@ -79,8 +79,8 @@ public class Tracker {
     	stage.show();
     }
     
-    									/*INTERNAL METHODS*/
-    public String output() {
+    						/*INTERNAL METHODS*/
+    private String output() {
     	String output = "";
     	
     	Scanner scanner = null;
