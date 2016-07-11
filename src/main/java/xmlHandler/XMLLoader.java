@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
@@ -25,16 +25,27 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
+/** This class implements the LoaderInterface.
+  * It is used to parse an XML-Catalog of exercises for the Test Driven Development Trainer (TDDT).
+  * @author Kai Holzinger
+  * @version 1.13
+  * */
 public class XMLLoader implements LoaderInterface {
 
-    private Document document;
     private NodeList exercises;
 
+    /**
+     * @param file - The XML file which contains the exercises.
+     */
     public XMLLoader(File file) {
         loadCatalog(file);
     }
 
-    //load a catalog from an xml file.
+    /**
+     * The constructor gets a file and calls the method loadCatalog.
+     * @param xmlCatalog  The XML file which contains the exercises.
+     * @throws  InvalidFileException if the method was unable to parse the XML file.
+     */
     @Override
     public void loadCatalog(File xmlCatalog) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -49,13 +60,12 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    public Document getDocument(){
-        return this.document;
-    }
-
                                             /*EXERCISE GETTERS*/
 
-    //@return the total amount of exercises
+    /**
+     * @return the total amount of exercises
+     * @throws InvalidFileException if the return value is null
+     */
     @Override
     public int getNumberOfExercises() throws InvalidFileException {
         try {
@@ -66,7 +76,11 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    //@return name of selected exercise
+    /**
+     * @param idx the index of the exercise.
+     * @return name of selected exercise
+     * @throws InvalidFileException if a nonexistent exercise is called.
+     */
     @Override
     public String getExerciseName(int idx) throws InvalidFileException {
         try {
@@ -77,7 +91,11 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    //@return the description of the selected exercise
+    /**
+     * @param idx the index of the exercise
+     * @return the description of the selected exercise
+     * @throws InvalidFileException if a nonexistent exercise is called.
+     */
     @Override
     public String getDescription(int idx) throws InvalidFileException {
         try {
@@ -90,9 +108,11 @@ public class XMLLoader implements LoaderInterface {
 
                                             /*CLASS GETTERS*/
 
-    /*@return classname for the selected class
-     *@param exerciseIDX index of the exercise within the NodeList
-     *@param classIDX index of the exercise within the NodeList of classes
+    /**
+     * @return classname for the selected class
+     * @param exerciseIDX index of the exercise within the NodeList
+     * @param classIDX index of the class within the NodeList of classes
+     * @throws InvalidFileException if a nonexistent exercise and / or class is called.
      */
     @Override
     public String getClassName(int exerciseIDX, int classIDX) throws InvalidFileException {
@@ -105,6 +125,11 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
+    /**
+     * @param idx the index of the exercise
+     * @return the amount of classes of the selected exercise
+     * @throws InvalidFileException if the amount of classes is null.
+     */
     //@return amount of classes for current exercise
     @Override
     public int getClassAmount(int idx) throws InvalidFileException {
@@ -117,9 +142,11 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    /*@return code of the selected class
-     *@param exerciseIDX index of the exercise within the NodeList
-     *@param classIDX index of the exercise within the NodeList of classes
+    /**
+     * @return code of the selected class
+     * @param exerciseIDX index of the exercise within the NodeList
+     * @param classIDX index of the exercise within the NodeList of classes
+     * @throws InvalidFileException if the called class is nonexistent
      */
     @Override
     public String getClass(int exerciseIDX, int classIDX) throws InvalidFileException {
@@ -134,9 +161,11 @@ public class XMLLoader implements LoaderInterface {
 
                                             /*TEST GETTERS*/
 
-    /*@return name of the selected showStage class
-     *@param exerciseIDX index of the exercise within the NodeList
-     *@param testIDX index of the showStage within the NodeList of tests
+    /**
+     * @return name of the selected showStage class
+     * @param exerciseIDX index of the exercise within the NodeList
+     * @param testIDX index of the showStage within the NodeList of tests
+     * @throws InvalidFileException if a nonexistent exercise and / or test is called.
      */
     @Override
     public String getTestName(int exerciseIDX, int testIDX) throws InvalidFileException {
@@ -149,7 +178,11 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    //@return amount of classes for current exercise
+    /**
+     * @param idx index of the exercise.
+     * @return the amount of tests for the selected exercise.
+     * @throws InvalidFileException if the test amount is null.
+     */
     @Override
     public int getTestAmount(int idx) throws InvalidFileException {
         try {
@@ -161,9 +194,11 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    /*@return code of the selected showStage class
-     *@param exerciseIDX index of the exercise within the NodeList
-     *@param testIDX index of the showStage within the NodeList of tests
+    /**
+     * @return code of the selected showStage class
+     * @param exerciseIDX index of the exercise within the NodeList
+     * @param testIDX index of the showStage within the NodeList of tests
+     * @throws InvalidFileException if a nonexistent exercise and / or test is called.
      */
     @Override
     public String getTest(int exerciseIDX, int testIDX) throws InvalidFileException {
@@ -178,7 +213,11 @@ public class XMLLoader implements LoaderInterface {
 
                                             /*CONFIG GETTERS*/
 
-    //@return true if babystep value == true
+    /**
+     * @param idx Index of the exercise
+     * @return True if babysteps value == true
+     * @throws InvalidFileException If the return value is null.
+     */
     @Override
     public boolean isBabystepsActive(int idx) throws InvalidFileException {
         try {
@@ -189,7 +228,11 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    //@return time window if babysteps is turned on
+    /**
+     * @param idx Index of the exercise.
+     * @return The time the user has to switch the phase.
+     * @throws InvalidFileException If the return value is null.
+     */
     @Override
     public int getBabyStepsTime(int idx) throws InvalidFileException {
         try {
@@ -200,22 +243,30 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    //this will always return true, because we dont want timetracking to be disabled. Ever.
-    //@return true if timetracking == true
+    /**
+     * @param idx Index of the exercise.
+     * @return This will always return true, because we dont want timetracking to be disabled. Ever.
+     * @throws InvalidFileException Practically never. But the Exception might be thrown if the developers decide to make the timetracker disablable.
+     */
     @Override
     public boolean isTimetrackerActive(int idx) throws InvalidFileException {
-        try {
+        //try {
             //return goToNode(getExercise(idx), "config", "timetracking").getAttribute("value").equalsIgnoreCase("true");
             return true;
-        } catch (NullPointerException e) {
-            throw new InvalidFileException
-				("Error. Couldnt find a timetracking config at index "+idx+". Check the catalog syntax.", e);
-        }
+        //} catch (NullPointerException e) {
+          //  throw new InvalidFileException
+				//("Error. Couldnt find a timetracking config at index "+idx+". Check the catalog syntax.", e);
+        //}
     }
 
                                             /*INTERNAL GETTERS*/
 
-    //@return n-th exercise tree
+    /**
+     *
+     * @param n The index of the exercise.
+     * @return The n-th exercise tree.
+     * @throws InvalidFileException If the return value is null.
+     */
     private Element getExercise(int n) throws InvalidFileException {
         try {
             return (Element) exercises.item(n);
@@ -225,7 +276,12 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    //@return Element n of passed exercise tree
+    /**
+     * @param exerciseElement One exercise element.
+     * @param n The name of the node which is returned.
+     * @return Node n of the passed exercise element.
+     * @throws InvalidFileException If the return value is null.
+     */
     private Element goToNode(Element exerciseElement, String n) throws InvalidFileException {
         try {
             return (Element) exerciseElement.getElementsByTagName(n).item(0);
@@ -235,7 +291,13 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
-    //@return Element-tree n2 of Element-tree n1 of the passed exercise tree
+    /**
+     * @param exerciseElement One exercise element.
+     * @param n1 The name of the node which contains the second node.
+     * @param n2 The name of the node which is returned.
+     * @return If the return value is null.
+     * @throws InvalidFileException
+     */
     private Element goToNode(Element exerciseElement, String n1, String n2) throws InvalidFileException {
         try {
             return goToNode(goToNode(exerciseElement, n1), n2);

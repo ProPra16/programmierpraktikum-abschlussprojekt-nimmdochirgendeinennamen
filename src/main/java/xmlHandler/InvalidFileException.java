@@ -14,10 +14,17 @@
 
 package main.java.xmlHandler;
 
+/** This is a subclass of RuntimeException. It's used for Exceptions that occur while using the xmlHandler.
+ * @author Kai Holzinger
+ * @version 1.0
+ */
 public class InvalidFileException extends RuntimeException {
 
-    public InvalidFileException(String message, Exception cause){
+    /** This constructor method creates a new Exception object.
+     * @param message   The message that is shown whenever the Exception is thrown.
+     * @param cause     The Exception that is handled.
+     */
+    protected InvalidFileException(String message, Exception cause){
         super(message,cause);
     }
-
 }

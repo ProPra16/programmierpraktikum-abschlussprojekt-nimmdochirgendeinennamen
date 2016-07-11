@@ -15,45 +15,28 @@
 package main.java.xmlHandler;
 
 import java.io.File;
-
+/**This is the interface for the XML Loader.
+ * Proper documentation for the methods can be cound in the implementing class.
+ * @author Kai Holzinger
+ * @version 1.1
+ * */
 public interface LoaderInterface {
 
     //load a catalog from an xml file.
     void loadCatalog(File file);
 
-    //@return name of the class at passed IDX
-    String getClassName(int idx, int idx2);
-
-    //@return name of the showStage at passed IDX
-    String getTestName(int idx, int idx2);
-
-    //@return  class at passed IDX
-    String getClass(int idx, int idx2);
-
-    //@return amount of classes for current exercise
-    int getClassAmount(int idx);
-
-    //@return amount of classes for current exercise
-    int getTestAmount(int idx);
-
-    //@return showStage at passed IDX
-    String getTest(int idx, int idx2);
-
-    //@return  name of the exercise at passed idx
-    String getExerciseName(int idx);
-
-    //@return description of the node with passed IDX
-    String getDescription(int idx);
-
-    //@return true if babysteps is active for the node with passed IDX
+    boolean isTimetrackerActive(int idx);
     boolean isBabystepsActive(int idx);
 
-    //@return available time if babysteps is active
+    String getClassName(int idx, int idx2);
+    String getTestName(int idx, int idx2);
+    String getClass(int idx, int idx2);
+    String getTest(int idx, int idx2);
+    String getExerciseName(int idx);
+    String getDescription(int idx);
+
+    int getClassAmount(int idx);
+    int getTestAmount(int idx);
     int getBabyStepsTime(int idx);
-
-    //@return true if timetracker is active for the node with passed IDX
-    boolean isTimetrackerActive(int idx);
-
-    //@return total amount of nodes which have been loaded from the catalog file.
     int getNumberOfExercises();
 }
