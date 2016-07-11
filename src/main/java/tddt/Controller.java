@@ -25,6 +25,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.java.backup.Backup;
 import main.java.exerciseChooser.ExerciseChooser;
+import main.java.tracker.ChartTracker;
+import main.java.tracker.Tracker;
 import main.java.xmlHandler.InvalidFileException;
 import main.java.xmlHandler.XMLLoader;
 
@@ -43,25 +45,18 @@ public class Controller {
 	Thread t;
 	TDDTCompiler compiler;
 
-	// ChartTracker chartTracking;
-	// Tracker tracking;
+	ChartTracker chartTracker;
+	Tracker tracker;
 
-	@FXML
-	private Pane pane;
-	@FXML
-	public TextArea txtCode;
-	@FXML
-	public TextArea txtTest;
-	@FXML
-	private Button btnNextStep;
-	@FXML
-	private Button btnPrevStep;
-	@FXML
-	private ImageView imgTest;
-	@FXML
-	private ImageView imgCode;
-	@FXML
-	private ImageView imgRefactor;
+	@FXML private Pane pane;
+	@FXML public TextArea txtCode;
+	@FXML public TextArea txtTest;
+	@FXML private Button btnNextStep;
+	@FXML private Button btnPrevStep;
+	@FXML private ImageView imgTest;
+	@FXML private ImageView imgCode;
+	@FXML private ImageView imgRefactor;
+
 	private static File file;
 	private static int exerciseIDX;
 	private static XMLLoader xmlLoader;
@@ -71,12 +66,14 @@ public class Controller {
 	public void initialize() {
 		phase = new Phase(0, 2, 1);
 		compiler = new TDDTCompiler();
+		codeBackup = new Backup();
+		testBackup = new Backup();
 		txtTest.setEditable(false);
 		btnNextStep.setDisable(true);
 		// #### babysteps = new Babysteps();
 
-		// chartTracking = new ChartTracker();
-		// tracking = new Tracker(txtCode.getText(), txtTest.getText());
+		chartTracker = new ChartTracker();
+		tracker = new Tracker(txtCode.getText(), txtTest.getText());
 		babysteps = new Babysteps();
 	}
 
@@ -97,8 +94,7 @@ public class Controller {
 		}
 
 		if (passed) {
-			// chartTracking.nextPhase(phase.get());
-
+			chartTracker.nextPhase(phase.get());
 			if (phase.get() == 0)
 				testBackup.setNewBackup(txtTest.getText());
 			if (phase.get() == 1)
@@ -206,7 +202,7 @@ public class Controller {
 		// check if compilable
 		if (!checkIfCompilableClass(code))
 			return false;
-		// try to compile and run showStage
+		// try to compile and run tests
 		compiler.compile(code, true, testname);
 		// settings for next phase
 		btnPrevStep.setDisable(false);
@@ -226,7 +222,7 @@ public class Controller {
 			new TDDTDialog("compileError", compiler.getInfo());
 			return false;
 		}
-		// try to compile and run showStage
+		// try to compile and run tests
 		passed = compiler.compile(txtTest.getText(), true, classname);
 		// display in Dialog if failed
 		if (!passed) {
@@ -250,7 +246,7 @@ public class Controller {
 			new TDDTDialog("compileError", compiler.getInfo());
 			return false;
 		}
-		// try to compile and run showStage
+		// try to compile and run tests
 		passed = compiler.compile(txtTest.getText(), true, classname);
 		// display in Dialog if failed
 		if (!passed) {
@@ -287,6 +283,7 @@ public class Controller {
 			imgRefactor.setOpacity(0.2);
 			txtTest.setDisable(true);
 			txtCode.setDisable(false);
+			btnPrevStep.setDisable(false);
 			break;
 		case 2:
 			imgTest.setOpacity(0.2);
@@ -294,6 +291,7 @@ public class Controller {
 			imgRefactor.setOpacity(1.0);
 			txtTest.setDisable(true);
 			txtCode.setDisable(false);
+			btnPrevStep.setDisable(true);
 			break;
 		}
 	}

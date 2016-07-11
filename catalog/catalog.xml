@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<exercises>
+    <!-- Exercise 1 -->
+    <exercise name="BasicExercise">
+        <description>Basic exercise for testing Programflow</description>
+        <!-- Enter classes needed for the exercise, each class needs to be surrounded by a class tag with a name value -->
+        <classes>
+            <class name="Basic">
+public class Basic {
+	public static void main(String[] args) {
+
+	}
+}
+            </class>
+        </classes>
+        <!-- Here comes the test code. -->
+        <tests>
+            <test name="BasicTest">
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class BasicTest {
+	@Test
+	public void test() {
+
+	}
+}
+            </test>
+        </tests>
+        <!-- Set config values for the exercise. -->
+        <config>
+            <!-- value may only contain a boolean value [TRUE / FALSE]. Time is measured in seconds. -->
+            <babysteps time="10" value="true"/>
+            <!-- value may only contain a boolean value [TRUE / FALSE] -->
+            <timetracking value="True"/>
+        </config>
+    </exercise>
+
+    <!-- Exercise 2 -->
+    <exercise name="BasicExercise2">
+        <description>Basic exercise for testing Programflow</description>
+        <!-- Enter classes needed for the exercise, each class needs to be surrounded by a class tag with a name value -->
+        <classes>
+            <class name="BasicTwo">
+public class BasicTwo {
+	public static void main(String[] args) {
+
+	}
+}
+            </class>
+        </classes>
+        <!-- Here comes the test code. -->
+        <tests>
+            <test name="BasicTwoTest">
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class BasicTwoTest {
+	@Test
+	public void test() {
+
+	}
+}
+            </test>
+        </tests>
+        <!-- Set config values for the exercise. -->
+        <config>
+            <!-- value may only contain a boolean value [TRUE / FALSE]. Time is measured in seconds. -->
+            <babysteps time="10" value="true"/>
+            <!-- value may only contain a boolean value [TRUE / FALSE] -->
+            <timetracking value="True"/>
+        </config>
+    </exercise>
+</exercises>
