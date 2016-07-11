@@ -36,12 +36,12 @@ public class CatalogEditor implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(nextButton1 != null) {
-            nextButton1.disableProperty().bind(Bindings.isEmpty(exnamefield.textProperty())
-                    .or(Bindings.isEmpty(babystepstimefield.textProperty())
-                            .or(Bindings.isEmpty(timetrackingfield.textProperty())
-                                    .or(Bindings.isEmpty(descfield.textProperty()))
-                                    .or(((Bindings.equalIgnoreCase("true",babystepsfield.textProperty())).not()).and((Bindings.equalIgnoreCase("false",babystepsfield.textProperty())).not())
-                                            .or(((Bindings.equalIgnoreCase("true",timetrackingfield.textProperty())).not()).and((Bindings.equalIgnoreCase("false",timetrackingfield.textProperty())).not()))))));
+            nextButton1.disableProperty().bind(Bindings.isEmpty(exnamefield.textProperty()).or(
+                                            Bindings.isEmpty(babystepstimefield.textProperty()).or(
+                                            Bindings.isEmpty(timetrackingfield.textProperty()).or(
+                                            Bindings.isEmpty(descfield.textProperty())).or(
+                                            (Bindings.equalIgnoreCase("true",babystepsfield.textProperty()).not()).and(Bindings.equalIgnoreCase("false",babystepsfield.textProperty()).not()).or(
+                                            (Bindings.equalIgnoreCase("true",timetrackingfield.textProperty()).not()).and(Bindings.equalIgnoreCase("false",timetrackingfield.textProperty()).not()))))));
         }
         if(submitbtn != null){
             submitbtn.disableProperty().bind((Bindings.isEmpty(classnamefield.textProperty())
