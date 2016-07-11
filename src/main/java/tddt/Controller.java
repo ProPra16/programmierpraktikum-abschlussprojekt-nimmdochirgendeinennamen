@@ -85,12 +85,7 @@ public class Controller {
 		}
 
 		if (passed) {
-			//chartTracking.nextPhase(phase.get());		
-
-			if (phase.get() == 0) {
-				backup = txtCode.getText();
-				//tracking.callDump(txtTest.getText(), 0, false);
-			} //else tracking.callDump(txtCode.getText(), phase.get(), false);
+			//chartTracking.nextPhase(phase.get());
 
 			if (phase.get() == 0) testBackup.setNewBackup(txtTest.getText());
 			if (phase.get() == 1) codeBackup.setNewBackup(txtCode.getText());

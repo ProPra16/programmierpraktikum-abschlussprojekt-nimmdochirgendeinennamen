@@ -1,10 +1,10 @@
-//Dient zur Zwischenspeicherung des Codes für
-// ->Babysteps: Zurücksetzen nachdem Zeit abgelaufen ist
-//? ->Tracker: Bekommt Eingabe für Auswertung (?)
-//? ->Beim Zurückgehen von Code schreiben zu Test schreiben
+//Dient zur Zwischenspeicherung des Codes fuer
+// ->Babysteps: Zuruecksetzen nachdem Zeit abgelaufen ist
+//? ->Tracker: Bekommt Eingabe fuer Auswertung (?)
+//? ->Beim Zurueckgehen von Code schreiben zu Test schreiben
 
 //Kann man das nicht auch als StringProperty machen?
-//Wäre keine extra Klasse nötig
+//Waere keine extra Klasse noetig
 
 package backup;
 

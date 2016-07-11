@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 
-//Das PieChart wird über TrackingChart.main(null); erstellt und aufgerufen
+//Das PieChart wird ueber TrackingChart.main(null); erstellt und aufgerufen
 //Die Datei TrackingData.txt wird ausgelesen und verarbeitet die enthaltenen Informationen
 //zu einem PieChart. 
 
@@ -77,8 +77,8 @@ public class TrackingChart extends Application{
 		double red = leseZeiten(1);
 		double green = leseZeiten(2);
 		double refactor = leseZeiten(3);
-		double übergang = red + green + refactor;
-		double prozent = 100 / übergang;
+		double uebergang = red + green + refactor;
+		double prozent = 100 / uebergang;
 
 		red = berechneProzente(red, prozent);
 		green = berechneProzente(green, prozent);
