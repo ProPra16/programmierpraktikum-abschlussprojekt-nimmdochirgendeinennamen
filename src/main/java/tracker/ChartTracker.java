@@ -61,7 +61,7 @@ public class ChartTracker {
 		long greenEndTime = System.currentTimeMillis() - greenStartTime;
 		greenSeconds += (int)greenEndTime/1000;
 		redStartTime = System.currentTimeMillis();
-		
+
 		writeToFile();
     }
 

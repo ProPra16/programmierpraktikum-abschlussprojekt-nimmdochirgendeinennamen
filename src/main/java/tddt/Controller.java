@@ -90,11 +90,16 @@ public class Controller {
 		}
 
 		if (passed) {
+			tracker.callDump("", phase.get(), false);
 			chartTracker.nextPhase(phase.get());
-			if (phase.get() == 0)
-				testBackup.setNewBackup(txtTest.getText());
 			if (phase.get() == 1)
 				codeBackup.setNewBackup(txtCode.getText());
+			if (phase.get() == 0) {
+				testBackup.setNewBackup(txtTest.getText());
+				tracker.callDump(txtTest.getText(), 0, false);
+			} else {
+				tracker.callDump(txtCode.getText(), phase.get(), false);
+			}
 			phase.next();
 			updateGUIElements(phase);
 		}
@@ -119,9 +124,6 @@ public class Controller {
 	 */
 	@FXML
 	public void newTask() throws IOException {
-		chartTracker = new ChartTracker();
-		tracker = new Tracker(txtCode.getText(), txtTest.getText());
-
 		turnBabystepsOff();
 
 		ExerciseChooser exercisechooser = new ExerciseChooser();
@@ -149,6 +151,8 @@ public class Controller {
 			// This popup is annoying as f...
 			// new TDDTDialog("alert", "Received an empty catalog path.");
 		}
+		chartTracker = new ChartTracker();
+		tracker = new Tracker(txtCode.getText(), txtTest.getText());
 		testBackup.setNewBackup(txtTest.getText());
 		codeBackup.setNewBackup(txtCode.getText());
 	}
