@@ -40,7 +40,8 @@ public class CatalogEditor implements Initializable {
                     .or(Bindings.isEmpty(babystepstimefield.textProperty())
                             .or(Bindings.isEmpty(timetrackingfield.textProperty())
                                     .or(Bindings.isEmpty(descfield.textProperty()))
-                                    .or((Bindings.equalIgnoreCase("true",babystepsfield.textProperty())).or(Bindings.equalIgnoreCase("false",babystepsfield.textProperty()))))));
+                                    .or(((Bindings.equalIgnoreCase("true",babystepsfield.textProperty())).not()).and((Bindings.equalIgnoreCase("false",babystepsfield.textProperty())).not())
+                                            .or(((Bindings.equalIgnoreCase("true",timetrackingfield.textProperty())).not()).and((Bindings.equalIgnoreCase("false",timetrackingfield.textProperty())).not()))))));
         }
         if(submitbtn != null){
             submitbtn.disableProperty().bind((Bindings.isEmpty(classnamefield.textProperty())
