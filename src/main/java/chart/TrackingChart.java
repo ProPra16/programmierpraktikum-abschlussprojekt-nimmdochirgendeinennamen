@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class TrackingChart {
 
-	private static int leseZeiten(int info) {
+	private int leseZeiten(int info) {
 		try(BufferedReader read = new BufferedReader(new FileReader("TrackingData.txt"))){
 			read.readLine();
 			String green = read.readLine();
@@ -43,7 +43,7 @@ public class TrackingChart {
 		return 0;
 	}
 		
-	private static PieChart erstellePieChart() {
+	private PieChart erstellePieChart() {
 		ObservableList<PieChart.Data> daten = FXCollections.observableArrayList(
                 new PieChart.Data("Red " + leseZeiten(1) + " Sekunden", leseZeiten(1)),                	
                 new PieChart.Data("Green " + leseZeiten(2) + " Sekunden", leseZeiten(2)),	                
@@ -64,7 +64,7 @@ public class TrackingChart {
         return pieChart;
 	}
 	
-	private static String gebeProzenteAus() {
+	private String gebeProzenteAus() {
 		double red = leseZeiten(1);
 		double green = leseZeiten(2);
 		double refactor = leseZeiten(3);
@@ -82,19 +82,19 @@ public class TrackingChart {
 		return ausgabe;
 	}
 	
-	static double berechneProzente(double i, double p){
+	double berechneProzente(double i, double p){
 		double prozent = i * p;
 		prozent = Math.round(prozent * 1000)/1000.0;
 		return prozent;
 	}
 	
-	private static Scene erstelleScene() {
+	private Scene erstelleScene() {
 		Scene scene = new Scene(new Group());
         ((Group) scene.getRoot()).getChildren().addAll(erstellePieChart());       
 		return scene;
 	}
 
-	public static void erstelleStage(){
+	public void erstelleStage(){
 		Stage fenster = new Stage();
 		fenster.setTitle("TrackingChart");			
 		VBox layout = new VBox(10);
