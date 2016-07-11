@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.catalogEditor.CatalogEditor">
+   <children>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="40.0" />
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="400.0">
+               <children>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="109.0" prefWidth="400.0">
+                     <children>
+                        <Text layoutX="47.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Main Class Details!" />
+                        <TextField fx:id="classnamefield" layoutX="126.0" layoutY="83.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                        <Text layoutX="47.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Name" />
+                     </children>
+                  </AnchorPane>
+                  <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="20.0" prefHeight="20.0" prefWidth="400.0" />
+                  <TextArea fx:id="classTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="365.0" prefWidth="300.0" wrapText="true" VBox.vgrow="ALWAYS" />
+                  <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="20.0" prefHeight="40.0" prefWidth="377.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="53.0" />
+            <VBox layoutX="27.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="400.0">
+               <children>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="109.0" prefWidth="400.0">
+                     <children>
+                        <Text layoutX="47.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Test Class Details!" />
+                        <TextField fx:id="testnamefield" layoutX="126.0" layoutY="83.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                        <Text layoutX="47.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Test Name" />
+                     </children>
+                  </AnchorPane>
+                  <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="20.0" prefHeight="20.0" prefWidth="400.0" />
+                  <TextArea fx:id="testTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="398.0" prefWidth="374.0" wrapText="true" />
+                  <AnchorPane minHeight="20.0" prefHeight="73.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="submitbtn" defaultButton="true" layoutX="237.0" layoutY="24.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSubmitButtonPressed" text="Submit" />
+                        <Button fx:id="cancelbtn" cancelButton="true" layoutX="322.0" layoutY="24.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onCancelButtonPressed" text="Cancel" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="40.0" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

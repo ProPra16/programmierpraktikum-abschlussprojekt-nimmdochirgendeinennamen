@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.catalogEditor.CatalogEditor">
+   <children>
+      <Text layoutX="293.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new exercise" wrappingWidth="214.13671875">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <TextField fx:id="exnamefield" layoutX="339.0" layoutY="170.0" prefHeight="25.0" prefWidth="255.0" />
+      <TextField fx:id="babystepsfield" layoutX="339.0" layoutY="330.0" prefHeight="25.0" prefWidth="255.0" promptText="true / false" />
+      <TextField fx:id="babystepstimefield" layoutX="339.0" layoutY="375.0" prefHeight="25.0" prefWidth="255.0" promptText="1-180" />
+      <TextField fx:id="timetrackingfield" layoutX="339.0" layoutY="420.0" prefHeight="25.0" prefWidth="255.0" promptText="true / false" />
+      <Text layoutX="210.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exercise name">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="226.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="183.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Babysteps default">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="199.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Babysteps time">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="214.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timetracking">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Button fx:id="nextButton1" defaultButton="true" layoutX="467.0" layoutY="500.0" mnemonicParsing="false" onAction="#onNextButton1Pressed" text="Next" />
+      <Button fx:id="cancelbtn" cancelButton="true" layoutX="542.0" layoutY="500.0" mnemonicParsing="false" onAction="#onCancelButtonPressed" text="Cancel" />
+      <TextArea fx:id="descfield" layoutX="340.0" layoutY="215.0" prefHeight="95.0" prefWidth="255.0" wrapText="true" />
+   </children>
+</AnchorPane>

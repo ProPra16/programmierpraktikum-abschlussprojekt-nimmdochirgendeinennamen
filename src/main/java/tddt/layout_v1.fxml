@@ -11,8 +11,8 @@
         <menus>
             <Menu mnemonicParsing="false" text="Task">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#newTask" text="Open" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
+                <MenuItem mnemonicParsing="false" onAction="#newTask" text="Open catalog" />
+                  <MenuItem mnemonicParsing="false" onAction="#onNewExerciseClicked" text="New exercise..." />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Options">

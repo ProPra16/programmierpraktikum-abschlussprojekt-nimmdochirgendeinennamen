@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.java.backup.Backup;
+import main.java.catalogEditor.CatalogEditor;
 import main.java.chart.TrackingChart;
 import main.java.exerciseChooser.ExerciseChooser;
 import main.java.tracker.ChartTracker;
@@ -94,6 +95,7 @@ public class Controller {
 		}
 
 		if (passed) {
+			tracker.callDump("", phase.get(), false);
 			chartTracker.nextPhase(phase.get());
 			if (phase.get() == 1)
 				codeBackup.setNewBackup(txtCode.getText());
@@ -212,7 +214,8 @@ public class Controller {
 
 	@FXML
 	public void showTrackingChart() {
-		TrackingChart.launch(TrackingChart.class, (String[])null);
+		TrackingChart tc = new TrackingChart();
+        tc.erstelleStage();
 	}
 
 	@FXML
@@ -325,4 +328,9 @@ public class Controller {
 			break;
 		}
 	}
+
+    public void onNewExerciseClicked() throws IOException {
+        CatalogEditor ce = new CatalogEditor();
+        ce.showStage((Stage) txtCode.getScene().getWindow());
+    }
 }
