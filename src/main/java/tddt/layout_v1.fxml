@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+
 <AnchorPane fx:id="pane" prefHeight="476.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.tddt.Controller">
    <children>
       <MenuBar layoutX="175.0" prefHeight="29.0" prefWidth="189.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -58,17 +60,17 @@
                   <Button fx:id="btnPrevStep" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#prevPhase" text="Previous Step" GridPane.rowIndex="1" />
                   <ImageView fx:id="imgTest" cache="true" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../../pictures/WriteFailingTest_v2.png" />
+                        <Image url="@../../../../pictures/WriteFailingTest_v2.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imgCode" fitHeight="120.0" fitWidth="120.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../pictures/MakeTestPass_v2.png" />
+                        <Image url="@../../../../pictures/MakeTestPass_v2.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imgRefactor" fitHeight="120.0" fitWidth="120.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../pictures/Refactor_v2.png" />
+                        <Image url="@../../../../pictures/Refactor_v2.png" />
                      </image>
                   </ImageView>
                </children>
