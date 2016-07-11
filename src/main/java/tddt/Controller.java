@@ -17,7 +17,6 @@ package main.java.tddt;
 import java.io.File;
 import java.io.IOException;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -218,7 +217,11 @@ public class Controller {
 
 	@FXML
 	public void showTrackerLog() {
-		tracker.showOutput();
+		//TODO Tracker using logHandler
+		if (tracker != null)
+			tracker.showOutput();
+		else
+			new TDDTDialog("alert", "Please first load an exercise");
 	}
 
 	private boolean checkTest() {
