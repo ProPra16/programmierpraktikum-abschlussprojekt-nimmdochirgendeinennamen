@@ -1,6 +1,10 @@
 #Source of most of the settings:
 #https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore
 
+# Tracking Files
+TrackingData.txt
+TrackingAnalyse.txt
+
 .metadata
 bin/
 tmp/

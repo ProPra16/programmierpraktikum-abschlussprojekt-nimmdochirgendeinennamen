@@ -1,6 +1,0 @@
-red
-80
-green
-0
-refactor
-0
