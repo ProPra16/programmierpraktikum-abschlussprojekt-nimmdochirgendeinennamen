@@ -70,10 +70,6 @@ public class Controller {
 		testBackup = new Backup();
 		txtTest.setEditable(false);
 		btnNextStep.setDisable(true);
-		// #### babysteps = new Babysteps();
-
-		chartTracker = new ChartTracker();
-		tracker = new Tracker(txtCode.getText(), txtTest.getText());
 		babysteps = new Babysteps();
 	}
 
@@ -106,11 +102,10 @@ public class Controller {
 
 	@FXML
 	public void prevPhase() {
-		// chartTracking.greenBack(1);
-		// tracking.callDump("", 1, true);
-
+		tracker.callDump("", 1, true);
 		if (phase.get() == 1) {
 			txtCode.setText(codeBackup.getLastBackup());
+			chartTracker.greenBack();
 		}
 		phase.previous();
 		updateGUIElements(phase);
@@ -124,6 +119,11 @@ public class Controller {
 	 */
 	@FXML
 	public void newTask() throws IOException {
+		chartTracker = new ChartTracker();
+		tracker = new Tracker(txtCode.getText(), txtTest.getText());
+
+		turnBabystepsOff();
+
 		ExerciseChooser exercisechooser = new ExerciseChooser();
 		String[] x = exercisechooser.showStage((Stage) txtCode.getScene().getWindow());
 		if (x[0] != null) {
@@ -136,19 +136,21 @@ public class Controller {
 				txtTest.setEditable(true);
 				btnNextStep.setDisable(false);
 				if (xmlLoader.isBabystepsActive(exerciseIDX)) {
-					// turnBabystepsOn();
-					// setBabystepsTime(xmlLoader.getBabyStepsTime(exerciseIDX));
+					turnBabystepsOn();
+					babysteps.setDuration(xmlLoader.getBabyStepsTime(exerciseIDX));
 				}
 			} catch (InvalidFileException e) {
 				TDDTDialog.showException(e);
 			}
-			// #### babysteps.startPhase();
+			babysteps.startPhase();
 			phase.reset();
 			updateGUIElements(phase);
 		} else {
 			// This popup is annoying as f...
 			// new TDDTDialog("alert", "Received an empty catalog path.");
 		}
+		testBackup.setNewBackup(txtTest.getText());
+		codeBackup.setNewBackup(txtCode.getText());
 	}
 
 	@FXML
@@ -181,7 +183,9 @@ public class Controller {
 
 	@FXML
 	public void turnBabystepsOff() {
-		t.interrupt();
+		if (babysteps.isEnabled()) {
+			t.interrupt();
+		}
 		babysteps.disable();
 	}
 
