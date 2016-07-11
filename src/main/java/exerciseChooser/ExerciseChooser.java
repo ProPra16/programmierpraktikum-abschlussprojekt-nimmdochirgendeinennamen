@@ -112,7 +112,7 @@ public class ExerciseChooser implements Initializable{
 
     //create and show catalog chooser stage. Returns catalog path and exercise number to the main app.
     public String[] showStage(Stage stage) throws IOException {
-        Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/ExerciseChooser/ExerciseChooserLayout.fxml"));
+        Parent newScene = FXMLLoader.load(getClass().getResource("src/main/java/exerciseChooser/ExerciseChooserLayout.fxml"));
         Scene toExerciseChooser = new Scene(newScene);
         Stage catalog_stage = new Stage();
         catalog_stage.initModality(Modality.WINDOW_MODAL);

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import main.java.Phase;
+import main.java.tddt.Phase;
 
 public class PhaseTest {
 	@Test

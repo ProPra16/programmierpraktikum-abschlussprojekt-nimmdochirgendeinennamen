@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="400" maxWidth="600" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="main.java.ExerciseChooser.ExerciseChooser">
+            fx:controller="main.java.exerciseChooser.ExerciseChooser">
     <top>
         <VBox>
             <children>
