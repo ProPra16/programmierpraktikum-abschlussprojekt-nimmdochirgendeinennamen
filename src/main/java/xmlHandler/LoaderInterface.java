@@ -16,7 +16,7 @@ package main.java.xmlHandler;
 
 import java.io.File;
 /**This is the interface for the XML Loader.
- * Proper documentation for the methods can be cound in the implementing class.
+ * Proper documentation for the methods can be found in the implementing class.
  * @author Kai Holzinger
  * @version 1.1
  * */
