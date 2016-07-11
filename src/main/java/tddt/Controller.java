@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -31,7 +32,9 @@ import main.java.xmlHandler.InvalidFileException;
 import main.java.xmlHandler.XMLLoader;
 
 public class Controller {
-	// TODO thinking about ExceptionHandler for Dialogspawning and way smaller
+    public MenuItem babystpsOnBtn;
+    public MenuItem babystpsOffBtn;
+    // TODO thinking about ExceptionHandler for Dialogspawning and way smaller
 	// Controller and Compiler class
 	// TODO String backup Wrapper, used for GUI-flow and Babysteps aswell.
 	// for Babysteps backup and state at the same time
@@ -160,22 +163,24 @@ public class Controller {
 	@FXML
 	public void turnBabystepsOn() {
 
+        babystpsOffBtn.setDisable(false);
+        babystpsOnBtn.setDisable(true);
 		// Was passiert, wenn Babysteps bereits on ist? -> Button sollte solange
 		// deaktiviert werden
 		t = new Thread(() -> {
             try {
                 while (!Thread.currentThread().isInterrupted()) {
                     Thread.sleep(1000);
+                    if (babysteps.isEnabled() & !babysteps.timeLeft() && phase.get() != 2) {
+                        if (phase.get() == 0)
+                            txtTest.setText(testBackup.getLastBackup());
+                        if (phase.get() == 1)
+                            txtCode.setText(codeBackup.getLastBackup());
+                        prevPhase();
+                    }
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-            }
-            if (babysteps.isEnabled() & !babysteps.timeLeft() && phase.get() != 2) {
-                if (phase.get() == 0)
-                    txtTest.setText(testBackup.getLastBackup());
-                if (phase.get() == 1)
-                    txtCode.setText(codeBackup.getLastBackup());
-                prevPhase();
             }
         });
 		t.start();
@@ -185,6 +190,8 @@ public class Controller {
 
 	@FXML
 	public void turnBabystepsOff() {
+        babystpsOffBtn.setDisable(true);
+        babystpsOnBtn.setDisable(false);
 		if (babysteps.isEnabled()) {
 			t.interrupt();
 		}
