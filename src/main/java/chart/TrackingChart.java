@@ -18,15 +18,15 @@ import javafx.stage.Stage;
 //Die Datei TrackingData.txt wird ausgelesen und verarbeitet die enthaltenen Informationen
 //zu einem PieChart. 
 
-public class TrackingChart extends Application{
-	
+public class TrackingChart extends Application {
+
     @Override 
     public void start(Stage stage) {
 	     stage.setTitle("Tracking Analyse");
 	     stage.setWidth(520);
 	     stage.setHeight(500);
 		 stage.setScene(erstelleScene());
-	     stage.show();		
+	     stage.show();
     }
 
 	private int leseZeiten(int info) {

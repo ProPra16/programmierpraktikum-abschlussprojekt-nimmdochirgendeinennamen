@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.java.backup.Backup;
+import main.java.chart.TrackingChart;
 import main.java.exerciseChooser.ExerciseChooser;
 import main.java.tracker.ChartTracker;
 import main.java.tracker.Tracker;
@@ -200,6 +201,16 @@ public class Controller {
 		} else {
 			new TDDTDialog("alert", "Input not accepted. It has to be between 1 and 180");
 		}
+	}
+
+	@FXML
+	public void showTrackingChart() {
+		TrackingChart.main(null);
+	}
+
+	@FXML
+	public void showTrackerLog() {
+		tracker.showOutput();
 	}
 
 	private boolean checkTest() {
