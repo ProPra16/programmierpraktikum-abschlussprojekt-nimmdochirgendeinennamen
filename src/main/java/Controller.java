@@ -14,6 +14,7 @@
 
 package main.java;
 
+import backup.Backup;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -33,9 +34,11 @@ public class Controller {
 	//for Babysteps backup and state at the same time
 	//might aswell take Tracker for backup tho
 
-	String	  backup;  //backup of Phase 1 code for prevPhase() on phase = 2;
+	Backup codeBackup;
+    Backup testBackup;
+	//String	  backup;  //backup of Phase 1 code for prevPhase() on phase = 2;
 	Phase	  phase;
-	//#### Babysteps babysteps;
+	Babysteps babysteps;
 	Thread 	  t;
 	TDDTCompiler compiler;
 
@@ -43,8 +46,8 @@ public class Controller {
 	//Tracker tracking;
 
 	@FXML private Pane pane;
-	@FXML private TextArea txtCode;
-	@FXML private TextArea txtTest;
+	@FXML public TextArea txtCode;
+	@FXML public TextArea txtTest;
 	@FXML private Button btnNextStep;
 	@FXML private Button btnPrevStep;
 	@FXML private ImageView imgTest;
@@ -65,6 +68,7 @@ public class Controller {
 
 		//chartTracking = new ChartTracker();
 		//tracking = new Tracker(txtCode.getText(), txtTest.getText());
+		babysteps = new Babysteps();
 	}
 
     //change phase if code meets requirements
@@ -88,6 +92,8 @@ public class Controller {
 				//tracking.callDump(txtTest.getText(), 0, false);
 			} //else tracking.callDump(txtCode.getText(), phase.get(), false);
 
+			if (phase.get() == 0) testBackup.setNewBackup(txtTest.getText());
+			if (phase.get() == 1) codeBackup.setNewBackup(txtCode.getText());
 			phase.next();
 			updateGUIElements(phase);
 		}
@@ -99,7 +105,7 @@ public class Controller {
 		//tracking.callDump("", 1, true);
 
 		if (phase.get() == 1) {
-			txtCode.setText(backup);
+			txtCode.setText(codeBackup.getLastBackup());
 		}
 		phase.previous();
 		updateGUIElements(phase);
@@ -141,27 +147,33 @@ public class Controller {
 
 	@FXML
 	public void turnBabystepsOn() {
-		//TODO proper loop
-		/*
-  		t = new Thread(
-  			() -> {
-  				try {
-  					Thread.sleep(1000);
-  				} catch (InterruptedException e) {}
-  				if (babysteps.isEnabled() | babysteps.timeLeft()) { //save calc-time with | instead of ||
-  					//TODO restore Backup, maybe with Tracker
-  					prevPhase();
-  				}
-  			}
-  		);
-  		*/
-		//#### babysteps.enable();
+
+		//Was passiert, wenn Babysteps bereits on ist? -> Button sollte solange deaktiviert werden
+		 t = new Thread(new Runnable() {
+	            public void run() {
+	                try {
+	                    while (!Thread.currentThread().isInterrupted()) {
+	                        Thread.sleep(1000);
+	                    }
+	                } catch (InterruptedException e) {
+	                    Thread.currentThread().interrupt();
+	                }
+	                if (babysteps.isEnabled() & !babysteps.timeLeft() && phase.get()!=2) {
+	  					if(phase.get() == 0) txtTest.setText(testBackup.getLastBackup());
+	  					if(phase.get() == 1) txtCode.setText(codeBackup.getLastBackup());
+	  					prevPhase();
+	  				}
+	            }
+	        });
+	        t.start();
+
+		babysteps.enable();
 	}
 
 	@FXML
 	public void turnBabystepsOff() {
-		//#### t.kill
-		//#### babysteps.disable();
+		t.interrupt();
+		babysteps.disable();
 	}
 
 	@FXML
@@ -171,7 +183,7 @@ public class Controller {
 		);
 		int result = Integer.parseInt( (String)dialog.getValue() );
 		if (result >= 1 && result <= 180) {
-			//####babysteps.setDuration(result);
+			babysteps.setDuration(result);
 		} else {
 			new TDDTDialog("alert", "Input not accepted. It has to be between 1 and 180");
         }
@@ -186,7 +198,7 @@ public class Controller {
 		compiler.compile(code, true, testname);
 		//settings for next phase
 		btnPrevStep.setDisable(false);
-		//#### babysteps.startPhase();
+		babysteps.startPhase();
 		return true;
 	}
 
@@ -209,7 +221,7 @@ public class Controller {
 			return false;
 		}
 		//settings for next phase
-		//#### babysteps.startPhase();
+		babysteps.startPhase();
 		return true;
 	}
 
@@ -232,7 +244,7 @@ public class Controller {
 			return false;
 		}
 		//settings for next phase
-		//#### babysteps.startPhase();
+		babysteps.startPhase();
 		return true;
 	}
 
