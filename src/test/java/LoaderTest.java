@@ -14,8 +14,8 @@
 
 package test.java;
 
-import main.java.xmlLoader.InvalidFileException;
-import main.java.xmlLoader.XMLLoader;
+import main.java.xmlHandler.InvalidFileException;
+import main.java.xmlHandler.XMLLoader;
 import org.junit.Test;
 
 import java.io.File;
@@ -23,7 +23,7 @@ import java.io.File;
 import static org.junit.Assert.assertEquals;
 
 public class LoaderTest {
-    XMLLoader testLoader = new XMLLoader(new File("src/main/java/xmlLoader/catalog.xml"));
+    XMLLoader testLoader = new XMLLoader(new File("src/main/java/xmlHandler/catalog.xml"));
 
     @Test
     public void testBabysteps() {
