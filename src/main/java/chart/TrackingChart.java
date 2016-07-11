@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 public class TrackingChart extends Application {
 
-    @Override 
+    @Override
     public void start(Stage stage) {
 	     stage.setTitle("Tracking Analyse");
 	     stage.setWidth(520);
@@ -99,12 +99,8 @@ public class TrackingChart extends Application {
 
 	private Scene erstelleScene() {
 		Scene scene = new Scene(new Group());
-        ((Group) scene.getRoot()).getChildren().addAll(erstellePieChart());       
+        ((Group) scene.getRoot()).getChildren().addAll(erstellePieChart());
 		return scene;
-	}
-
-	public static void main(String[] args) {
-	        launch(args);
 	}
 }
 

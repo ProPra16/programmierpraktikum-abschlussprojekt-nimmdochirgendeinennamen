@@ -37,7 +37,7 @@ import main.java.tddt.TDDTDialog;
 import main.java.xmlHandler.InvalidFileException;
 import main.java.xmlHandler.XMLLoader;
 
-public class ExerciseChooser implements Initializable{
+public class ExerciseChooser implements Initializable {
 
     @FXML private ListView exerciseList;
     @FXML private TextArea exerciseDesc;

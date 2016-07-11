@@ -17,6 +17,7 @@ package main.java.tddt;
 import java.io.File;
 import java.io.IOException;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -94,7 +95,6 @@ public class Controller {
 		}
 
 		if (passed) {
-			tracker.callDump("", phase.get(), false);
 			chartTracker.nextPhase(phase.get());
 			if (phase.get() == 1)
 				codeBackup.setNewBackup(txtCode.getText());
@@ -212,7 +212,7 @@ public class Controller {
 
 	@FXML
 	public void showTrackingChart() {
-		TrackingChart.main(null);
+		TrackingChart.launch(TrackingChart.class, (String[])null);
 	}
 
 	@FXML
