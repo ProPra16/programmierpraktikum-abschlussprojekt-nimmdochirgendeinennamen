@@ -1,3 +1,5 @@
+
+
 package projekt7;
 
 import java.io.BufferedReader;
@@ -12,7 +14,11 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 
-public class TrackingChart extends Application implements Chart {
+//Das PieChart wird über TrackingChart.main(null); erstellt und aufgerufen
+//Die Datei TrackingData.txt wird ausgelesen und verarbeitet die enthaltenen Informationen
+//zu einem PieChart. 
+
+public class TrackingChart extends Application{
 	
     @Override 
     public void start(Stage stage) {
@@ -23,8 +29,7 @@ public class TrackingChart extends Application implements Chart {
 	     stage.show();		
     }
     	
-	@Override
-	public int leseZeiten(int info) {
+	private int leseZeiten(int info) {
 		try(BufferedReader read = new BufferedReader(new FileReader("TrackingData.txt"))){
 			read.readLine();
 			String green = read.readLine();
@@ -43,45 +48,41 @@ public class TrackingChart extends Application implements Chart {
 						
 			read.close();
 		}
-			catch (IOException e){
+		catch (IOException e){
 				e.printStackTrace();
 			}
 		return 0;
 	}
 		
-	@Override
-	public PieChart erstellePieChart() {
+	private PieChart erstellePieChart() {
 		ObservableList<PieChart.Data> daten = FXCollections.observableArrayList(
                 new PieChart.Data("Red " + leseZeiten(1) + " Sekunden", leseZeiten(1)),                	
                 new PieChart.Data("Green " + leseZeiten(2) + " Sekunden", leseZeiten(2)),	                
                 new PieChart.Data("Refactor " + leseZeiten(3) + " Sekunden", leseZeiten(3)));
         PieChart pieChart = new PieChart(daten);
-        pieChart.setTitle(setzteTitel());
+        pieChart.setTitle(gebeProzenteAus());
         pieChart.setLegendVisible(false);
        
         int i = 0;        
         for (PieChart.Data data : daten) {
         	if(i == 0) data.getNode().setStyle("-fx-pie-color: #FF0000;");
         	if(i == 1) data.getNode().setStyle("-fx-pie-color: #008000;");
-        	if(i == 2) data.getNode().setStyle("-fx-pie-color: #4682B4;");
+        	if(i == 2) data.getNode().setStyle("-fx-pie-color: #000000;");
             i++;
         }         
         return pieChart;
 	}
 	
-	@Override
-	public String setzteTitel() {
+	private String gebeProzenteAus() {
 		double red = leseZeiten(1);
 		double green = leseZeiten(2);
 		double refactor = leseZeiten(3);
 		double übergang = red + green + refactor;
 		double prozent = 100 / übergang;
-		red = red * prozent;
-		red = Math.round(red * 1000)/1000.0;
-		green = green * prozent;
-		green = Math.round(green * 1000)/1000.0;
-		refactor = refactor * prozent;
-		refactor = Math.round(refactor * 1000)/1000.0;
+
+		red = berechneProzente(red, prozent);
+		green = berechneProzente(green, prozent);
+		refactor = berechneProzente(refactor, prozent);
 		
 		String ausgabe = ("Sie haben " + red + "% ihrer Zeit in der Phase RED verbracht, \n                 "
 		+ green + "% in der Phase GREEN und \n                 "
@@ -90,8 +91,13 @@ public class TrackingChart extends Application implements Chart {
 		return ausgabe;
 	}
 	
-	@Override
-	public Scene erstelleScene() {
+	static double berechneProzente(double i, double p){
+		double prozent = i * p;
+		prozent = Math.round(prozent * 1000)/1000.0;
+		return prozent;
+	}
+	
+	private Scene erstelleScene() {
 		Scene scene = new Scene(new Group());
         ((Group) scene.getRoot()).getChildren().addAll(erstellePieChart());       
 		return scene;
@@ -101,3 +107,4 @@ public class TrackingChart extends Application implements Chart {
 	        launch(args);
 	}
 }
+
