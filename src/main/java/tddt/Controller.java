@@ -177,6 +177,7 @@ public class Controller {
                             txtTest.setText(testBackup.getLastBackup());
                         if (phase.get() == 1)
                             txtCode.setText(codeBackup.getLastBackup());
+                        babysteps.reset();
                         prevPhase();
                     }
                 }

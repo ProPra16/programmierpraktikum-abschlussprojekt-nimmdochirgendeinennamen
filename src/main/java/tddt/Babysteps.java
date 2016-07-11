@@ -23,6 +23,10 @@ public class Babysteps {
 		else return false;
 	}
 
+	public void reset(){
+		this.startTime = System.currentTimeMillis();
+	}
+
 	public boolean isEnabled() {
 		return enabled;
 	}
