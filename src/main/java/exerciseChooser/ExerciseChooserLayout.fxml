@@ -107,9 +107,15 @@
                         <HBox prefHeight="25.0" prefWidth="345.0">
                             <children>
                                 <Region prefHeight="25.0" prefWidth="211.0" />
-                                <Button fx:id="BtnChoose" defaultButton="true" mnemonicParsing="false" onAction="#onBtnChooseClicked" text="Choose" />
+                                <Button fx:id="BtnChoose" defaultButton="true" mnemonicParsing="false" onAction="#onBtnChooseClicked" text="Choose">
+                           <font>
+                              <Font name="Calibri" size="12.0" />
+                           </font></Button>
                                 <Region prefHeight="25.0" prefWidth="27.0" />
-                                <Button fx:id="BtnCancel" cancelButton="true" mnemonicParsing="false" onAction="#onBtnCloseClicked" text="Cancel" />
+                                <Button fx:id="BtnCancel" cancelButton="true" mnemonicParsing="false" onAction="#onBtnCloseClicked" text="Cancel">
+                           <font>
+                              <Font name="Calibri" size="12.0" />
+                           </font></Button>
                             </children>
                         </HBox>
                     </children>
