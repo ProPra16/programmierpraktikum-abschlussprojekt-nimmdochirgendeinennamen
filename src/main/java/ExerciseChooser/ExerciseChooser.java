@@ -29,8 +29,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.TDDTDialog;
-import main.java.xmlLoader.InvalidFileException;
-import main.java.xmlLoader.XMLLoader;
+import main.java.xmlHandler.InvalidFileException;
+import main.java.xmlHandler.XMLLoader;
 
 import java.io.File;
 import java.io.IOException;

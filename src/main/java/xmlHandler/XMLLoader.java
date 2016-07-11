@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.xmlLoader;
+package main.java.xmlHandler;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,6 +27,7 @@ import java.io.IOException;
 
 public class XMLLoader implements LoaderInterface {
 
+    private Document document;
     private NodeList exercises;
 
     public XMLLoader(File file) {
@@ -46,6 +47,10 @@ public class XMLLoader implements LoaderInterface {
             throw new InvalidFileException
 				("Error. The specified file either contains no catalog or its syntax is corrupt.", e);
         }
+    }
+
+    public Document getDocument(){
+        return this.document;
     }
 
                                             /*EXERCISE GETTERS*/

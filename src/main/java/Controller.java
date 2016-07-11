@@ -17,13 +17,12 @@ package main.java;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.java.ExerciseChooser.ExerciseChooser;
-import main.java.xmlLoader.InvalidFileException;
-import main.java.xmlLoader.XMLLoader;
+import main.java.xmlHandler.InvalidFileException;
+import main.java.xmlHandler.XMLLoader;
 
 import java.io.File;
 import java.io.IOException;

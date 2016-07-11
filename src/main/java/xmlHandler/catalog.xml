@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <exercises>
     <!-- Exercise 1 -->
     <exercise name="TestEx">
@@ -23,7 +24,7 @@
         <!-- Set config values for the exercise. -->
         <config>
             <!-- value may only contain a boolean value [TRUE / FALSE]. Time is measured in seconds. -->
-            <babysteps value="true" time="10"/>
+            <babysteps time="10" value="true"/>
             <!-- value may only contain a boolean value [TRUE / FALSE] -->
             <timetracking value="True"/>
         </config>
@@ -46,10 +47,9 @@
 
         <config>
             <!-- value may only contain a boolean value [TRUE / FALSE]. Time is measured in seconds. -->
-            <babysteps value="False" time="20"/>
+            <babysteps time="20" value="False"/>
             <!-- value may only contain a boolean value [TRUE / FALSE] -->
             <timetracking value="false"/>
         </config>
     </exercise>
-
 </exercises>
