@@ -37,7 +37,10 @@ import main.java.tddt.TDDTDialog;
 import main.java.xmlHandler.InvalidFileException;
 import main.java.xmlHandler.XMLLoader;
 
-public class ExerciseChooser implements Initializable {
+/**
+ * This class opens a new window which allows the user to load catalogs and choose exercises out of those catalogs.
+ */
+public class ExerciseChooser implements Initializable{
 
     @FXML private ListView exerciseList;
     @FXML private TextArea exerciseDesc;
@@ -49,11 +52,11 @@ public class ExerciseChooser implements Initializable {
     private static XMLLoader loader;
     private static String[] values = new String[2];
 
-    /*
-    * Open a FileChooser dialog if user clicks on open in the file menu.
-    * If user chooses a file which is not a catalog file an exception prompt pops up.
-    * If catalog is successfully loaded the ListView will show all contained exercises.
-    * */
+    /**
+     * Open a FileChooser dialog if user clicks on open in the file menu.
+     * If user chooses a file which is not a catalog file an exception prompt pops up.
+     * If catalog is successfully loaded, the ListView will show all contained exercises.
+     */
     @FXML
     public void onOpenClicked() {
         try {
@@ -76,7 +79,10 @@ public class ExerciseChooser implements Initializable {
         }
     }
 
-    //If user clicks on an exercise in the ListView some information about the exercise is shown on the right
+    /**
+     * If the user clicks on an exercise in the ListView some information about the exercise is shown on the right
+     * and the choose button becomes enabled.
+     */
     @FXML
     public void onExerciseClicked() {
         if(loader != null) {
@@ -94,14 +100,20 @@ public class ExerciseChooser implements Initializable {
         }
     }
 
-    //Close catalog chooser if user clicks on the 'Choose' button.
+    /**
+     * Close catalog chooser if user clicks on the 'Choose' button.
+     * @throws IOException
+     */
     @FXML
     public void onBtnChooseClicked() throws IOException {
         Stage app_stage = (Stage) (BtnChoose.getScene().getWindow());
         app_stage.close();
     }
 
-    //set return values to null and close the stage if user clicks on cancel button
+    /**
+     * Set the return values to null and close the stage if user clicks on cancel button
+     * @throws IOException
+     */
     @FXML
     public void onBtnCloseClicked() throws IOException {
         Stage catalog_stage = (Stage) (BtnCancel.getScene().getWindow());
@@ -110,7 +122,14 @@ public class ExerciseChooser implements Initializable {
         catalog_stage.close();
     }
 
-    //create and show catalog chooser stage. Returns catalog path and exercise number to the main app.
+
+
+    /**
+     * Create and show catalog chooser stage. Returns catalog path and exercise number to the main app.
+     * @param stage The owner (Main) window
+     * @return A String Array which contains the XML-Catalog-File and the index of the chosen exercise.
+     * @throws IOException
+     */
     public String[] showStage(Stage stage) throws IOException {
         Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/exerciseChooser/ExerciseChooserLayout.fxml"));
         Scene toExerciseChooser = new Scene(newScene);
@@ -125,7 +144,10 @@ public class ExerciseChooser implements Initializable {
         return values;
     }
 
-    //Cant choose an exercise if no catalog is loaded.
+    /**
+     * The choosebutton is initialized as a disabled button.
+     * @see {@link #onExerciseClicked} for enable setting
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         BtnChoose.setDisable(true);
