@@ -39,6 +39,9 @@ public class Controller {
 	Thread 	  t;
 	TDDTCompiler compiler;
 
+	//ChartTracker chartTracking;
+	//Tracker tracking;
+
 	@FXML private Pane pane;
 	@FXML private TextArea txtCode;
 	@FXML private TextArea txtTest;
@@ -59,6 +62,9 @@ public class Controller {
         txtTest.setEditable(false);
         btnNextStep.setDisable(true);
 		//#### babysteps = new Babysteps();
+
+		//chartTracking = new ChartTracker();
+		//tracking = new Tracker(txtCode.getText(), txtTest.getText());
 	}
 
     //change phase if code meets requirements
@@ -67,18 +73,21 @@ public class Controller {
 		boolean passed = false;
 		switch (phase.get()) {
 			case 0: passed = checkTest();
-					//#### tracker.dump(txtTest.getText());
 					break;
 			case 1: passed = checkCode();
-					//#### tracker.dump(txtCode.getText());
 					break;
 			case 2: passed = checkRefactor();
-					//#### tracker.dump(txtCode.getText());
 					break;
 		}
 
 		if (passed) {
-			if (phase.get() == 0) backup = txtCode.getText();
+			//chartTracking.nextPhase(phase.get());		
+
+			if (phase.get() == 0) {
+				backup = txtCode.getText();
+				//tracking.callDump(txtTest.getText(), 0, false);
+			} //else tracking.callDump(txtCode.getText(), phase.get(), false);
+
 			phase.next();
 			updateGUIElements(phase);
 		}
@@ -86,11 +95,15 @@ public class Controller {
 
 	@FXML
 	public void prevPhase() {
+		//chartTracking.greenBack(1);
+		//tracking.callDump("", 1, true);
+
 		if (phase.get() == 1) {
 			txtCode.setText(backup);
 		}
 		phase.previous();
 		updateGUIElements(phase);
+
 	}
 
    /*

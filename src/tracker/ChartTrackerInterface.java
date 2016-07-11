@@ -11,41 +11,29 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License.
  */
+package tracker;
 
-package main.java;
+public interface ChartTrackerInterface {
+    /*
+     * Measures time spent in a certain phase. 
+     * When the phase is ended, writes the time to a textfile.
+     */
+    
+    //call when changing to next phase
+    public void nextPhase();
+    
+    //call when changing BACK
+    public void greenBack();
+ 
+    /*
+    internal methods, not needed in Interface but used in implementing class:
 
-/**
- * Phase class for controlling
- *
- */
-public class Phase {
-	int phase;
-	int start;
-	int end;
-	int step;
-
-	public Phase(int start, int end, int step) {
-		phase = 0;
-		this.start = start;
-		this.end = end;
-		this.step = step;
-	}
-
-	public void next() {
-		if (phase < end) phase = phase + step;
-		else 			 phase = start;
-	}
-
-	public void previous() {
-		if (phase > start)
-			phase = phase - step;
-	}
-
-	public void reset() {
-		phase = start;
-	}
-
-	public int get() {
-		return phase;
-	}
+    public void redToGreen();
+    
+    public void greenToRefactor();
+    
+    public void refactorToRed();
+    
+    public void writeToFile();
+    */
 }
