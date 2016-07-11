@@ -22,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.java.backup.Backup;
 import main.java.catalogEditor.CatalogEditor;
@@ -42,19 +41,18 @@ public class Controller {
 	// for Babysteps backup and state at the same time
 	// might aswell take Tracker for backup tho
 
-	Backup codeBackup;
-	Backup testBackup;
+    private Backup codeBackup;
+	private Backup testBackup;
 	// String backup; //backup of Phase 1 code for prevPhase() on phase = 2;
-	Phase phase;
-	Babysteps babysteps;
-	Thread t;
-	TDDTCompiler compiler;
+    private Phase phase;
+	private Babysteps babysteps;
+	private Thread t;
+	private TDDTCompiler compiler;
 
-	ChartTracker chartTracker;
-	Tracker tracker;
+	private ChartTracker chartTracker;
+	private Tracker tracker;
 
-	@FXML private Pane pane;
-	@FXML public TextArea txtCode;
+    @FXML public TextArea txtCode;
 	@FXML public TextArea txtTest;
 	@FXML private Button btnNextStep;
 	@FXML private Button btnPrevStep;
@@ -62,8 +60,7 @@ public class Controller {
 	@FXML private ImageView imgCode;
 	@FXML private ImageView imgRefactor;
 
-	private static File file;
-	private static int exerciseIDX;
+    private static int exerciseIDX;
 	private static XMLLoader xmlLoader;
 
 	// Interactable objects are disabled until an exercise is loaded
@@ -134,7 +131,7 @@ public class Controller {
 		String[] x = exercisechooser.showStage((Stage) txtCode.getScene().getWindow());
 		if (x[0] != null) {
 			try {
-				file = new File(x[0]);
+                File file = new File(x[0]);
 				exerciseIDX = Integer.parseInt(x[1]);
 				xmlLoader = new XMLLoader(file);
 				txtCode.setText(xmlLoader.getClass(exerciseIDX, 0));
@@ -151,10 +148,10 @@ public class Controller {
 			babysteps.startPhase();
 			phase.reset();
 			updateGUIElements(phase);
-		} else {
-			// This popup is annoying as f...
-			// new TDDTDialog("alert", "Received an empty catalog path.");
-		}
+		}/*else {
+			 This popup is annoying as f...
+			 new TDDTDialog("alert", "Received an empty catalog path.");
+		}*/
 		chartTracker = new ChartTracker();
 		tracker = new Tracker(txtCode.getText(), txtTest.getText());
 		testBackup.setNewBackup(txtTest.getText());
@@ -219,11 +216,11 @@ public class Controller {
 
 	@FXML
 	public void showTrackerLog() {
-		//TODO Tracker using logHandler
-		if (tracker != null)
-			tracker.showOutput();
-		else
-			new TDDTDialog("alert", "Please first load an exercise");
+        //TODO Tracker using logHandler
+        if (tracker != null)
+            tracker.showOutput();
+        else
+            new TDDTDialog("alert", "Please first load an exercise");
 	}
 
 	private boolean checkTest() {
