@@ -200,11 +200,13 @@ public class XMLLoader implements LoaderInterface {
         }
     }
 
+    //this will always return true, because we dont want timetracking to be disabled. Ever.
     //@return true if timetracking == true
     @Override
     public boolean isTimetrackerActive(int idx) throws InvalidFileException {
         try {
-            return goToNode(getExercise(idx), "config", "timetracking").getAttribute("value").equalsIgnoreCase("true");
+            //return goToNode(getExercise(idx), "config", "timetracking").getAttribute("value").equalsIgnoreCase("true");
+            return true;
         } catch (NullPointerException e) {
             throw new InvalidFileException
 				("Error. Couldnt find a timetracking config at index "+idx+". Check the catalog syntax.", e);

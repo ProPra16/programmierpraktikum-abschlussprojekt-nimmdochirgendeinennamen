@@ -36,7 +36,7 @@ public class LoaderTest {
     @Test
     public void testTimetracker() {
         assertEquals("Must be true.", true, testLoader.isTimetrackerActive(0));
-        assertEquals("Must be false.", false, testLoader.isTimetrackerActive(1));
+        assertEquals("Must be true.", true, testLoader.isTimetrackerActive(1));
     }
 
     @Test
