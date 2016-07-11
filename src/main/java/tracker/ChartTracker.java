@@ -31,31 +31,31 @@ public class ChartTracker {
     public int greenSeconds;
     public int redSeconds;
     public int refactorSeconds;
-    
+
     //system time when phase is entered
     private long greenStartTime;
     private long redStartTime;
     private long refactorStartTime;
-               
+
     public ChartTracker() {
         //initialise times to 0
         this.greenSeconds = 0;
         this.redSeconds = 0;
         this.refactorSeconds = 0;
-        
-        //start in RED phase        
+
+        //start in RED phase
         this.redStartTime = System.currentTimeMillis();
     }
-    
+
     //change to next phase, call with current phase (0 = RED, 1 = GREEN, 2 = REFACTOR)
     public void nextPhase(int phase) {
         if (phase == 0) redToGreen();
         if (phase == 1) greenToRefactor();
         if (phase == 2) refactorToRed();
-        
+
         writeToFile();
     }
-    
+
     //change BACK from GREEN to RED
     public void greenBack(int phase) {
 	//will only work in phase GREEN
@@ -68,19 +68,19 @@ public class ChartTracker {
     }
     }
 
-                                        /*INTERNAL METHODS*/
+    /*INTERNAL METHODS*/
     private void redToGreen() {
         long redEndTime = System.currentTimeMillis() - redStartTime;
         redSeconds += (int)redEndTime/1000;
         greenStartTime = System.currentTimeMillis();
     }
-    
+
     private void greenToRefactor() {
         long greenEndTime = System.currentTimeMillis() - greenStartTime;
         greenSeconds += (int)greenEndTime/1000;
         refactorStartTime = System.currentTimeMillis();
     }
-    
+
     private void refactorToRed() {
         long refactorEndTime = System.currentTimeMillis() - refactorStartTime;
         refactorSeconds += (int)refactorEndTime/1000;

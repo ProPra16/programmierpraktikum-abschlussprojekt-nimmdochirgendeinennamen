@@ -14,10 +14,6 @@
 
 package main.java.tddt;
 
-/**
- * Phase class for controlling
- *
- */
 public class Phase {
 	int phase;
 	int start;

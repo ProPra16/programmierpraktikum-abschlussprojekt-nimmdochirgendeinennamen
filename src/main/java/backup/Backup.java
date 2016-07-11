@@ -8,7 +8,6 @@
 
 package main.java.backup;
 
-
 public class Backup {
 
 	String inhalt;
@@ -16,7 +15,6 @@ public class Backup {
 	public Backup() {
 		inhalt = "";
 	}
-
 
 	public String getLastBackup() {
 		return this.inhalt;

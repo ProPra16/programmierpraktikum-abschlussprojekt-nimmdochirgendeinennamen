@@ -30,10 +30,10 @@ import javafx.stage.Stage;
 public class Tracker {
 
     public LocalDateTime time;
-    
+
     String oldCode;
     String oldTest;
-    
+
     File file;
 
     //constructor
@@ -41,7 +41,7 @@ public class Tracker {
         time = LocalDateTime.now();
         oldCode = code;
         oldTest = test;
-        
+
         file = new File("TrackingAnalyse.txt");
         FileWriter clear;
 		try {
@@ -50,45 +50,43 @@ public class Tracker {
 	        clear.close();
 		} catch (IOException e) {}
     }
-    
+
     public void callDump(String now, int phase, boolean back) {
-    	
     	time = LocalDateTime.now();
     	String output = time.toString() + "\n";
     	if (!back) output += dump(now, phase);
-    	
+
     	//if user went back from GREEN to RED
     	else if (back) { output += "Changed code in GREEN:\nWent back to RED, no changes.\n"; }
     	writeToFile(output);
     }
-    
+
     public void showOutput() {
-    	
     	Text show = new Text(output());
-    	
+
     	ScrollPane window = new ScrollPane();
         window.setContent(show);
         window.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         window.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-    	
+
     	Scene scene = new Scene(window, 400, 600);
     	Stage stage = new Stage();
-    	
+
     	stage.setTitle("Tracking history");
     	stage.setScene(scene);
     	stage.show();
     }
-    
-    						/*INTERNAL METHODS*/
+
+    /*INTERNAL METHODS*/
     private String output() {
     	String output = "";
-    	
+
     	Scanner scanner = null;
-    	
+
     	try {
 		scanner = new Scanner(file);
     	} catch (FileNotFoundException e) {}
-	
+
 	  	while (scanner.hasNextLine()) {
 			output += "\n" + scanner.nextLine();
 	  	}
@@ -124,7 +122,6 @@ public class Tracker {
 
 	//complete output String
 	String output = (phaseChanged + "\n" + changes + "\n");
-        
 	return output;
     }
 
@@ -159,7 +156,6 @@ public class Tracker {
 		    	lineNo = i + 1;
 		    	if(!codeArray[i].equals(oldCodeArray[i])) 
 				different += ("Changed line " + lineNo + ": " + codeArray[i] + "\n");
-			
 		}
 
 		if (codeArray.length > oldCodeArray.length) {
@@ -176,7 +172,7 @@ public class Tracker {
 			}
 		}
 	}
-    return different;   
+    return different;
     }
 
     private static String[] getLines(String a) {

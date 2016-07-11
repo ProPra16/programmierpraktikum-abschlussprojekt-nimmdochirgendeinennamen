@@ -18,22 +18,22 @@ public interface ChartTrackerInterface {
      * Measures time spent in a certain phase. 
      * When the phase is ended, writes the time to a textfile.
      */
-    
+
     //call when changing to next phase
     public void nextPhase();
-    
+
     //call when changing BACK
     public void greenBack();
- 
+
     /*
     internal methods, not needed in Interface but used in implementing class:
 
     public void redToGreen();
-    
+
     public void greenToRefactor();
-    
+
     public void refactorToRed();
-    
+
     public void writeToFile();
     */
 }
