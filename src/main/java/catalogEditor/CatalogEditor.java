@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,6 +33,7 @@ public class CatalogEditor implements Initializable {
     public Button nextButton1;
     public Button cancelbtn;
     public Button submitbtn;
+    public HBox ttwrapper;
 
 
     @Override
@@ -44,10 +47,10 @@ public class CatalogEditor implements Initializable {
                                             (Bindings.equalIgnoreCase("true",timetrackingfield.textProperty()).not()).and(Bindings.equalIgnoreCase("false",timetrackingfield.textProperty()).not()))))));
         }
         if(submitbtn != null){
-            submitbtn.disableProperty().bind((Bindings.isEmpty(classnamefield.textProperty())
-                    .or(Bindings.isEmpty(classTextArea.textProperty())
-                            .or(Bindings.isEmpty(testnamefield.textProperty())
-                                    .or(Bindings.isEmpty(testTextArea.textProperty()))))));
+            submitbtn.disableProperty().bind(Bindings.isEmpty(classnamefield.textProperty()).or(
+                                            Bindings.isEmpty(classTextArea.textProperty()).or(
+                                            Bindings.isEmpty(testnamefield.textProperty()).or(
+                                            Bindings.isEmpty(testTextArea.textProperty())))));
         }
     }
 
@@ -58,7 +61,7 @@ public class CatalogEditor implements Initializable {
         catalog_stage.initModality(Modality.WINDOW_MODAL);
         catalog_stage.initOwner(stage);
         catalog_stage.setScene(toExerciseChooser);
-        catalog_stage.setTitle("TDDT Client - Exercise Chooser");
+        catalog_stage.setTitle("TDDT Client - Catalog Editor");
         catalog_stage.getIcons().add(new Image("file:pictures/icon.png"));
         catalog_stage.setResizable(false);
         catalog_stage.showAndWait();
@@ -78,5 +81,11 @@ public class CatalogEditor implements Initializable {
 
     public void onSubmitButtonPressed(ActionEvent actionEvent) {
 
+    }
+
+    public void showTimetrackingTooltip() {
+        Tooltip tooltip = new Tooltip("Please purchase the full version of this product to disable tracking!");
+        Tooltip.install(ttwrapper,tooltip);
+        timetrackingfield.setTooltip(tooltip);
     }
 }

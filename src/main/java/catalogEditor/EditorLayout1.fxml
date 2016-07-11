@@ -14,7 +14,11 @@
       <TextField fx:id="exnamefield" layoutX="339.0" layoutY="170.0" prefHeight="25.0" prefWidth="255.0" />
       <TextField fx:id="babystepsfield" layoutX="339.0" layoutY="330.0" prefHeight="25.0" prefWidth="255.0" promptText="true / false" />
       <TextField fx:id="babystepstimefield" layoutX="339.0" layoutY="375.0" prefHeight="25.0" prefWidth="255.0" promptText="1-180" />
-      <TextField fx:id="timetrackingfield" layoutX="339.0" layoutY="420.0" prefHeight="25.0" prefWidth="255.0" promptText="true / false" />
+      <HBox fx:id="ttwrapper" layoutX="339.0" layoutY="420.0" onMouseEntered="#showTimetrackingTooltip" onTouchPressed="#showTimetrackingTooltip">
+         <children>
+            <TextField fx:id="timetrackingfield" disable="true" editable="false" layoutX="339.0" layoutY="420.0" onMouseEntered="#showTimetrackingTooltip" onTouchPressed="#showTimetrackingTooltip" prefHeight="25.0" prefWidth="255.0" promptText="true / false" text="true" />
+         </children>
+      </HBox>
       <Text layoutX="210.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exercise name">
          <font>
             <Font size="14.0" />
