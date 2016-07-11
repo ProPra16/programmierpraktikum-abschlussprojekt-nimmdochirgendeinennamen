@@ -14,7 +14,7 @@ package main.java.tddt;
  */
 
 import java.io.File;
-
+@Deprecated //used XMLLoader instead
 public class TDDTTask {
 
 	private String codeCode;

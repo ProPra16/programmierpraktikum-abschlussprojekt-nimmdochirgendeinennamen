@@ -1,0 +1,21 @@
+Review der letzten Woche:
+	Erreichte Ziele:
+		Babysteps
+		Refactor
+		KatalogEditor
+		Alle Klassen auf den master mergen
+	Unerreichte Ziele:
+		-
+
+Projektziele/TODO:
+	TrackerChart mit Initializable statt Application aufsetzen
+	Kleinere Bugfixes
+	Refactor
+	Reduzierung/Fertigstellung der GUI
+
+Individuelle Ziele:
+	Caro 	: Refactor
+	Dominik : GUI reduzieren, Refactor
+	Kai B. 	: TrackerChart aufrufbar machen
+	Jule 	: Refactor
+	Kai H. 	: KatalogEditor
