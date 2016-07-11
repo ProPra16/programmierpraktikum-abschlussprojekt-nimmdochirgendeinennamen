@@ -57,15 +57,12 @@ public class ChartTracker {
     }
 
     //change BACK from GREEN to RED
-    public void greenBack(int phase) {
-	//will only work in phase GREEN
-	if (phase == 1) {
-            long greenEndTime = System.currentTimeMillis() - greenStartTime;
-            greenSeconds += (int)greenEndTime/1000;
-            redStartTime = System.currentTimeMillis();
-
-            writeToFile();
-    }
+    public void greenBack() {
+		long greenEndTime = System.currentTimeMillis() - greenStartTime;
+		greenSeconds += (int)greenEndTime/1000;
+		redStartTime = System.currentTimeMillis();
+		
+		writeToFile();
     }
 
     /*INTERNAL METHODS*/

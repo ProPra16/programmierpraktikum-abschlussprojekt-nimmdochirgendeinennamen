@@ -17,7 +17,7 @@ public class ChartTrackerTest {
 		assertEquals(1, testTracker.redSeconds);
 
 		Thread.sleep(2000);
-		testTracker.greenBack(1);
+		testTracker.greenBack();
 
 		assertEquals(2, testTracker.greenSeconds);
 
