@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <exercises>
     <!-- Exercise 1 -->
-    <exercise name="BasicExercise">
-        <description>Basic exercise for testing Programflow</description>
+    <exercise name="BasicExercise1">
+        <description>Basic exercise for testing Programflow. 10 sec. on babysteps</description>
         <!-- Enter classes needed for the exercise, each class needs to be surrounded by a class tag with a name value -->
         <classes>
             <class name="Basic">
@@ -38,11 +38,11 @@ public class BasicTest {
 
     <!-- Exercise 2 -->
     <exercise name="BasicExercise2">
-        <description>Basic exercise for testing Programflow</description>
+        <description>Basic exercise for testing Programflow. 180 sec on babysteps</description>
         <!-- Enter classes needed for the exercise, each class needs to be surrounded by a class tag with a name value -->
         <classes>
-            <class name="BasicTwo">
-public class BasicTwo {
+            <class name="Basic2">
+public class Basic2 {
 	public static void main(String[] args) {
 
 	}
@@ -51,11 +51,11 @@ public class BasicTwo {
         </classes>
         <!-- Here comes the test code. -->
         <tests>
-            <test name="BasicTwoTest">
+            <test name="BasicTest2">
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class BasicTwoTest {
+public class BasicTest2 {
 	@Test
 	public void test() {
 
@@ -66,7 +66,43 @@ public class BasicTwoTest {
         <!-- Set config values for the exercise. -->
         <config>
             <!-- value may only contain a boolean value [TRUE / FALSE]. Time is measured in seconds. -->
-            <babysteps time="10" value="true"/>
+            <babysteps time="180" value="true"/>
+            <!-- value may only contain a boolean value [TRUE / FALSE] -->
+            <timetracking value="True"/>
+        </config>
+    </exercise>
+
+    <!-- Exercise 1 -->
+    <exercise name="BasicExercise3">
+        <description>Basic exercise for testing Programflow. No babysteps</description>
+        <!-- Enter classes needed for the exercise, each class needs to be surrounded by a class tag with a name value -->
+        <classes>
+            <class name="Basic3">
+public class Basic3 {
+	public static void main(String[] args) {
+
+	}
+}
+            </class>
+        </classes>
+        <!-- Here comes the test code. -->
+        <tests>
+            <test name="BasicTest3">
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class BasicTest3 {
+	@Test
+	public void test() {
+
+	}
+}
+            </test>
+        </tests>
+        <!-- Set config values for the exercise. -->
+        <config>
+            <!-- value may only contain a boolean value [TRUE / FALSE]. Time is measured in seconds. -->
+            <babysteps time="1" value="false"/>
             <!-- value may only contain a boolean value [TRUE / FALSE] -->
             <timetracking value="True"/>
         </config>
