@@ -82,7 +82,7 @@ public class TrackingChart {
 		return ausgabe;
 	}
 	
-	double berechneProzente(double i, double p){
+	public double berechneProzente(double i, double p){
 		double prozent = i * p;
 		prozent = Math.round(prozent * 1000)/1000.0;
 		return prozent;

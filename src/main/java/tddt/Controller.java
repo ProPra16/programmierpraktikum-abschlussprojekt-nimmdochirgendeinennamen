@@ -95,7 +95,6 @@ public class Controller {
 		}
 
 		if (passed) {
-			tracker.callDump("", phase.get(), false);
 			chartTracker.nextPhase(phase.get());
 			if (phase.get() == 1)
 				codeBackup.setNewBackup(txtCode.getText());
