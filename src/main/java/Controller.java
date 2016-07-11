@@ -1,14 +1,31 @@
-package main.java;
+/*
+ * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+ *
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
 
-import java.io.File;
+package main.java;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.java.ExerciseChooser.ExerciseChooser;
+import main.java.xmlHandler.InvalidFileException;
+import main.java.xmlHandler.XMLLoader;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Controller {
 	//TODO thinking about ExceptionHandler for Dialogspawning and way smaller Controller and Compiler class
@@ -30,14 +47,21 @@ public class Controller {
 	@FXML private ImageView imgTest;
 	@FXML private ImageView imgCode;
 	@FXML private ImageView imgRefactor;
+    private static File file;
+    private static int exerciseIDX;
+    private static XMLLoader xmlLoader;
 
-	@FXML
+    //Interactable objects are disabled until an exercise is loaded
+    @FXML
 	public void initialize() {
 		phase = new Phase(0, 2, 1);
 		compiler = new TDDTCompiler();
+        txtTest.setEditable(false);
+        btnNextStep.setDisable(true);
 		//#### babysteps = new Babysteps();
 	}
 
+    //change phase if code meets requirements
 	@FXML
 	public void nextPhase() {
 		boolean passed = false;
@@ -69,28 +93,38 @@ public class Controller {
 		updateGUIElements(phase);
 	}
 
+   /*
+   * Open Catalog chooser window, prepare main window for user interaction.
+   * Program supports only 1 class / test per exercise for now. XML-Loader supports multiple classes per exercise.
+   * */
 	@FXML
-	public void newTask() {
-		FileChooser fc = new FileChooser();
-		fc.setTitle("Choose a catalog-folder");
-		File file = fc.showOpenDialog( (Stage) pane.getScene().getWindow() );
-		if (file == null) {
-			new TDDTDialog("alert", "File could not get read properly");
-			return;
-		}
-
-		TDDTTask task = new TDDTTask(file);
-
-		if (task.getCode() == null && task.getCode() == null) {
-			new TDDTDialog("alert", "The chosen file is not a Task");
-		}
-
-		txtCode.setText(task.getCode());
-		txtTest.setText(task.getTest());
-		//#### babysteps.startPhase();
-		phase.reset();
-		updateGUIElements(phase);
-	}
+	public void newTask() throws IOException{
+        ExerciseChooser exercisechooser = new ExerciseChooser();
+        String[] x = exercisechooser.showStage((Stage)txtCode.getScene().getWindow());
+        if(x[0] != null) {
+            try {
+                file = new File(x[0]);
+                exerciseIDX = Integer.parseInt(x[1]);
+                xmlLoader = new XMLLoader(file);
+                txtCode.setText(xmlLoader.getClass(exerciseIDX, 0));
+                txtTest.setText(xmlLoader.getTest(exerciseIDX, 0));
+                txtTest.setEditable(true);
+                btnNextStep.setDisable(false);
+                if (xmlLoader.isBabystepsActive(exerciseIDX)) {
+                    //turnBabystepsOn();
+                    //setBabystepsTime(xmlLoader.getBabyStepsTime(exerciseIDX));
+                }
+            }catch (InvalidFileException e){
+                TDDTDialog.showException(e);
+            }
+            //#### babysteps.startPhase();
+            phase.reset();
+            updateGUIElements(phase);
+        }else {
+			//This popup is annoying as f...
+            //new TDDTDialog("alert", "Received an empty catalog path.");
+        }
+    }
 
 	@FXML
 	public void turnBabystepsOn() {
@@ -126,17 +160,17 @@ public class Controller {
 		if (result >= 1 && result <= 180) {
 			//####babysteps.setDuration(result);
 		} else {
-			new TDDTDialog("alert", "Input not acceptet. It has to be between 1 and 180");
-			return;
-		}
+			new TDDTDialog("alert", "Input not accepted. It has to be between 1 and 180");
+        }
 	}
 
 	private boolean checkTest() {
 		String code = txtTest.getText();
+        String testname = xmlLoader.getTestName(exerciseIDX, 0);
 		//check if compilable
 		if (!checkIfCompilableClass(code)) return false;
-		//try to compile and run test
-		compiler.compile(code, true);
+		//try to compile and run showStage
+		compiler.compile(code, true, testname);
 		//settings for next phase
 		btnPrevStep.setDisable(false);
 		//#### babysteps.startPhase();
@@ -144,17 +178,18 @@ public class Controller {
 	}
 
 	private boolean checkCode() {
-		String code = txtTest.getText();
+		String code = txtCode.getText();
+        String classname = xmlLoader.getClassName(exerciseIDX,0);
 		//check if compilable
 		if (!checkIfCompilableClass(code)) return false;
 		//try to compile code
-		boolean passed = compiler.compile(txtCode.getText(), false);
+		boolean passed = compiler.compile(txtCode.getText(), false, classname);
 		if (!passed) {
 			new TDDTDialog("compileError", compiler.getInfo());
 			return false;
 		}
-		//try to compile and run test
-		passed = compiler.compile(txtTest.getText(), true);
+		//try to compile and run showStage
+		passed = compiler.compile(txtTest.getText(), true, classname);
 		//display in Dialog if failed
 		if (!passed) {
 			new TDDTDialog("testFail", compiler.getInfo());
@@ -167,16 +202,17 @@ public class Controller {
 
 	private boolean checkRefactor() {
 		String code = txtTest.getText();
+        String classname = xmlLoader.getTestName(exerciseIDX,0);
 		//check if compilable
 		if (!checkIfCompilableClass(code)) return false;
 		//try to compile code
-		boolean passed = compiler.compile(txtCode.getText(), false);
+		boolean passed = compiler.compile(txtCode.getText(), false, classname);
 		if (!passed) {
 			new TDDTDialog("compileError", compiler.getInfo());
 			return false;
 		}
-		//try to compile and run test
-		passed = compiler.compile(txtTest.getText(), true);
+		//try to compile and run showStage
+		passed = compiler.compile(txtTest.getText(), true, classname);
 		//display in Dialog if failed
 		if (!passed) {
 			new TDDTDialog("testFail", compiler.getInfo());

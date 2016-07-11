@@ -1,6 +1,18 @@
-package main.java;
+/*
+ * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+ *
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
 
-import java.util.Collection;
+package main.java;
 
 import vk.core.api.CompilationUnit;
 import vk.core.api.CompileError;
@@ -10,23 +22,25 @@ import vk.core.api.JavaStringCompiler;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
 
+import java.util.Collection;
+
 public class TDDTCompiler {
 
 	String info;
 
-	public boolean compile(String code, boolean isTest) {
+	public boolean compile(String code, boolean isTest, String classname) {
 		if (isTest)
-			return compileAndRunTests(code);
+			return compileAndRunTests(code, classname);
 		else
-			return compileCode(code);
+			return compileCode(code, classname);
 	}
 	
 	public String getInfo() {
 		return this.info;
 	}
 
-	private boolean compileCode(String code) {
-		String className       = findClassName(code).trim();
+	private boolean compileCode(String code, String className) {
+		//String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, false);
 		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
 
@@ -41,11 +55,10 @@ public class TDDTCompiler {
 		return true;
 	}
 
-	private boolean compileAndRunTests(String code) {
-		String className       = findClassName(code).trim();
+	private boolean compileAndRunTests(String code, String className) {
+		//String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, true);
 		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
-
 		jsc.compileAndRunTests();
 		CompilerResult cr = jsc.getCompilerResult();
 
