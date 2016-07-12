@@ -40,6 +40,16 @@ public class Controller {
 	// TODO String backup Wrapper, used for GUI-flow and Babysteps aswell.
 	// for Babysteps backup and state at the same time
 	// might aswell take Tracker for backup tho
+	
+	//TODO proper Thead killing/interrupting on javafx stage close
+	/* might use something like: Sijo Jose on http://stackoverflow.com/questions/22576261/how-get-close-event-of-stage-in-javafx
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		      public void handle(WindowEvent we) {
+		          t.interrupt();
+		      }
+		  }); 
+	  not sure if this will include the "X"-Button in the upper right corner...probably tho
+	*/
 
     private Backup codeBackup;
 	private Backup testBackup;
