@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<exercises>
+    <exercise name="exercisename">
+        <description>description</description>
+        <classes>
+            <class name="classname">class</class>
+        </classes>
+        <tests>
+            <test name="testname">test</test>
+        </tests>
+        <config>
+            <babysteps time="50" value="true"/>
+            <timetracking value="true"/>
+        </config>
+    </exercise>
+</exercises>
