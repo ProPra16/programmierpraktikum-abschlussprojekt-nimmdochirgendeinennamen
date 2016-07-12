@@ -14,12 +14,22 @@
 
 package main.java.tddt;
 
+/**
+ * This class handles the phase state of the program
+ * @author Dominik Kuhnen
+ * @version unknown
+ */
 public class Phase {
-	int phase;
-	int start;
-	int end;
-	int step;
+	private int phase;
+	private int start;
+	private int end;
+	private int step;
 
+    /**
+     * @param start The start phase
+     * @param end The end phase
+     * @param step The step that's done when changing phase
+     */
 	public Phase(int start, int end, int step) {
 		phase = 0;
 		this.start = start;
@@ -27,20 +37,32 @@ public class Phase {
 		this.step = step;
 	}
 
+    /**
+     * Go to the next phase.
+     */
 	public void next() {
 		if (phase < end) phase = phase + step;
 		else 			 phase = start;
 	}
 
+    /**
+     * Go to the previous phase.
+     */
 	public void previous() {
 		if (phase > start)
 			phase = phase - step;
 	}
 
+    /**
+     * Go back to the start phase
+     */
 	public void reset() {
 		phase = start;
 	}
 
+    /**
+     * @return The current phase.
+     */
 	public int get() {
 		return phase;
 	}

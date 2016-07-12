@@ -21,11 +21,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * The main class of the program.
+ */
 public class TDDT extends Application{
-	public static void main(String[] args) {
-		launch(args);
-	}
 
+	/**
+	 * Creates the main stage and scene.
+	 * @param primaryStage The main stage.
+     */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -40,5 +44,12 @@ public class TDDT extends Application{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @param args startup parameters (Not used in this program)...
+     */
+	public static void main(String[] args) {
+		launch(args);
 	}
 }

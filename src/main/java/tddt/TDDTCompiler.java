@@ -24,21 +24,42 @@ import vk.core.api.JavaStringCompiler;
 import vk.core.api.TestFailure;
 import vk.core.api.TestResult;
 
+/**
+ * This class handles the interaction between the kata API and TDDT.
+ * @author Dominik Kuhnen
+ * @version unknown
+ */
 public class TDDTCompiler {
 
-	String info;
+	private String info;
 
+	/**
+	 * Tests if code is compilable.
+	 * @param code The compiled code
+	 * @param isTest Boolean 'hint' if the code is a test or not.
+	 * @param classname The classname of the code.
+     * @return	True if the code is compilable.
+     */
 	public boolean compile(String code, boolean isTest, String classname) {
 		if (isTest)
 			return compileAndRunTests(code, classname);
 		else
 			return compileCode(code, classname);
 	}
-	
+
+	/**
+	 * @return Compile errors.
+     */
 	public String getInfo() {
 		return this.info;
 	}
 
+	/**
+	 * Compiles the passed code and sets info to compile errors if there are any.
+	 * @param code The code that is going to be compiled
+	 * @param className The classname of the code
+     * @return True if the code is compilable. Otherwise false.
+     */
 	private boolean compileCode(String code, String className) {
 		//String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, false);
@@ -55,6 +76,12 @@ public class TDDTCompiler {
 		return true;
 	}
 
+	/**
+	 * Compiles and runs the passed test and sets info to any error that may have occured.
+	 * @param code The code that is going to be compiled
+	 * @param className The classname of the code
+     * @return True if the test is compile- and runnable. Otherwise false.
+     */
 	private boolean compileAndRunTests(String code, String className) {
 		//String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, true);
@@ -70,18 +97,30 @@ public class TDDTCompiler {
 		TestResult tr = jsc.getTestResult();
 
 		if (tr.getNumberOfFailedTests() != 0) {
-			info = formatFailingTests(tr, cu);
+			info = formatFailingTests(tr);
 			return false;
 		}
 
 		return true;
 	}
 
+	/**
+	 * This was used to determine the classname in a former version. Not used any longer.
+	 * @param text The class code.
+	 * @return The classname.
+     */
+	@Deprecated
 	private String findClassName(String text) {
 		//offset 6 for the String "class "
 		return text.substring(text.indexOf("class") + 6, text.indexOf(" {"));
 	}
 
+	/**
+	 * This formats any compile errors.
+	 * @param cr The CompilerResult of the uncompilable class.
+	 * @param cu The CompilationUnit of the uncompilable class.
+     * @return A String that contains all the errors.
+     */
 	private String formatCompileErrors(CompilerResult cr, CompilationUnit cu) {
 		StringBuilder output = new StringBuilder();
 		Collection<CompileError> errorList = cr.getCompilerErrorsForCompilationUnit(cu);
@@ -91,8 +130,13 @@ public class TDDTCompiler {
 		}
 		return output.toString();
 	}
-	
-	private String formatFailingTests(TestResult tr, CompilationUnit cu) {
+
+	/**
+	 * @see #formatCompileErrors(CompilerResult, CompilationUnit)
+	 * @param tr The testresult of the failed test.
+	 * @return A String that contains all the errors.
+     */
+	private String formatFailingTests(TestResult tr) {
 		StringBuilder output = new StringBuilder();
 		Collection<TestFailure> failureList = tr.getTestFailures();
 		for (TestFailure failure : failureList) {
