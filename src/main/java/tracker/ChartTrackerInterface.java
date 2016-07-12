@@ -20,20 +20,8 @@ public interface ChartTrackerInterface {
      */
 
     //call when changing to next phase
-    public void nextPhase();
+    void nextPhase(int phase);
 
     //call when changing BACK
-    public void greenBack();
-
-    /*
-    internal methods, not needed in Interface but used in implementing class:
-
-    public void redToGreen();
-
-    public void greenToRefactor();
-
-    public void refactorToRed();
-
-    public void writeToFile();
-    */
+    void greenBack();
 }
