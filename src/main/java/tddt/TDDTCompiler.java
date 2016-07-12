@@ -109,6 +109,7 @@ public class TDDTCompiler {
 	 * @param text The class code.
 	 * @return The classname.
      */
+	@SuppressWarnings("unused")
 	@Deprecated
 	private String findClassName(String text) {
 		//offset 6 for the String "class "
