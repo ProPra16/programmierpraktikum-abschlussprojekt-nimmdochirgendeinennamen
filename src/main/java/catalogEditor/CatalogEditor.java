@@ -1,7 +1,6 @@
 package main.java.catalogEditor;
 
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -14,12 +13,18 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
+/**
+ * This class creates a new Window which allows the user to create a new exercise for the catalog.
+ * The new exercise can either be stored inside a new catalog file, or it can be appended to an
+ * existing catalog.
+ * @author Kai Holzinger
+ * @version 1.0
+ */
 public class CatalogEditor implements Initializable {
     public TextField classnamefield;
     public TextArea classTextArea;
@@ -35,7 +40,17 @@ public class CatalogEditor implements Initializable {
     public Button submitbtn;
     public HBox ttwrapper;
 
-
+    /**
+     * Both the next button on the first scene and the submit button on the second scene
+     * are bound to the specific text fields.
+     *
+     * The next button is bound so that it becomes enabled only if all text fields on the
+     * first scene are not empty and the babysteps field and timetracking field have to
+     * contain either true or false.
+     *
+     * The submit button is bound so that it becomes enabled only if all text fields on
+     * the second scene are not empty.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(nextButton1 != null) {
@@ -54,6 +69,13 @@ public class CatalogEditor implements Initializable {
         }
     }
 
+    /**
+     * This method is used to initially create the new stage and show the first scene.
+     * The modality is set to WINDOW_MODAL so that the main window is inaccessible while
+     * the catalog editor window is open.
+     * @param stage The main stage, it's set to the owner window of the catalog editor window.
+     * @throws IOException If the FXML file is corrupt...
+     */
     public void showStage(Stage stage) throws IOException {
         Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/catalogEditor/EditorLayout1.fxml"));
         Scene toExerciseChooser = new Scene(newScene);
@@ -67,7 +89,10 @@ public class CatalogEditor implements Initializable {
         catalog_stage.showAndWait();
     }
 
-
+    /**
+     * This method changes the scene to scene 2
+     * @throws IOException If the FXML file is corrupt...
+     */
     public void onNextButton1Pressed() throws IOException {
         Stage stage = (Stage) cancelbtn.getScene().getWindow();
         Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/catalogEditor/EditorLayout2.fxml"));
@@ -75,14 +100,24 @@ public class CatalogEditor implements Initializable {
         stage.setScene(scene2);
     }
 
-    public void onCancelButtonPressed(ActionEvent actionEvent) {
+    /**
+     * If the user clicks on the cancel button the stage is closed.
+     */
+    public void onCancelButtonPressed() {
         ((Stage)cancelbtn.getScene().getWindow()).close();
     }
 
-    public void onSubmitButtonPressed(ActionEvent actionEvent) {
+    /**
+     * Coming soon
+     */
+    public void onSubmitButtonPressed() {
 
     }
 
+    /**
+     * Shows a fancy tooltip if you hover over the timetracking field.
+     * We decided to have timetracking enabled at any time, so we don't need the option to disable it.
+     */
     public void showTimetrackingTooltip() {
         Tooltip tooltip = new Tooltip("Please purchase the full version of this product to disable tracking!");
         Tooltip.install(ttwrapper,tooltip);
