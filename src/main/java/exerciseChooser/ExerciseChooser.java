@@ -39,6 +39,8 @@ import main.java.xmlHandler.XMLLoader;
 
 /**
  * This class opens a new window which allows the user to load catalogs and choose exercises out of those catalogs.
+ * @author Kai Holzinger
+ * @version 1.0
  */
 public class ExerciseChooser implements Initializable{
 

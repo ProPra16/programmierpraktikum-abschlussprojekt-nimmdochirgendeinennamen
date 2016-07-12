@@ -18,4 +18,4 @@ Individuelle Ziele:
 	Dominik : GUI reduzieren, Refactor
 	Kai B. 	: TrackerChart aufrufbar machen
 	Jule 	: Refactor
-	Kai H. 	: KatalogEditor
+	Kai H. 	: KatalogEditor, Refactor, Javadoc Kommentare
