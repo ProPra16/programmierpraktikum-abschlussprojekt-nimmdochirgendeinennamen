@@ -28,12 +28,22 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
+/**
+ * This class handles dialog spawning  while the program is running.
+ * @author Dominik Kuhnen
+ * @version unknown
+ */
 public class TDDTDialog {
 
-	Object value;
+	private Object value;
 
-	//TODO think about chaning it to a static method wrapper class
-	public TDDTDialog(String type, String message) {
+	/**
+	 * This method is used to differentiate between the different dialogs and call the show method for each of it.
+	 * @param type The dialog type
+	 * @param message The dialog message
+     */
+	//TODO think about changing it to a static method wrapper class
+	TDDTDialog(String type, String message) {
 		switch (type){
 			case "alert": 		 showAlert(message);
 								 break;
@@ -42,14 +52,22 @@ public class TDDTDialog {
 			case "compileError": showCompileError(message);
 			 					 break;
 			case "textInput":	 value = showTextInput(message);
-			default:			 return;
+			default:
 		}
 	}
 
+	/**
+	 * ??
+	 * @return The value Object
+     */
 	public Object getValue() {
 		return value;
 	}
 
+	/**
+	 * Shows an alert dialog
+	 * @param message The printed message
+     */
 	private void showAlert(String message) {
 		Alert alert = new Alert(AlertType.ERROR);
 		((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("file:pictures/icon.png"));
@@ -59,7 +77,11 @@ public class TDDTDialog {
 		alert.showAndWait();
 	}
 
-	//doesnt really fit the implementation style of the class but whatever... needed some exception output
+	/**
+	 * This method cannot be called using {@link #TDDTDialog(String, String)}, because it needs the Exception object
+	 * in order to work properly.
+	 * @param e The exception thats going to be shown in the dialog.
+     */
 	public static void showException(Exception e) {
 		Alert alert = new Alert(AlertType.ERROR);
 		((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("file:pictures/icon.png"));
@@ -85,6 +107,11 @@ public class TDDTDialog {
 		alert.showAndWait();
 	}
 
+	/**
+	 * Shows a simple dialog that waits for the user to enter some text.
+	 * @param message The message is shown in the content text of the dialog.
+	 * @return The user input
+     */
 	private String showTextInput(String message) {
 		TextInputDialog dialog = new TextInputDialog();
 		((Stage)dialog.getDialogPane().getScene().getWindow()).getIcons().add(new Image("file:pictures/icon.png"));
@@ -103,14 +130,27 @@ public class TDDTDialog {
 		return "-1";
 	}
 
+	/**
+	 * Spawns a dialog that shows info about a failed test.
+	 * @param message The info about the failed test
+     */
 	private void showTestFails(String message) {
 		spawnTextAreaAlert("Test failed!", message);
 	}
 
+	/**
+	 * Spawns a dialog that shows info about a failed compilation.
+	 * @param message The errorlog of the failed compilation
+     */
 	private void showCompileError(String message) {
 		spawnTextAreaAlert("Compile Error!", message);
 	}
 
+	/**
+	 * Spawns an alert dialog with a text area.
+	 * @param title The title of the dialog.
+	 * @param message The message thats printed inside of the text area.
+     */
 	private void spawnTextAreaAlert(String title, String message) {
 		Alert alert = new Alert(AlertType.ERROR);
 		((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("file:pictures/icon.png"));
