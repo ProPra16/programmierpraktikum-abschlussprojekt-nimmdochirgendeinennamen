@@ -27,8 +27,8 @@ public class Babysteps {
 	}
 
     /**
-     * This method subtracts the
-     * @link #startTime from the current time. The amount of milliseconds that emerges is converted to seconds.
+     * This method subtracts the {@link #startTime ] from the current time.
+     * The amount of milliseconds that emerges is converted to seconds.
      * @return True if the elapsed time is less than the Babysteps cycle duration, otherwise false.
      */
 	boolean timeLeft() {
