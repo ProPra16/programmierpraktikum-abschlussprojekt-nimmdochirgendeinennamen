@@ -14,12 +14,24 @@ package main.java.tddt;
  */
 
 import java.io.File;
+
+/**
+ * This class was used as a task loader at the beginning of this project. However, we decided to switch
+ * to the XML Reader {@link main.java.xmlHandler.XMLLoader}.
+ * @author Dominik Kuhnen
+ * @version unknown
+ */
 @Deprecated //used XMLLoader instead
 public class TDDTTask {
 
 	private String codeCode;
 	private String testCode;
 
+	/**
+	 * Reads a file and splits the contained class code and test code into 2 Strings.
+	 * @param file The file that contains the code.
+     */
+	@Deprecated
 	public TDDTTask(File file) {
 		TDDTFileReader reader = new TDDTFileReader();
 		String content = reader.readAll(file);
@@ -36,10 +48,18 @@ public class TDDTTask {
 		this.testCode = splitContent[1];
 	}
 
+	/**
+	 * @return The code that's been saved to String {@link #codeCode}
+     */
+	@Deprecated
 	public String getCode() {
 		return this.codeCode;
 	}
 
+	/**
+	 * @return The code that's been saved to String {@link #testCode}
+     */
+	@Deprecated
 	public String getTest() {
 		return this.testCode;
 	}
