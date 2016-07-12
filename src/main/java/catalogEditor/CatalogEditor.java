@@ -5,16 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.java.tddt.TDDTCompiler;
+import main.java.tddt.TDDTDialog;
+import main.java.xmlHandler.XMLWriter;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -39,6 +46,7 @@ public class CatalogEditor implements Initializable {
     public Button cancelbtn;
     public Button submitbtn;
     public HBox ttwrapper;
+    private static String[] firstScene = new String[5];
 
     /**
      * Both the next button on the first scene and the submit button on the second scene
@@ -94,10 +102,21 @@ public class CatalogEditor implements Initializable {
      * @throws IOException If the FXML file is corrupt...
      */
     public void onNextButton1Pressed() throws IOException {
-        Stage stage = (Stage) cancelbtn.getScene().getWindow();
-        Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/catalogEditor/EditorLayout2.fxml"));
-        Scene scene2 = new Scene(newScene);
-        stage.setScene(scene2);
+        if(babystepstimefield.getText().chars().allMatch( Character::isDigit )) {
+            int i = Integer.parseInt(babystepstimefield.getText());
+            if(((i < 181) && ( i > 0)) && (descfield.getText().length() > 15) && exnamefield.getText().length() > 3){
+                firstScene[0] = exnamefield.getText();
+                firstScene[1] = descfield.getText();
+                firstScene[2] = babystepsfield.getText();
+                firstScene[3] = babystepstimefield.getText();
+                firstScene[4] = timetrackingfield.getText();
+                Stage stage = (Stage) cancelbtn.getScene().getWindow();
+                Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/catalogEditor/EditorLayout2.fxml"));
+                Scene scene2 = new Scene(newScene);
+                stage.setScene(scene2);
+            }else new TDDTDialog("alert", "The data you entered does not match the quality criteria.\n\n" +
+                    "Please buy the full version of this program in order to create shitty exercises!");
+        }else new TDDTDialog("alert", "Babystepstime needs to be numeric.");
     }
 
     /**
@@ -110,8 +129,83 @@ public class CatalogEditor implements Initializable {
     /**
      * Coming soon
      */
-    public void onSubmitButtonPressed() {
+    public void onSubmitButtonPressed() throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
+        TDDTCompiler tc = new TDDTCompiler();
+
+        if((tc.compile(classTextArea.getText(),false,classnamefield.getText())) & tc.compile(testTextArea.getText(),false,testnamefield.getText())) {
+            File dummy = null;
+            FileChooser fc;
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+            int i;
+            switch (i = howToSaveDialog()) {
+                case 0:
+                    fc = new FileChooser();
+                    fc.getExtensionFilters().add(extFilter);
+                    File newfile = dummy = fc.showSaveDialog(submitbtn.getScene().getWindow());
+                    if(newfile != null) saveExercise(0, newfile);
+                    break;
+                case 1:
+                    fc = new FileChooser();
+                    fc.getExtensionFilters().add(extFilter);
+                    File appendfile = dummy = fc.showOpenDialog(submitbtn.getScene().getWindow());
+                    if (appendfile != null) saveExercise(1, appendfile);
+                    break;
+                default:
+                    break;
+
+            }
+            if(i != -1 && dummy != null){
+                new TDDTDialog("alert", "Files have been saved successfully.");
+                ((Stage) cancelbtn.getScene().getWindow()).close();
+            }
+        }else{
+            new TDDTDialog("alert", "The class / test have to be compilable. Please enter at least a class skeleton.");
+        }
+    }
+
+    private void saveExercise(int mode, File file) throws TransformerException, ParserConfigurationException, IOException, SAXException {
+        XMLWriter xmlWriter = new XMLWriter();
+        for (String x: firstScene) {
+            System.out.println(x);
+        }
+        switch(mode){
+            case 0:
+                xmlWriter.newXMLFile(
+                        file, firstScene[0], firstScene[1], classTextArea.getText(), classnamefield.getText(), testTextArea.getText(), testnamefield.getText(), firstScene[2], firstScene[3], firstScene[4]);
+                break;
+            case 1: xmlWriter.appendXMLFile(
+                        file, firstScene[0], firstScene[1], classTextArea.getText(), classnamefield.getText(), testTextArea.getText(), testnamefield.getText(), firstScene[2], firstScene[3], firstScene[4]);
+                break;
+            default:
+        }
+    }
+
+    /**
+     * Shows a dialog, which prompts the user to choose how he wants to save the exercise.
+     * @return 0 == New catalog, 1 == Append a catalog, -1 == cancel or error.
+     */
+    private int howToSaveDialog(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("What is your plan, master?");
+        alert.setHeaderText("Dobby is a free elf, and Dobby has come to save your exercise!");
+        ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("file:pictures/icon.png"));
+        alert.setContentText("Do you want me to save the exercise to an existing catalog, or do you want to create a new one?");
+        ButtonType newCatalog = new ButtonType("Create a new catalog");
+        ButtonType appendCatalog = new ButtonType("Append an existing catalog");
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(newCatalog, appendCatalog, cancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent()) {
+            if (result.get() == newCatalog) {
+                return 0;
+            } else if (result.get() == appendCatalog) {
+                return 1;
+            }
+        }
+        return -1;
     }
 
     /**
