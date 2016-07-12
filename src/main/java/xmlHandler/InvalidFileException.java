@@ -24,7 +24,7 @@ public class InvalidFileException extends RuntimeException {
      * @param message   The message that is shown whenever the Exception is thrown.
      * @param cause     The Exception that is handled.
      */
-    protected InvalidFileException(String message, Exception cause){
+    InvalidFileException(String message, Exception cause){
         super(message,cause);
     }
 }

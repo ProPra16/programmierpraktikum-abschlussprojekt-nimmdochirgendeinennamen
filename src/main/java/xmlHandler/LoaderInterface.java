@@ -20,7 +20,7 @@ import java.io.File;
  * @author Kai Holzinger
  * @version 1.1
  * */
-public interface LoaderInterface {
+interface LoaderInterface {
 
     //load a catalog from an xml file.
     void loadCatalog(File file);
