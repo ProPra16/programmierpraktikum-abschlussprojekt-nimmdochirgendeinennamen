@@ -27,16 +27,24 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * This class tracks the coding behavior of the user. It saves what the user changes and when.
+ * @author Jule Pohlmann
+ * @version unknown
+ */
 public class Tracker {
 
 	public LocalDateTime time;
+	private String oldCode;
+	private String oldTest;
+	private File file;
 
-	String oldCode;
-	String oldTest;
-
-	File file;
-
-	// constructor
+	/**
+	 * The constructor initializes the variables and erases all former information off the file
+	 * the analyse is saved to.
+	 * @param code The initial code which is going to be changed by the user.
+	 * @param test The initial test code which is going to be changed by the user.
+     */
 	public Tracker(String code, String test) {
 		time = LocalDateTime.now();
 		oldCode = code;
@@ -48,10 +56,17 @@ public class Tracker {
 			clear = new FileWriter(file, false);
 			clear.write("");
 			clear.close();
-		} catch (IOException e) {
+		} catch (IOException ignored) {
 		}
 	}
 
+	/**
+	 * <p>If back is true this method adds a String to the tracker output file. Otherwise it calls {@link #dump(String, int)}</p>
+	 * @see #dump(String, int)
+	 * @param now The current state of the code.
+	 * @param phase The current phase the user is in.
+	 * @param back This parameter is true if the user went back into a previous phase.
+     */
 	public void callDump(String now, int phase, boolean back) {
 		time = LocalDateTime.now();
 		String output = time.toString() + "\n";
@@ -59,12 +74,15 @@ public class Tracker {
 			output += dump(now, phase);
 
 		// if user went back from GREEN to RED
-		else if (back) {
+		else {
 			output += "Changed code in GREEN:\nWent back to RED, no changes.\n";
 		}
 		writeToFile(output);
 	}
 
+	/**
+	 * Prints the content of the tracking log into a new Stage.
+	 */
 	public void showOutput() {
 		Text show = new Text(output());
 
@@ -82,6 +100,11 @@ public class Tracker {
 	}
 
 	/* INTERNAL METHODS */
+
+	/**
+	 * Reads the content of the tracking log file into a String
+	 * @return String that contains the tracking log.
+     */
 	private String output() {
 		String output = "";
 
@@ -89,18 +112,25 @@ public class Tracker {
 
 		try {
 			scanner = new Scanner(file);
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException ignored) {
 		}
 
-		while (scanner.hasNextLine()) {
+		while (scanner != null && scanner.hasNextLine()) {
 			output += "\n" + scanner.nextLine();
 		}
-		scanner.close();
+		if (scanner != null) {
+			scanner.close();
+		}
 		return output;
 	}
 
-	// now: current code/test
-	// phase: 0 = RED, 1 = GREEN, 2 = REFACTOR
+	/**
+	 * Saves the difference between the initial and the current code using the {@link #getDiff(String, int)} method
+	 * and changes the initial code to the current code. It then returns the saved difference as a String.
+	 * @param now The current code / test
+	 * @param phase phase: 0 = RED, 1 = GREEN, 2 = REFACTOR
+     * @return A String that contains all the changes that've been done to the initial code.
+     */
 	public String dump(String now, int phase) {
 		// initialise Strings for output
 		String changes = "";
@@ -126,20 +156,28 @@ public class Tracker {
 		}
 
 		// complete output String
-		String output = (phaseChanged + "\n" + changes + "\n");
-		return output;
+		return (phaseChanged + "\n" + changes + "\n");
 	}
 
-	public void writeToFile(String output) {
+	/**
+	 * Writes a String to a file.
+	 * @param output The String that is to be saved to the file.
+     */
+	private void writeToFile(String output) {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
 			out.write(output);
 			out.close();
-		} catch (IOException e) {
+		} catch (IOException ignored) {
 		}
 	}
 
-	// get differences
+	/**
+	 * Gets the difference between the current code and the initial code.
+	 * @param now The current code.
+	 * @param phase The current phase the user is in.
+     * @return A String that contains all differences between the current and the initial code.
+     */
 	private String getDiff(String now, int phase) {
 
 		String old;
@@ -184,8 +222,12 @@ public class Tracker {
 		return different;
 	}
 
+	/**
+	 * Splits a String at every newline character and saves the fragments to a String array.
+	 * @param a The String that is going to be split.
+	 * @return The String Array that contains the fragments.
+     */
 	private static String[] getLines(String a) {
-		String[] splitted = a.split("\n");
-		return splitted;
+		return a.split("\n");
 	}
 }
