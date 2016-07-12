@@ -43,7 +43,7 @@ public class TDDTDialog {
 	 * @param message The dialog message
      */
 	//TODO think about changing it to a static method wrapper class
-	TDDTDialog(String type, String message) {
+	public TDDTDialog(String type, String message) {
 		switch (type){
 			case "alert": 		 showAlert(message);
 								 break;
