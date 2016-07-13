@@ -5,7 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="476.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tddt.Controller">
+<AnchorPane prefHeight="542.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tddt.Controller">
    <children>
       <MenuBar layoutX="175.0" prefHeight="29.0" prefWidth="189.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
@@ -46,6 +46,7 @@
                   <RowConstraints maxHeight="-Infinity" minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="-Infinity" minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="-Infinity" minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Button fx:id="btnNextStep" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#nextPhase" text="Next Step" />
@@ -65,6 +66,7 @@
                         <Image url="/pictures/Refactor_v2.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="lblTimeLeft" text="Time left: " GridPane.rowIndex="5" />
                </children>
             </GridPane>
             <TextArea fx:id="txtCode" disable="true" maxHeight="Infinity" maxWidth="Infinity" text="// code here" GridPane.vgrow="ALWAYS" />
