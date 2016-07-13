@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -56,6 +57,7 @@ public class Controller {
     @FXML private ImageView imgTest;
     @FXML private ImageView imgCode;
     @FXML private ImageView imgRefactor;
+    @FXML private Label lblTimeLeft;
 
     private Backup codeBackup;
 	private Backup testBackup;
@@ -219,6 +221,7 @@ public class Controller {
 	 * Creates a new Thread for babysteps. Checks for changes each second.
 	 */
 	public void turnBabystepsOn() {
+		//TODO proper Thread/Babysteps class with binded lblTimeLeft
 		t = new Thread(() -> {
 			Thread thisThread = Thread.currentThread();
 			while (t == thisThread) {
@@ -291,14 +294,14 @@ public class Controller {
 		// try to compile and run tests
 		boolean passed = compiler.compileCode(code, testname);
 		if (!passed) {
-			//compile failed
+			//on compile failed
 			new TDDTDialog("compileError", compiler.getInfo());
 			return true;
 		} else {
-			//compile succeeded
+			//on compile succeeded
 			passed = compiler.compileAndRunTests(code, testname);
 			if (!passed) {
-				//tests failed
+				//on tests failed
 				new TDDTDialog("testFail", compiler.getInfo());
 				return false;
 			}
