@@ -1,4 +1,4 @@
-package main.java.tddt;
+package tddt;
 /*
  * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
  *

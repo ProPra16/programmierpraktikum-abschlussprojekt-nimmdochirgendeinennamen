@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.xmlHandler;
+package tddt.catalog.xmlhandler;
 
 /** This is a subclass of RuntimeException. It's used for Exceptions that occur while using the xmlHandler.
  * @author Kai Holzinger

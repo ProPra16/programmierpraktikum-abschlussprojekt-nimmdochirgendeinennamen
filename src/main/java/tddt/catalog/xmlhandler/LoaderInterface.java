@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.xmlHandler;
+package tddt.catalog.xmlhandler;
 
 import java.io.File;
 /**This is the interface for the XML Loader.

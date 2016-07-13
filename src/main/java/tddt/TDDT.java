@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.tddt;
+package tddt;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -33,12 +33,11 @@ public class TDDT extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/main/java/tddt/layout_v1.fxml"));
-			Parent root = fxmlLoader.load();
+			Parent root = FXMLLoader.load(getClass().getResource("/FXML_layouts/TDDTLayout.fxml"));
 			Scene scene = new Scene(root, 800, 500);
 
 			primaryStage.setScene(scene);
-			primaryStage.getIcons().add(new Image("file:pictures/icon.png"));
+			primaryStage.getIcons().add(new Image("/pictures/icon.png"));
 			primaryStage.setTitle("TDDT Client - Main");
 			primaryStage.show();
 		} catch (Exception e) {

@@ -1,4 +1,4 @@
-package test.java.tddt;
+package tddt;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,18 +6,16 @@ import java.io.File;
 
 import org.junit.Ignore;
 import org.junit.Test;
-
-import main.java.tddt.TDDTTask;
 @Ignore
 @SuppressWarnings("deprecation")
 public class TDDTTaskTest {
 
 	//TODO find a way to split dependencies...
-	//TDDTFileReaderTest is basically just a wrapper...is necessary?
+	//TDDTFileReaderTest is basically just a wrapper...is splitting necessary?
 
 	@Test
 	public void basicTask() {
-		File file = new File("src/test/java/testResources/basicTask.txt");
+		File file = new File("src/test/resources/basicTask.txt");
 		TDDTTask task = new TDDTTask(file);
 		String expectedCode = (
 			  "public class Task1 {\n"
@@ -45,7 +43,7 @@ public class TDDTTaskTest {
 
 	@Test
 	public void minimalisticTask() {
-		File file = new File("src/test/java/testResources/minimalisticTask.txt");
+		File file = new File("src/test/resources/minimalisticTask.txt");
 		TDDTTask task = new TDDTTask(file);
 		assertEquals("Dis is\n", task.getCode());
 		assertEquals("task\n", task.getTest());
@@ -53,7 +51,7 @@ public class TDDTTaskTest {
 
 	@Test
 	public void noContentTask() {
-		File file = new File("src/test/java/testResources/noContentTask.txt");
+		File file = new File("src/test/resources/noContentTask.txt");
 		TDDTTask task = new TDDTTask(file);
 		assertEquals(null, task.getCode());
 		assertEquals(null, task.getTest());
@@ -61,7 +59,7 @@ public class TDDTTaskTest {
 
 	@Test
 	public void notATask_missingTaskBorder() {
-		File file = new File("src/test/java/testResources/notATask_missingTaskBorder.txt");
+		File file = new File("src/test/resources/notATask_missingTaskBorder.txt");
 		TDDTTask task = new TDDTTask(file);
 		assertEquals(null, task.getCode());
 		assertEquals(null, task.getTest());
@@ -69,7 +67,7 @@ public class TDDTTaskTest {
 
 	@Test
 	public void notATask_havingTwoTaskBorders() {
-		File file = new File("src/test/java/testResources/notATask_havingTwoTaskBorders.txt");
+		File file = new File("src/test/resources/notATask_havingTwoTaskBorders.txt");
 		TDDTTask task = new TDDTTask(file);
 		assertEquals(null, task.getCode());
 		assertEquals(null, task.getCode());

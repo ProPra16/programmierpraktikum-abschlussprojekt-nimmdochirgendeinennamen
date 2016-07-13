@@ -1,28 +1,36 @@
-package main.java.catalogEditor;
+package tddt.catalog.editor;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import main.java.tddt.TDDTCompiler;
-import main.java.tddt.TDDTDialog;
-import main.java.xmlHandler.XMLWriter;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import tddt.TDDTCompiler;
+import tddt.TDDTDialog;
+import tddt.catalog.xmlhandler.XMLWriter;
 
 
 /**
@@ -85,14 +93,14 @@ public class CatalogEditor implements Initializable {
      * @throws IOException If the FXML file is corrupt...
      */
     public void showStage(Stage stage) throws IOException {
-        Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/catalogEditor/EditorLayout1.fxml"));
+        Parent newScene = FXMLLoader.load(getClass().getResource("/FXML_layouts/CatalogEditorLayout1.fxml"));
         Scene toExerciseChooser = new Scene(newScene);
         Stage catalog_stage = new Stage();
         catalog_stage.initModality(Modality.WINDOW_MODAL);
         catalog_stage.initOwner(stage);
         catalog_stage.setScene(toExerciseChooser);
         catalog_stage.setTitle("TDDT Client - Catalog Editor");
-        catalog_stage.getIcons().add(new Image("file:pictures/icon.png"));
+        catalog_stage.getIcons().add(new Image(getClass().getResource("/pictures/icon.png").toString()));
         catalog_stage.setResizable(false);
         catalog_stage.showAndWait();
     }
@@ -104,14 +112,14 @@ public class CatalogEditor implements Initializable {
     public void onNextButton1Pressed() throws IOException {
         if(babystepstimefield.getText().chars().allMatch( Character::isDigit )) {
             int i = Integer.parseInt(babystepstimefield.getText());
-            if(((i < 181) && ( i > 0)) && (descfield.getText().length() > 15) && exnamefield.getText().length() > 3){
+            if(((i < 181) && ( i > 0)) && (descfield.getText().length() > 8) && exnamefield.getText().length() > 3){
                 firstScene[0] = exnamefield.getText();
                 firstScene[1] = descfield.getText();
                 firstScene[2] = babystepsfield.getText();
                 firstScene[3] = babystepstimefield.getText();
                 firstScene[4] = timetrackingfield.getText();
                 Stage stage = (Stage) cancelbtn.getScene().getWindow();
-                Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/catalogEditor/EditorLayout2.fxml"));
+                Parent newScene = FXMLLoader.load(getClass().getResource("/FXML_layouts/CatalogEditorLayout2.fxml"));
                 Scene scene2 = new Scene(newScene);
                 stage.setScene(scene2);
             }else new TDDTDialog("alert", "The data you entered does not match the quality criteria.\n\n" +

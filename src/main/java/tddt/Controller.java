@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.tddt;
+package tddt;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,14 +23,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import main.java.backup.Backup;
-import main.java.catalogEditor.CatalogEditor;
-import main.java.chart.TrackingChart;
-import main.java.exerciseChooser.ExerciseChooser;
-import main.java.tracker.ChartTracker;
-import main.java.tracker.Tracker;
-import main.java.xmlHandler.InvalidFileException;
-import main.java.xmlHandler.XMLLoader;
+import tddt.backup.Backup;
+import tddt.catalog.editor.CatalogEditor;
+import tddt.catalog.exercisechooser.ExerciseChooser;
+import tddt.catalog.xmlhandler.InvalidFileException;
+import tddt.catalog.xmlhandler.XMLLoader;
+import tddt.chart.TrackingChart;
+import tddt.tracker.ChartTracker;
+import tddt.tracker.Tracker;
 
 /**
  * This is the controller class for the main stage.
@@ -78,13 +78,13 @@ public class Controller {
      */
 	@FXML
 	public void initialize() {
-		phase = new Phase(0, 2, 1);
-		compiler = new TDDTCompiler();
+		phase      = new Phase(0, 2, 1);
+		compiler   = new TDDTCompiler();
 		codeBackup = new Backup();
 		testBackup = new Backup();
+		babysteps  = new Babysteps();
 		txtTest.setEditable(false);
 		btnNextStep.setDisable(true);
-		babysteps = new Babysteps();
 	}
 
 
@@ -102,9 +102,9 @@ public class Controller {
         String[] x = exercisechooser.showStage((Stage) txtCode.getScene().getWindow());
         if (x[0] != null) {
             try {
-                File file = new File(x[0]);
+                File file   = new File(x[0]);
                 exerciseIDX = Integer.parseInt(x[1]);
-                xmlLoader = new XMLLoader(file);
+                xmlLoader   = new XMLLoader(file);
                 txtCode.setText(xmlLoader.getClass(exerciseIDX, 0));
                 txtTest.setText(xmlLoader.getTest(exerciseIDX, 0));
                 txtTest.setEditable(true);
@@ -229,15 +229,18 @@ public class Controller {
         boolean passed = false;
         int currentPhase = phase.get();
 
+        //compile
         if (currentPhase == 0) {
             passed = checkTest();
         } else if (currentPhase == 1 | currentPhase == 2) {
             passed = checkCodeAndTest();
         }
 
+        //actions if compiled properly and tests run
         if (passed) {
             currentPhase = phase.get();
             chartTracker.nextPhase(currentPhase);
+            //TODO include branching to tracker
             if (currentPhase == 0) {
                 testBackup.setNewBackup(txtTest.getText());
                 tracker.callDump(txtTest.getText(), 0, false);
@@ -289,9 +292,9 @@ public class Controller {
      * @return True if code and test are compilable
      */
 	private boolean checkCodeAndTest() {
-		String code = txtCode.getText();
+		String code      = txtCode.getText();
 		String classname = xmlLoader.getClassName(exerciseIDX, 0);
-        String testname = xmlLoader.getTestName(exerciseIDX,0);
+        String testname  = xmlLoader.getTestName(exerciseIDX,0);
 		// check if compilable
 		if (!checkIfCompilableClass(code))
 			return false;

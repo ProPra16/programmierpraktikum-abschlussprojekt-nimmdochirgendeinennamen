@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.exerciseChooser;
+package tddt.catalog.exercisechooser;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,9 +33,10 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import main.java.tddt.TDDTDialog;
-import main.java.xmlHandler.InvalidFileException;
-import main.java.xmlHandler.XMLLoader;
+import tddt.TDDT;
+import tddt.TDDTDialog;
+import tddt.catalog.xmlhandler.InvalidFileException;
+import tddt.catalog.xmlhandler.XMLLoader;
 
 /**
  * This class opens a new window which allows the user to load catalogs and choose exercises out of those catalogs.
@@ -133,14 +134,14 @@ public class ExerciseChooser implements Initializable{
      * @throws IOException
      */
     public String[] showStage(Stage stage) throws IOException {
-        Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/exerciseChooser/ExerciseChooserLayout.fxml"));
+        Parent newScene = FXMLLoader.load(getClass().getResource("/FXML_layouts/ExerciseChooserLayout.fxml"));
         Scene toExerciseChooser = new Scene(newScene);
         Stage catalog_stage = new Stage();
         catalog_stage.initModality(Modality.WINDOW_MODAL);
         catalog_stage.initOwner(stage);
         catalog_stage.setScene(toExerciseChooser);
         catalog_stage.setTitle("TDDT Client - Exercise Chooser");
-        catalog_stage.getIcons().add(new Image("file:pictures/icon.png"));
+        catalog_stage.getIcons().add(new Image(getClass().getResource("/pictures/icon.png").toString()));
         catalog_stage.setResizable(false);
         catalog_stage.showAndWait();
         return values;

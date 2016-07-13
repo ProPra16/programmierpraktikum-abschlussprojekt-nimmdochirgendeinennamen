@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.catalogEditor.CatalogEditor">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tddt.catalog.editor.CatalogEditor">
    <children>
       <Text layoutX="293.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new exercise" wrappingWidth="214.13671875">
          <font>
