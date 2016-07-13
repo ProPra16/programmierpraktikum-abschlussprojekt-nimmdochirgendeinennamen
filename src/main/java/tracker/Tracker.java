@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 /**
  * This class tracks the coding behavior of the user. It saves what the user changes and when.
  * @author Jule Pohlmann
+ * @author Caro Jachmann
  * @version unknown
  */
 public class Tracker {
