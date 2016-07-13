@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import tddt.chart.TrackingChart;
+
 
 public class ChartTests {
 

@@ -1,4 +1,4 @@
-package catalogEditor;
+package tddt.catalog.editor;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tddt.TDDTCompiler;
 import tddt.TDDTDialog;
-import xmlHandler.XMLWriter;
+import tddt.catalog.xmlhandler.XMLWriter;
 
 
 /**

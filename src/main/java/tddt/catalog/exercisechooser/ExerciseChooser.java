@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package exerciseChooser;
+package tddt.catalog.exercisechooser;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,8 +34,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tddt.TDDTDialog;
-import xmlHandler.InvalidFileException;
-import xmlHandler.XMLLoader;
+import tddt.catalog.xmlhandler.InvalidFileException;
+import tddt.catalog.xmlhandler.XMLLoader;
 
 /**
  * This class opens a new window which allows the user to load catalogs and choose exercises out of those catalogs.

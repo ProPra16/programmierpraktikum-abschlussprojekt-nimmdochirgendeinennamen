@@ -25,6 +25,9 @@ import javax.xml.transform.TransformerException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import tddt.catalog.xmlhandler.XMLLoader;
+import tddt.catalog.xmlhandler.XMLWriter;
+
 public class WriterTest {
 
 

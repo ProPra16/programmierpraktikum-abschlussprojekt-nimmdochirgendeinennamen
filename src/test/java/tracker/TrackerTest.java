@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import tddt.tracker.Tracker;
+
 public class TrackerTest {
 	// callDump is not tested since LocalTime is too exact (but was tested
 	// manually).

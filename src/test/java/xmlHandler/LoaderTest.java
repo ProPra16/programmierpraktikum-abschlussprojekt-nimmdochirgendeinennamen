@@ -20,6 +20,9 @@ import java.io.File;
 
 import org.junit.Test;
 
+import tddt.catalog.xmlhandler.InvalidFileException;
+import tddt.catalog.xmlhandler.XMLLoader;
+
 public class LoaderTest {
     XMLLoader testLoader = new XMLLoader(new File("src/main/java/xmlHandler/catalog.xml"));
 

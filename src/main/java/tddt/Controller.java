@@ -17,20 +17,20 @@ package tddt;
 import java.io.File;
 import java.io.IOException;
 
-import backup.Backup;
-import catalogEditor.CatalogEditor;
-import chart.TrackingChart;
-import exerciseChooser.ExerciseChooser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import tracker.ChartTracker;
-import tracker.Tracker;
-import xmlHandler.InvalidFileException;
-import xmlHandler.XMLLoader;
+import tddt.backup.Backup;
+import tddt.catalog.editor.CatalogEditor;
+import tddt.catalog.exercisechooser.ExerciseChooser;
+import tddt.catalog.xmlhandler.InvalidFileException;
+import tddt.catalog.xmlhandler.XMLLoader;
+import tddt.chart.TrackingChart;
+import tddt.tracker.ChartTracker;
+import tddt.tracker.Tracker;
 
 /**
  * This is the controller class for the main stage.
