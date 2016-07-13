@@ -1,4 +1,4 @@
-package tracker;
+package tddt.tracker;
 
 import static org.junit.Assert.assertEquals;
 

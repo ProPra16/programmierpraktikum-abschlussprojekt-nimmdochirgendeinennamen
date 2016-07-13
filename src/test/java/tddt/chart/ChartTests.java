@@ -1,4 +1,4 @@
-package chart;
+package tddt.chart;
 
 import static org.junit.Assert.assertEquals;
 
