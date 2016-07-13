@@ -33,6 +33,7 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import tddt.TDDT;
 import tddt.TDDTDialog;
 import tddt.catalog.xmlhandler.InvalidFileException;
 import tddt.catalog.xmlhandler.XMLLoader;
@@ -133,7 +134,8 @@ public class ExerciseChooser implements Initializable{
      * @throws IOException
      */
     public String[] showStage(Stage stage) throws IOException {
-        Parent newScene = FXMLLoader.load(getClass().getResource("/exerciseChooser/ExerciseChooserLayout.fxml"));
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML_layouts/ExerciseChooserLayout.fxml"));
+		Parent newScene = fxmlLoader.load();
         Scene toExerciseChooser = new Scene(newScene);
         Stage catalog_stage = new Stage();
         catalog_stage.initModality(Modality.WINDOW_MODAL);

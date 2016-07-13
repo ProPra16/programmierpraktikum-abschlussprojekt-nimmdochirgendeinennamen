@@ -33,12 +33,12 @@ public class TDDT extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/tddt/layout_v1.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML_layouts/TDDTLayout.fxml"));
 			Parent root = fxmlLoader.load();
 			Scene scene = new Scene(root, 800, 500);
 
 			primaryStage.setScene(scene);
-			primaryStage.getIcons().add(new Image("file:src/main/ressources/icon.png"));
+			primaryStage.getIcons().add(new Image("/pictures/icon.png"));
 			primaryStage.setTitle("TDDT Client - Main");
 			primaryStage.show();
 		} catch (Exception e) {

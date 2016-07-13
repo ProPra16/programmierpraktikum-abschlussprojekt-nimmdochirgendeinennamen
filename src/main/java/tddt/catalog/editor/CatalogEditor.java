@@ -93,7 +93,7 @@ public class CatalogEditor implements Initializable {
      * @throws IOException If the FXML file is corrupt...
      */
     public void showStage(Stage stage) throws IOException {
-        Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/catalogEditor/EditorLayout1.fxml"));
+        Parent newScene = FXMLLoader.load(getClass().getResource("/FXML_layouts/CatalogEditorLayout1.fxml"));
         Scene toExerciseChooser = new Scene(newScene);
         Stage catalog_stage = new Stage();
         catalog_stage.initModality(Modality.WINDOW_MODAL);
@@ -119,7 +119,7 @@ public class CatalogEditor implements Initializable {
                 firstScene[3] = babystepstimefield.getText();
                 firstScene[4] = timetrackingfield.getText();
                 Stage stage = (Stage) cancelbtn.getScene().getWindow();
-                Parent newScene = FXMLLoader.load(getClass().getResource("/main/java/catalogEditor/EditorLayout2.fxml"));
+                Parent newScene = FXMLLoader.load(getClass().getResource("/FXML_layouts/CatalogEditorLayout2.fxml"));
                 Scene scene2 = new Scene(newScene);
                 stage.setScene(scene2);
             }else new TDDTDialog("alert", "The data you entered does not match the quality criteria.\n\n" +
