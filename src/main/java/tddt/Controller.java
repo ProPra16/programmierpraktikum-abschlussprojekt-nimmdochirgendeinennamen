@@ -16,8 +16,11 @@ package tddt;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -37,7 +40,7 @@ import tddt.tracker.Tracker;
  * @author Dominik Kuhnen
  * @version unknown
  */
-public class Controller {
+public class Controller implements Initializable{
     // TODO thinking about ExceptionHandler for Dialogspawning and way smaller
     // TODO String backup Wrapper, used for GUI-flow and Babysteps aswell.
     // TODO proper Thead killing/interrupting on javafx stage close
@@ -72,19 +75,19 @@ public class Controller {
 
     private static int exerciseIDX;
 
-
     /**
      * This method initializes some objects and disables the test textarea and the next step button.
      */
-	@FXML
-	public void initialize() {
-		phase      = new Phase(0, 2, 1);
-		compiler   = new TDDTCompiler();
-		codeBackup = new Backup();
-		testBackup = new Backup();
-		babysteps  = new Babysteps();
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+		phase       = new Phase(0, 2, 1);
+		compiler    = new TDDTCompiler();
+		codeBackup  = new Backup();
+		testBackup  = new Backup();
+        babysteps   = new Babysteps();
 		txtTest.setEditable(false);
 		btnNextStep.setDisable(true);
+        babystpsOffBtn.setDisable(true);
 	}
 
 
@@ -134,9 +137,12 @@ public class Controller {
      */
 	@FXML
 	public void turnBabystepsOn() {
-		t = new Thread(() -> {
-            try {
-                while (!Thread.currentThread().isInterrupted()) {
+        babystpsOnBtn.setDisable(true);
+        babystpsOffBtn.setDisable(false);
+        t = new Thread(() -> {
+            Thread thisThread = Thread.currentThread();
+            while (t == thisThread) {
+                try {
                     Thread.sleep(1000);
                     if (babysteps.isEnabled() && !babysteps.timeLeft() && phase.get() != 2) {
                         if (phase.get() == 0)
@@ -146,22 +152,32 @@ public class Controller {
                         prevPhase();
                         babysteps.startPhase();
                     }
+                } catch (InterruptedException e) {
+                    stop();
                 }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
             }
         });
-		t.start();
-		babysteps.enable();
+
+        (txtCode.getScene().getWindow()).setOnCloseRequest(we -> stop());
+
+        t.start();
+        babysteps.enable();
 	}
+
+    private void stop(){
+        Thread.currentThread().interrupt();
+        t = null;
+    }
 
     /**
      * Interrupts the babysteps thread and sets babysteps to disabled.
      */
 	@FXML
 	public void turnBabystepsOff() {
+        babystpsOnBtn.setDisable(false);
+        babystpsOffBtn.setDisable(true);
 		if (babysteps.isEnabled()) {
-			t.interrupt();
+			stop();
 		}
 		babysteps.disable();
 	}
@@ -292,9 +308,9 @@ public class Controller {
      * @return True if code and test are compilable
      */
 	private boolean checkCodeAndTest() {
-		String code      = txtCode.getText();
-		String classname = xmlLoader.getClassName(exerciseIDX, 0);
-        String testname  = xmlLoader.getTestName(exerciseIDX,0);
+		String code         = txtCode.getText();
+		String classname    = xmlLoader.getClassName(exerciseIDX, 0);
+        String testname     = xmlLoader.getTestName(exerciseIDX,0);
 		// check if compilable
 		if (!checkIfCompilableClass(code))
 			return false;
