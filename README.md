@@ -7,12 +7,20 @@ A very basic TDDT Trainer (Test-Driven Development) forcing code novices to stri
 
 ## Installation
 
-Clone this repository and use gradle to build and run.
-
+To download this program, clone this repository
 ```shell
 git clone https://github.com/ProPra16/programmierpraktikum-abschlussprojekt-nimmdochirgendeinennamen.git
-gradle build
+```
+
+To run it, use the gradle task "run"
+```shell
 gradle run
+```
+
+To setup a IDE project for eclipse or idea, use the associated gradle tasks
+```shell
+gradle eclipse
+gradle idea
 ```
 
 ## Features
