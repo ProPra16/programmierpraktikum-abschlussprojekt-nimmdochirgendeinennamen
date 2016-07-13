@@ -279,8 +279,8 @@ public class Controller {
 				/*INTERNAL METHODS*/
 
     /**
-     * Checks if the test is compilable.
-     * @return True if test is compilable. Otherwise false.
+     * Checks if the test is compilable and is failing.
+     * @return True if test is compilable and is failing. Otherwise false.
      */
 	private boolean checkTest() {
 		String code = txtTest.getText();
@@ -289,7 +289,20 @@ public class Controller {
 		if (!checkIfCompilableClass(code))
 			return false;
 		// try to compile and run tests
-		compiler.compile(code, true, testname);
+		boolean passed = compiler.compileCode(code, testname);
+		if (!passed) {
+			//compile failed
+			new TDDTDialog("compileError", compiler.getInfo());
+			return true;
+		} else {
+			//compile succeeded
+			passed = compiler.compileAndRunTests(code, testname);
+			if (!passed) {
+				//tests failed
+				new TDDTDialog("testFail", compiler.getInfo());
+				return false;
+			}
+		}
 		// settings for next phase
 		btnPrevStep.setDisable(false);
 		babysteps.startPhase();
@@ -307,13 +320,13 @@ public class Controller {
 		if (!checkIfCompilableClass(code))
 			return false;
 		// try to compile code
-		boolean passed = compiler.compile(txtCode.getText(), false, classname);
+		boolean passed = compiler.compileCode(txtCode.getText(), classname);
 		if (!passed) {
 			new TDDTDialog("compileError", compiler.getInfo());
 			return false;
 		}
 		// try to compile and run tests
-		passed = compiler.compile(txtTest.getText(), true, testname);
+		passed = compiler.compileAndRunTests(txtTest.getText(), testname);
 		// display in Dialog if failed
 		if (!passed) {
 			new TDDTDialog("testFail", compiler.getInfo());

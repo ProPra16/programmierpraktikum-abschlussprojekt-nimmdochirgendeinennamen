@@ -22,7 +22,7 @@ public class TDDTCompilerTest {
                         + ""
                         + "}"
         );
-        passed = compiler.compile(code, false, "simpleCompile");
+        passed = compiler.compileCode(code, "simpleCompile");
         assertEquals(true, passed);
     }
 
@@ -64,7 +64,7 @@ public class TDDTCompilerTest {
                         +"	}\n"
                         +"}"
         );
-        passed = compiler.compile(code, false, "Problem12");
+        passed = compiler.compileCode(code, "Problem12");
         assertEquals(true, passed);
     }
 
@@ -75,7 +75,7 @@ public class TDDTCompilerTest {
                         + ""
                         + "}"
         );
-        passed = compiler.compile(code, false,"simpleCompile");
+        passed = compiler.compileCode(code, "simpleCompile");
         assertEquals(false, passed);
     }
 
@@ -86,7 +86,7 @@ public class TDDTCompilerTest {
                         + "int i == 1;"
                         + "}"
         );
-        passed = compiler.compile(code, false, "simpleCompile");
+        passed = compiler.compileCode(code, "simpleCompile");
         assertEquals(false, passed);
     }
 
@@ -96,7 +96,7 @@ public class TDDTCompilerTest {
                 "public simpleCompile {\n"
                         + "int i = 1;"
         );
-        passed = compiler.compile(code, false, "simpleCompile");
+        passed = compiler.compileCode(code, "simpleCompile");
         assertEquals(false, passed);
     }
 
@@ -109,7 +109,7 @@ public class TDDTCompilerTest {
                         + "   }\n"
                         + "}"
         );
-        passed = compiler.compile(code, false, "simpleCompile");
+        passed = compiler.compileCode(code, "simpleCompile");
         assertEquals(false, passed);
     }
 

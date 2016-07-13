@@ -141,7 +141,7 @@ public class CatalogEditor implements Initializable {
 
         TDDTCompiler tc = new TDDTCompiler();
 
-        if((tc.compile(classTextArea.getText(),false,classnamefield.getText())) & tc.compile(testTextArea.getText(),false,testnamefield.getText())) {
+        if((tc.compileCode(classTextArea.getText(),classnamefield.getText())) & tc.compileCode(testTextArea.getText(),testnamefield.getText())) {
             File dummy = null;
             FileChooser fc;
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");

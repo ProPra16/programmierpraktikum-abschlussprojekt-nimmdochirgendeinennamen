@@ -34,20 +34,6 @@ public class TDDTCompiler {
 	private String info;
 
 	/**
-	 * Tests if code is compilable.
-	 * @param code The compiled code
-	 * @param isTest Boolean 'hint' if the code is a test or not.
-	 * @param classname The classname of the code.
-     * @return	True if the code is compilable.
-     */
-	public boolean compile(String code, boolean isTest, String classname) {
-		if (isTest)
-			return compileAndRunTests(code, classname);
-		else
-			return compileCode(code, classname);
-	}
-
-	/**
 	 * @return Compile errors.
      */
 	public String getInfo() {
@@ -60,7 +46,7 @@ public class TDDTCompiler {
 	 * @param className The classname of the code
      * @return True if the code is compilable. Otherwise false.
      */
-	private boolean compileCode(String code, String className) {
+	public boolean compileCode(String code, String className) {
 		//String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, false);
 		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
@@ -82,7 +68,7 @@ public class TDDTCompiler {
 	 * @param className The classname of the code
      * @return True if the test is compile- and runnable. Otherwise false.
      */
-	private boolean compileAndRunTests(String code, String className) {
+	public boolean compileAndRunTests(String code, String className) {
 		//String className       = findClassName(code).trim();
 		CompilationUnit cu     = new CompilationUnit(className, code, true);
 		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
