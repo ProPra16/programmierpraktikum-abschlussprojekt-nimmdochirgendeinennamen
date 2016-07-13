@@ -142,7 +142,7 @@ public class ExerciseChooser implements Initializable{
         catalog_stage.initOwner(stage);
         catalog_stage.setScene(toExerciseChooser);
         catalog_stage.setTitle("TDDT Client - Exercise Chooser");
-        catalog_stage.getIcons().add(new Image("file:pictures/icon.png"));
+        catalog_stage.getIcons().add(new Image(getClass().getResource("/pictures/icon.png").toString()));
         catalog_stage.setResizable(false);
         catalog_stage.showAndWait();
         return values;
