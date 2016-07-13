@@ -24,7 +24,7 @@ import tddt.catalog.xmlhandler.InvalidFileException;
 import tddt.catalog.xmlhandler.XMLLoader;
 
 public class LoaderTest {
-    XMLLoader testLoader = new XMLLoader(new File("src/test/java/testResources/catalog.xml"));
+    XMLLoader testLoader = new XMLLoader(new File("src/test/resources/catalog.xml"));
 
     @Test
     public void testBabysteps() {

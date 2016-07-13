@@ -60,17 +60,17 @@
                   <Button fx:id="btnPrevStep" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#prevPhase" text="Previous Step" GridPane.rowIndex="1" />
                   <ImageView fx:id="imgTest" cache="true" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../resources/WriteFailingTest_v2.png" />
+                        <Image url="/pictures/WriteFailingTest_v2.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imgCode" fitHeight="120.0" fitWidth="120.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../resources/MakeTestPass_v2.png" />
+                        <Image url="/pictures/MakeTestPass_v2.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imgRefactor" fitHeight="120.0" fitWidth="120.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../resources/Refactor_v2.png" />
+                        <Image url="/pictures/Refactor_v2.png" />
                      </image>
                   </ImageView>
                </children>

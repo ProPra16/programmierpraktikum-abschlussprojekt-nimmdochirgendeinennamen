@@ -37,8 +37,8 @@ public class WriterTest {
     @Test
     public void testappend() {
         try {
-            w.appendXMLFile(new File("src/test/java/testResources/catalog.xml") ,"exercisename", "description", "class", "classname", "test", "testname", "true", "50", "true");
-            l = new XMLLoader(new File("src/test/java/testResources/catalog.xml"));
+            w.appendXMLFile(new File("src/test/resources/catalog.xml") ,"exercisename", "description", "class", "classname", "test", "testname", "true", "50", "true");
+            l = new XMLLoader(new File("src/test/resources/catalog.xml"));
             String exercisename = l.getExerciseName(l.getNumberOfExercises()-1);
             assertEquals("Must be exercisename", "exercisename", exercisename);
         } catch (IOException | SAXException | ParserConfigurationException | TransformerException e) {
@@ -49,8 +49,8 @@ public class WriterTest {
     @Test
     public void testNew() {
         try {
-            w.newXMLFile(new File("src/test/java/testResources/tests.xml") ,"exercisename", "description", "class", "classname", "test", "testname", "true", "50", "true");
-            l = new XMLLoader(new File("src/test/java/testResources/tests.xml"));
+            w.newXMLFile(new File("src/test/resources/tests.xml") ,"exercisename", "description", "class", "classname", "test", "testname", "true", "50", "true");
+            l = new XMLLoader(new File("src/test/resources/tests.xml"));
             String exercisename = l.getExerciseName(l.getNumberOfExercises()-1);
             assertEquals("Must be exercisename", "exercisename", exercisename);
         } catch (ParserConfigurationException | TransformerException e) {

@@ -33,8 +33,7 @@ public class TDDT extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML_layouts/TDDTLayout.fxml"));
-			Parent root = fxmlLoader.load();
+			Parent root = FXMLLoader.load(getClass().getResource("/FXML_layouts/TDDTLayout.fxml"));
 			Scene scene = new Scene(root, 800, 500);
 
 			primaryStage.setScene(scene);

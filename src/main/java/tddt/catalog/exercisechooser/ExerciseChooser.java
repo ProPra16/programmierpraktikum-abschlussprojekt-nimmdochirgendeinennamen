@@ -134,15 +134,14 @@ public class ExerciseChooser implements Initializable{
      * @throws IOException
      */
     public String[] showStage(Stage stage) throws IOException {
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML_layouts/ExerciseChooserLayout.fxml"));
-		Parent newScene = fxmlLoader.load();
+        Parent newScene = FXMLLoader.load(getClass().getResource("/FXML_layouts/ExerciseChooserLayout.fxml"));
         Scene toExerciseChooser = new Scene(newScene);
         Stage catalog_stage = new Stage();
         catalog_stage.initModality(Modality.WINDOW_MODAL);
         catalog_stage.initOwner(stage);
         catalog_stage.setScene(toExerciseChooser);
         catalog_stage.setTitle("TDDT Client - Exercise Chooser");
-        catalog_stage.getIcons().add(new Image("file:pictures/icon.png"));
+        catalog_stage.getIcons().add(new Image(getClass().getResource("/pictures/icon.png").toString()));
         catalog_stage.setResizable(false);
         catalog_stage.showAndWait();
         return values;

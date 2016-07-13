@@ -100,7 +100,7 @@ public class CatalogEditor implements Initializable {
         catalog_stage.initOwner(stage);
         catalog_stage.setScene(toExerciseChooser);
         catalog_stage.setTitle("TDDT Client - Catalog Editor");
-        catalog_stage.getIcons().add(new Image("file:pictures/icon.png"));
+        catalog_stage.getIcons().add(new Image(getClass().getResource("/pictures/icon.png").toString()));
         catalog_stage.setResizable(false);
         catalog_stage.showAndWait();
     }
@@ -112,7 +112,7 @@ public class CatalogEditor implements Initializable {
     public void onNextButton1Pressed() throws IOException {
         if(babystepstimefield.getText().chars().allMatch( Character::isDigit )) {
             int i = Integer.parseInt(babystepstimefield.getText());
-            if(((i < 181) && ( i > 0)) && (descfield.getText().length() > 15) && exnamefield.getText().length() > 3){
+            if(((i < 181) && ( i > 0)) && (descfield.getText().length() > 8) && exnamefield.getText().length() > 3){
                 firstScene[0] = exnamefield.getText();
                 firstScene[1] = descfield.getText();
                 firstScene[2] = babystepsfield.getText();
