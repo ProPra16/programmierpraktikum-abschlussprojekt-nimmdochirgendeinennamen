@@ -33,7 +33,6 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import tddt.TDDT;
 import tddt.TDDTDialog;
 import tddt.catalog.xmlhandler.InvalidFileException;
 import tddt.catalog.xmlhandler.XMLLoader;

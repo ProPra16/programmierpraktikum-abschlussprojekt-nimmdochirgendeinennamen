@@ -16,13 +16,9 @@ package tddt;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -40,7 +36,7 @@ import tddt.tracker.Tracker;
  * @author Dominik Kuhnen
  * @version unknown
  */
-public class Controller implements Initializable{
+public class Controller {
     // TODO thinking about ExceptionHandler for Dialogspawning and way smaller
     // TODO String backup Wrapper, used for GUI-flow and Babysteps aswell.
     // TODO proper Thead killing/interrupting on javafx stage close
@@ -53,8 +49,6 @@ public class Controller implements Initializable{
 	 * not sure if this will include the "X"-Button in the upper right corner...probably tho
 	 **/
 
-    @FXML public MenuItem babystpsOnBtn;
-    @FXML public MenuItem babystpsOffBtn;
     @FXML public TextArea txtCode;
     @FXML public TextArea txtTest;
     @FXML private Button btnNextStep;
@@ -78,8 +72,8 @@ public class Controller implements Initializable{
     /**
      * This method initializes some objects and disables the test textarea and the next step button.
      */
-    @Override
-	public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+	public void initialize() {
 		phase       = new Phase(0, 2, 1);
 		compiler    = new TDDTCompiler();
 		codeBackup  = new Backup();
@@ -87,9 +81,60 @@ public class Controller implements Initializable{
         babysteps   = new Babysteps();
 		txtTest.setEditable(false);
 		btnNextStep.setDisable(true);
-        babystpsOffBtn.setDisable(true);
 	}
 
+
+    									/*PHASE LOGIC*/
+
+	/**
+	 * This method switches the program into the next TDD phase if the entered
+	 * code meets the requirements. Each time the Phase is switched a new backup
+	 * and a new tracker dump is created.
+	 */
+	@FXML
+	public void nextPhase() {
+		boolean passed = false;
+		int currentPhase = phase.get();
+
+		// compile
+		if (currentPhase == 0) {
+			passed = checkTest();
+		} else if (currentPhase == 1 | currentPhase == 2) {
+			passed = checkCodeAndTest();
+		}
+
+		// actions if compiled properly and tests run
+		if (passed) {
+			currentPhase = phase.get();
+			chartTracker.nextPhase(currentPhase);
+			// TODO include branching to tracker
+			if (currentPhase == 0) {
+				testBackup.setNewBackup(txtTest.getText());
+				tracker.callDump(txtTest.getText(), 0, false);
+			} else {
+				codeBackup.setNewBackup(txtCode.getText());
+				tracker.callDump(txtCode.getText(), currentPhase, false);
+			}
+			phase.next();
+			updateGUIElements(phase);
+		}
+	}
+
+	/**
+	 * Switches the program into the previous phase. Can only happen while in
+	 * phase 1.
+	 */
+	@FXML
+	public void prevPhase() {
+		// not relying on GUI-flow
+		if (phase.get() == 1) {
+			txtCode.setText(codeBackup.getLastBackup());
+			chartTracker.greenBack();
+			tracker.callDump("", 1, true);
+			phase.previous();
+			updateGUIElements(phase);
+		}
+	}
 
     /**
      * Open Catalog chooser window, prepare main window for user interaction.
@@ -131,71 +176,6 @@ public class Controller implements Initializable{
         codeBackup.setNewBackup(txtCode.getText());
     }
 
-                                            /*BABYSTEPS METHODS*/
-    /**
-     * Creates a new Thread for babysteps. Checks for changes each second.
-     */
-	@FXML
-	public void turnBabystepsOn() {
-        babystpsOnBtn.setDisable(true);
-        babystpsOffBtn.setDisable(false);
-        t = new Thread(() -> {
-            Thread thisThread = Thread.currentThread();
-            while (t == thisThread) {
-                try {
-                    Thread.sleep(1000);
-                    if (babysteps.isEnabled() && !babysteps.timeLeft() && phase.get() != 2) {
-                        if (phase.get() == 0)
-                            txtTest.setText(testBackup.getLastBackup());
-                        if (phase.get() == 1)
-                            txtCode.setText(codeBackup.getLastBackup());
-                        prevPhase();
-                        babysteps.startPhase();
-                    }
-                } catch (InterruptedException e) {
-                    stop();
-                }
-            }
-        });
-
-        (txtCode.getScene().getWindow()).setOnCloseRequest(we -> stop());
-
-        t.start();
-        babysteps.enable();
-	}
-
-    private void stop(){
-        Thread.currentThread().interrupt();
-        t = null;
-    }
-
-    /**
-     * Interrupts the babysteps thread and sets babysteps to disabled.
-     */
-	@FXML
-	public void turnBabystepsOff() {
-        babystpsOnBtn.setDisable(false);
-        babystpsOffBtn.setDisable(true);
-		if (babysteps.isEnabled()) {
-			stop();
-		}
-		babysteps.disable();
-	}
-
-    /**
-     * Opens a window in which the user can enter a new babysteps time. Input can be between 1 and 180 seconds.
-     */
-	@FXML
-	public void setBabystepsTime() {
-		TDDTDialog dialog = new TDDTDialog("textInput", "babysteps duration in sec. (Between  1 and 180):");
-		int result = Integer.parseInt((String) dialog.getValue());
-		if (result >= 1 && result <= 180) {
-			babysteps.setDuration(result);
-		} else {
-			new TDDTDialog("alert", "Input not accepted. It has to be between 1 and 180");
-		}
-	}
-
                                             /*TRACKING*/
 
     /**
@@ -234,55 +214,66 @@ public class Controller implements Initializable{
         ce.showStage((Stage) txtCode.getScene().getWindow());
     }
 
-                                            /*PHASE LOGIC*/
+										/*BABYSTEPS METHODS*/
+	/**
+	 * Creates a new Thread for babysteps. Checks for changes each second.
+	 */
+	public void turnBabystepsOn() {
+		t = new Thread(() -> {
+			Thread thisThread = Thread.currentThread();
+			while (t == thisThread) {
+				try {
+					Thread.sleep(1000);
+					if (babysteps.isEnabled() && !babysteps.timeLeft() && phase.get() != 2) {
+						if (phase.get() == 0)
+							txtTest.setText(testBackup.getLastBackup());
+						if (phase.get() == 1)
+							txtCode.setText(codeBackup.getLastBackup());
+						prevPhase();
+						babysteps.startPhase();
+					}
+				} catch (InterruptedException e) {
+					stop();
+				}
+			}
+		});
 
-    /**
-     * This method switches the program into the next TDD phase if the entered code meets the requirements.
-     * Each time the Phase is switched a new backup and a new tracker dump is created.
-     */
-    @FXML
-    public void nextPhase() {
-        boolean passed = false;
-        int currentPhase = phase.get();
+		(txtCode.getScene().getWindow()).setOnCloseRequest(we -> stop());
 
-        //compile
-        if (currentPhase == 0) {
-            passed = checkTest();
-        } else if (currentPhase == 1 | currentPhase == 2) {
-            passed = checkCodeAndTest();
-        }
+		t.start();
+		babysteps.enable();
+	}
 
-        //actions if compiled properly and tests run
-        if (passed) {
-            currentPhase = phase.get();
-            chartTracker.nextPhase(currentPhase);
-            //TODO include branching to tracker
-            if (currentPhase == 0) {
-                testBackup.setNewBackup(txtTest.getText());
-                tracker.callDump(txtTest.getText(), 0, false);
-            } else {
-                codeBackup.setNewBackup(txtCode.getText());
-                tracker.callDump(txtCode.getText(), currentPhase, false);
-            }
-            phase.next();
-            updateGUIElements(phase);
-        }
-    }
+	private void stop() {
+		Thread.currentThread().interrupt();
+		t = null;
+	}
 
-    /**
-     * Switches the program into the previous phase. Can only happen while in phase 1.
-     */
-    @FXML
-    public void prevPhase() {
-        //not relying on GUI-flow
-        if (phase.get() == 1) {
-            txtCode.setText(codeBackup.getLastBackup());
-            chartTracker.greenBack();
-            tracker.callDump("", 1, true);
-            phase.previous();
-            updateGUIElements(phase);
-        }
-    }
+	/**
+	 * Interrupts the babysteps thread and sets babysteps to disabled.
+	 */
+	public void turnBabystepsOff() {
+		if (babysteps.isEnabled()) {
+			stop();
+		}
+		babysteps.disable();
+	}
+
+	/**
+	 * Opens a window in which the user can enter a new babysteps time. Input
+	 * can be between 1 and 180 seconds.
+	 */
+	@Deprecated
+	public void setBabystepsTime() {
+		TDDTDialog dialog = new TDDTDialog("textInput", "babysteps duration in sec. (Between  1 and 180):");
+		int result = Integer.parseInt((String) dialog.getValue());
+		if (result >= 1 && result <= 180) {
+			babysteps.setDuration(result);
+		} else {
+			new TDDTDialog("alert", "Input not accepted. It has to be between 1 and 180");
+		}
+	}
+
 
                                             /*INTERNAL METHODS*/
 
