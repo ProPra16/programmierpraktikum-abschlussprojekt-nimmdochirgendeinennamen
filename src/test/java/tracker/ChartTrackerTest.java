@@ -1,10 +1,8 @@
-package test.java.tracker;
+package tracker;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import main.java.tracker.ChartTracker;
 
 public class ChartTrackerTest {
 

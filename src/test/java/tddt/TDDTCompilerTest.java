@@ -1,11 +1,9 @@
-package test.java.tddt;
+package tddt;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import main.java.tddt.TDDTCompiler;
 
 public class TDDTCompilerTest {
 

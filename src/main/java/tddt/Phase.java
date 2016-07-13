@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.tddt;
+package tddt;
 
 /**
  * This class handles the phase state of the program

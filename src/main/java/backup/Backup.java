@@ -6,9 +6,9 @@
 //Kann man das nicht auch als StringProperty machen?
 //Waere keine extra Klasse noetig
 
-package main.java.backup;
+package backup;
 
-import main.java.tddt.Controller;
+import tddt.Controller;
 
 /**
  * This class is used to save the version of the code when the babysteps timer is active. After the time has run out,

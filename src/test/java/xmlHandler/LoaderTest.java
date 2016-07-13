@@ -12,15 +12,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package test.java.xmlHandler;
+package xmlHandler;
 
-import main.java.xmlHandler.InvalidFileException;
-import main.java.xmlHandler.XMLLoader;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class LoaderTest {
     XMLLoader testLoader = new XMLLoader(new File("src/main/java/xmlHandler/catalog.xml"));

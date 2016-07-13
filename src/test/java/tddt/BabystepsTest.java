@@ -1,10 +1,8 @@
-package test.java.tddt;
+package tddt;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import main.java.tddt.Babysteps;
 
 
 public class BabystepsTest {

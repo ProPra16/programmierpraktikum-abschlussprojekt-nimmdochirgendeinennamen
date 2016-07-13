@@ -12,25 +12,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package main.java.tddt;
+package tddt;
 
 import java.io.File;
 import java.io.IOException;
 
+import backup.Backup;
+import catalogEditor.CatalogEditor;
+import chart.TrackingChart;
+import exerciseChooser.ExerciseChooser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import main.java.backup.Backup;
-import main.java.catalogEditor.CatalogEditor;
-import main.java.chart.TrackingChart;
-import main.java.exerciseChooser.ExerciseChooser;
-import main.java.tracker.ChartTracker;
-import main.java.tracker.Tracker;
-import main.java.xmlHandler.InvalidFileException;
-import main.java.xmlHandler.XMLLoader;
+import tracker.ChartTracker;
+import tracker.Tracker;
+import xmlHandler.InvalidFileException;
+import xmlHandler.XMLLoader;
 
 /**
  * This is the controller class for the main stage.

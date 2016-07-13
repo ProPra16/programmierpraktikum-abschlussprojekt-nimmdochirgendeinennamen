@@ -1,10 +1,8 @@
-package test.java.tracker;
+package tracker;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import main.java.tracker.Tracker;
 
 public class TrackerTest {
 	// callDump is not tested since LocalTime is too exact (but was tested

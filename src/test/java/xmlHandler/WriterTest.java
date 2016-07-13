@@ -12,19 +12,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package test.java.xmlHandler;
+package xmlHandler;
 
-import main.java.xmlHandler.XMLLoader;
-import main.java.xmlHandler.XMLWriter;
-import org.junit.Test;
-import org.xml.sax.SAXException;
+import static org.junit.Assert.assertEquals;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.junit.Test;
+import org.xml.sax.SAXException;
 
 public class WriterTest {
 

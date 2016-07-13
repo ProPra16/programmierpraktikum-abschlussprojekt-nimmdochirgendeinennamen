@@ -1,4 +1,4 @@
-package main.java.tddt;
+package tddt;
 
 /**
  * This class handles the Babysteps plugin.

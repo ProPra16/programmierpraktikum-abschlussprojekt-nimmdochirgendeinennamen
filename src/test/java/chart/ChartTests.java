@@ -1,10 +1,8 @@
-package test.java.chart;
+package chart;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import main.java.chart.TrackingChart;
 
 
 public class ChartTests {

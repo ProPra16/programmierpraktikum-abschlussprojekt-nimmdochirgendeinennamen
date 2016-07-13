@@ -1,4 +1,4 @@
-package main.java.chart;
+package chart;
 
 /**
  * The interface for chart, only public methods are written below.
