@@ -84,7 +84,7 @@ public class Controller {
 	}
 
 
-    									/*PHASE LOGIC*/
+    			/*PHASE LOGIC*/
 
 	/**
 	 * This method switches the program into the next TDD phase if the entered
@@ -176,7 +176,7 @@ public class Controller {
         codeBackup.setNewBackup(txtCode.getText());
     }
 
-                                            /*TRACKING*/
+    			/*TRACKING*/
 
     /**
      * Opens a new window in which the TrackingChart is shown.
@@ -201,7 +201,7 @@ public class Controller {
             new TDDTDialog("alert", "Please first load an exercise");
 	}
 
-                                            /*CATALOG EDITOR*/
+				/*CATALOG EDITOR*/
 
     /**
      * Opens a new stage in which the CatalogEditor is shown.
@@ -214,7 +214,7 @@ public class Controller {
         ce.showStage((Stage) txtCode.getScene().getWindow());
     }
 
-										/*BABYSTEPS METHODS*/
+				/*BABYSTEPS METHODS*/
 	/**
 	 * Creates a new Thread for babysteps. Checks for changes each second.
 	 */
@@ -262,6 +262,7 @@ public class Controller {
 	/**
 	 * Opens a window in which the user can enter a new babysteps time. Input
 	 * can be between 1 and 180 seconds.
+	 * Deprecated: The time will be set over the XML-file in the newer versions
 	 */
 	@Deprecated
 	public void setBabystepsTime() {
@@ -275,7 +276,7 @@ public class Controller {
 	}
 
 
-                                            /*INTERNAL METHODS*/
+				/*INTERNAL METHODS*/
 
     /**
      * Checks if the test is compilable.
