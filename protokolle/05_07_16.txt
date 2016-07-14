@@ -15,7 +15,7 @@ Projektziele/TODO:
 
 Individuelle Ziele:
 	Caro 	: Refactor/Tests
-	Dominik : Refactor/Struktur
+	dokuh100 : Refactor/Struktur
 	Kai B. 	: Refactor/Struktur
 	Jule 	: Tracker optimieren/Tests
 	Kai H. 	: XML-Loader mergen 

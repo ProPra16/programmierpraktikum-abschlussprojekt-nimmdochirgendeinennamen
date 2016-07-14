@@ -15,7 +15,7 @@ Projektziele/TODO:
 
 Individuelle Ziele:
 	Caro 	: Refactor
-	Dominik : GUI reduzieren, Refactor
+	dokuh100 : GUI reduzieren, Refactor
 	Kai B. 	: TrackerChart aufrufbar machen
 	Jule 	: Refactor
 	Kai H. 	: KatalogEditor, Refactor, Javadoc Kommentare

@@ -31,7 +31,7 @@ GitHub:
 
 Aufteilung:
 	Caro 	: Chart-Utility-Klassen (TrackerLoader) + Bilder für Phasendarstellung + CSS
-	Dominik : Controller und GUI
+	dokuh100 : Controller und GUI
 	Kai C. 	: Chart-Klasse
 	Jule 	: Tracker
 	Kai H. 	: KatalogLoader

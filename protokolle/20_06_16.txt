@@ -5,7 +5,7 @@ Organisation:
 Projekt:
 	Vorbereiten des ersten Treffen:
 		Caro 	arbeitet sich in Gradle ein
-		Dominik setzte GitHub auf
+		dokuh100 setzte GitHub auf
 		Kai C. 	schaut sich Travis an
 		Jule 	bereitet eine allgemeine Projektstruktur vor
 		Kai H. 	überlegt sich ein Design

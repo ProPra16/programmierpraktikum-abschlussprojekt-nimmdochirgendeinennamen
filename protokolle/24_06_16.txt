@@ -11,7 +11,7 @@ Projektziele/TODO:
 
 Individuelle Ziele:
 	Caro 	: Chart-Utility-Klassen (TrackerLoader) + Bilder für Phasendarstellung
-	Dominik : Controller und GUI
+	dokuh100 : Controller und GUI
 	Kai C. 	: Chart-Klasse
 	Jule 	: Tracker
 	Kai H. 	: KatalogLoader

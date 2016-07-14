@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
+ * Copyright (c) 2016. Caro Jachmann, Jule Pohlmann, Kai Brandt, Kai Holzinger
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
  *
@@ -26,7 +26,7 @@ import vk.core.api.TestResult;
 
 /**
  * This class handles the interaction between the kata API and TDDT.
- * @author Dominik Kuhnen
+ * @author unknown
  * @version unknown
  */
 public class TDDTCompiler {

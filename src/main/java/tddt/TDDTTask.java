@@ -1,6 +1,6 @@
 package tddt;
 /*
- * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
+ * Copyright (c) 2016. Caro Jachmann, Jule Pohlmann, Kai Brandt, Kai Holzinger
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
  *
@@ -18,7 +18,7 @@ import java.io.File;
 /**
  * This class was used as a task loader at the beginning of this project. However, we decided to switch
  * to the XML Reader {@link main.java.xmlHandler.XMLLoader}.
- * @author Dominik Kuhnen
+ * @author unknown
  * @version unknown
  */
 @Deprecated //used XMLLoader instead

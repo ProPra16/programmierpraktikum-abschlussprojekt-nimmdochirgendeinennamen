@@ -20,7 +20,7 @@ Projektziele/TODO:
 
 Individuelle Ziele:
 	Caro 	: Babysteps
-	Dominik : Refactor/Struktur
+	dokuh100 : Refactor/Struktur
 	Kai C. 	: Refactor/Struktur
 	Jule 	: Tracker
 	Kai H. 	: Merge leiten/ Qualitätskontrolle

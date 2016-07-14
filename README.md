@@ -29,7 +29,7 @@ gradle idea
 
 ## Licensing
 
-Copyright (c) 2016. Caro Jachmann, Dominik K, Jule Pohlmann, Kai Brandt, Kai Holzinger
+Copyright (c) 2016. Caro Jachmann, Jule Pohlmann, Kai Brandt, Kai Holzinger
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

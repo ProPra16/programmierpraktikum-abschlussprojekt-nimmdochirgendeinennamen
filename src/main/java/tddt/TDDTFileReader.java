@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016. Caro Jachmann, Dominik Kuhnen, Jule Pohlmann, Kai Brandt, Kai Holzinger
+ * Copyright (c) 2016. Caro Jachmann, Jule Pohlmann, Kai Brandt, Kai Holzinger
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
  *
@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * This class handles file reading for some of the other TDD classes.
- * @author Dominik Kuhnen
+ * @author unknown
  * @version unknown
  */
 public class TDDTFileReader {
