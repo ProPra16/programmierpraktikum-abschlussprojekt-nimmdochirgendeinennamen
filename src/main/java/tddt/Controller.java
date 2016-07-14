@@ -17,6 +17,7 @@ package tddt;
 import java.io.File;
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,21 +36,11 @@ import tddt.tracker.Tracker;
 /**
  * This is the controller class for the main stage.
  * @author unknown
- * @author Caro Jachmann
  * @version unknown
  */
 public class Controller {
     // TODO thinking about ExceptionHandler for Dialogspawning and way smaller
-    // TODO String backup Wrapper, used for GUI-flow and Babysteps aswell.
-    // TODO proper Thead killing/interrupting on javafx stage close
-	/* might use something like: Sijo Jose on http://stackoverflow.com/questions/22576261/how-get-close-event-of-stage-in-javafx
-	 * 	stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-	 * 		public void handle(WindowEvent we) {
-	 * 			t.interrupt();
-	 *		}
-	 *	});
-	 * not sure if this will include the "X"-Button in the upper right corner...probably tho
-	 **/
+
 
     @FXML public TextArea txtCode;
     @FXML public TextArea txtTest;
@@ -58,13 +49,15 @@ public class Controller {
     @FXML private ImageView imgTest;
     @FXML private ImageView imgCode;
     @FXML private ImageView imgRefactor;
-    @FXML private Label lblTimeLeft;
+    @FXML public Label lblTimeLeft;
+    @FXML public Label lblCounter;
 
     private Backup codeBackup;
 	private Backup testBackup;
     private Phase phase;
 	private Babysteps babysteps;
 	private Thread t;
+	private Thread m;
 	private TDDTCompiler compiler;
 	private ChartTracker chartTracker;
 	private Tracker tracker;
@@ -120,6 +113,7 @@ public class Controller {
 			}
 			phase.next();
 			updateGUIElements(phase);
+			if(babysteps.isEnabled()) babysteps.startPhase();
 		}
 	}
 
@@ -136,6 +130,7 @@ public class Controller {
 			tracker.callDump("", 1, true);
 			phase.previous();
 			updateGUIElements(phase);
+			babysteps.startPhase();
 		}
 	}
 
@@ -222,19 +217,21 @@ public class Controller {
 	 * Creates a new Thread for babysteps. Checks for changes each second.
 	 */
 	public void turnBabystepsOn() {
-		//TODO proper Thread/Babysteps class with binded lblTimeLeft
+
 		t = new Thread(() -> {
 			Thread thisThread = Thread.currentThread();
 			while (t == thisThread) {
 				try {
 					Thread.sleep(1000);
 					if (babysteps.isEnabled() && !babysteps.timeLeft() && phase.get() != 2) {
-						if (phase.get() == 0)
+						if (phase.get() == 0) {
 							txtTest.setText(testBackup.getLastBackup());
-						if (phase.get() == 1)
+							babysteps.startPhase();
+						}
+						if (phase.get() == 1) {
 							txtCode.setText(codeBackup.getLastBackup());
 						prevPhase();
-						babysteps.startPhase();
+						}
 					}
 				} catch (InterruptedException e) {
 					stop();
@@ -242,23 +239,50 @@ public class Controller {
 			}
 		});
 
-		(txtCode.getScene().getWindow()).setOnCloseRequest(we -> stop());
 
-		t.start();
-		babysteps.enable();
-	}
+	        m = new Thread(() -> {
+	            while (babysteps.timeLeft()) {
+	                try {
+	                    Thread.sleep(1000);
+	                    babysteps.update();
+	                    Platform.runLater(new Runnable() {
+	                        @Override
+	                        public void run() {
+	                             lblCounter.setText(babysteps.timeLeftR);
+	                       }
+	               });
+	                }
+	                catch (InterruptedException e) {
+	                    stopUpdate();
+	                }
+	            }
+	        });
 
-	private void stop() {
-		Thread.currentThread().interrupt();
-		t = null;
-	}
+	        (txtCode.getScene().getWindow()).setOnCloseRequest(we -> stop());
+
+	        m.start();
+	        t.start();
+	        babysteps.enable();
+	    }
+
+	    private void stop() {
+	        Thread.currentThread().interrupt();
+	        t = null;
+	    }
+
+	    private void stopUpdate() {
+	        Thread.currentThread().interrupt();
+	        m = null;
+	    }
+
+
 
 	/**
 	 * Interrupts the babysteps thread and sets babysteps to disabled.
 	 */
 	public void turnBabystepsOff() {
 		if (babysteps.isEnabled()) {
-			stop();
+			stop(); stopUpdate();
 		}
 		babysteps.disable();
 	}
@@ -301,9 +325,9 @@ public class Controller {
 		} else {
 			//on compile succeeded
 			passed = compiler.compileAndRunTests(code, testname);
-			if (passed) {
-				//on tests succeeded
-				new TDDTDialog("alert", "At least one test has to fail!");
+			if (!passed) {
+				//on tests failed
+				new TDDTDialog("testFail", compiler.getInfo());
 				return false;
 			}
 		}

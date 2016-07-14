@@ -66,7 +66,10 @@
                         <Image url="/pictures/Refactor_v2.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblTimeLeft" text="Time left: " GridPane.rowIndex="5" />
+                  <GridPane GridPane.rowIndex="5">
+                 	 <Label fx:id="lblTimeLeft" text="Time left: " GridPane.columnIndex="1"/>
+                 	 <Label fx:id="lblCounter" text="" GridPane.columnIndex="2" />
+                  </GridPane>
                </children>
             </GridPane>
             <TextArea fx:id="txtCode" disable="true" maxHeight="Infinity" maxWidth="Infinity" text="// code here" GridPane.vgrow="ALWAYS" />

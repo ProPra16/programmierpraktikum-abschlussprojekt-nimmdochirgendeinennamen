@@ -6,38 +6,49 @@ package tddt;
  * @version unknown
  */
 public class Babysteps {
-	private long startTime;
-	public long duration;
-	private boolean enabled;
+	    private long startTime;
+	    public long duration;
+	    private boolean enabled;
+	    public String timeLeftR;
 
-    /**
-     * A babysteps object is created with the boolean variable 'enabled' set to false and the
-     * long variable 'duration' set to 180 (seconds).
-     */
-	public Babysteps() {
-		this.enabled = false;
-		this.duration = 180;
-	}
+	    /**
+	     * A babysteps object is created with the boolean variable 'enabled' set to false and the
+	     * long variable 'duration' set to 180 (seconds).
+	     */
+	    public Babysteps() {
+	        this.enabled = false;
+	        this.duration = 180;
+	        this.timeLeftR = "";
+	    }
 
-    /**
-     * This method sets the start time of the Object to the current time.
-     */
-	void startPhase() {
-		this.startTime = System.currentTimeMillis();
-	}
+	    /**
+	     * This method sets the start time of the Object to the current time.
+	     */
+	    void startPhase() {
+	        this.startTime = System.currentTimeMillis();
+	    }
 
-    /**
-     * This method subtracts the {@link #startTime } from the current time.
-     * The amount of milliseconds that emerges is converted to seconds.
-     * @return True if the elapsed time is less than the Babysteps cycle duration, otherwise false.
-     */
-	boolean timeLeft() {
-		long currentTime = System.currentTimeMillis();
-		long delta = currentTime - startTime;
-		int time = (int)delta / 1000;
 
-		return time < duration;
-	}
+	    /**
+	     * This method subtracts the {@link #startTime } from the current time.
+	     * The amount of milliseconds that emerges is converted to seconds.
+	     * @return True if the elapsed time is less than the Babysteps cycle duration, otherwise false.
+	     */
+	    boolean timeLeft() {
+	        long currentTime = System.currentTimeMillis();
+	        long delta = currentTime - startTime;
+	        int time = (int)delta / 1000;
+
+	        return time < duration;
+	    }
+
+	    void update() {
+	        long currentTime = System.currentTimeMillis();
+	        long delta = currentTime - startTime;
+	        int time = (int)delta / 1000;
+	        int übrigeZeit = (int) duration - time;
+	        timeLeftR = String.valueOf(übrigeZeit);
+	    }
 
     /**
      * @return True if babysteps is enabled
