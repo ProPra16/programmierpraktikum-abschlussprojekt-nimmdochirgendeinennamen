@@ -34,7 +34,7 @@ public class TDDT extends Application{
 	public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/FXML_layouts/TDDTLayout.fxml"));
-			Scene scene = new Scene(root, 800, 500);
+			Scene scene = new Scene(root, 800, 550);
 
 			primaryStage.setScene(scene);
 			primaryStage.getIcons().add(new Image("/pictures/icon.png"));
