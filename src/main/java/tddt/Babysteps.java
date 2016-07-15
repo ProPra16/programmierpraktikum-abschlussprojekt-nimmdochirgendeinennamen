@@ -46,8 +46,8 @@ public class Babysteps {
 	        long currentTime = System.currentTimeMillis();
 	        long delta = currentTime - startTime;
 	        int time = (int)delta / 1000;
-	        int übrigeZeit = (int) duration - time;
-	        timeLeftR = String.valueOf(übrigeZeit);
+	        int uebrigeZeit = (int) duration - time;
+	        timeLeftR = String.valueOf(uebrigeZeit);
 	    }
 
     /**
