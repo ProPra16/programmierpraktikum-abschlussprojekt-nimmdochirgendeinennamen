@@ -19,7 +19,7 @@
                <items>
                   <Menu mnemonicParsing="false" text="Tracker">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#showTrackingChart" text="Time spend" />
+                        <MenuItem mnemonicParsing="false" onAction="#showTrackingChart" text="Time spent" />
                       <MenuItem mnemonicParsing="false" onAction="#showTrackerLog" text="Show all" />
                     </items>
                   </Menu>
