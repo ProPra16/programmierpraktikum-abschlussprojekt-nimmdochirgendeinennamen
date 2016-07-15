@@ -130,7 +130,7 @@ public class Tracker {
 	 * and changes the initial code to the current code. It then returns the saved difference as a String.
 	 * @param now The current code / test
 	 * @param phase phase: 0 = RED, 1 = GREEN, 2 = REFACTOR
-     * @return A String that contains all the changes that've been done to the initial code.
+     * @return A String that contains all the changes that have been made to the initial code.
      */
 	public String dump(String now, int phase) {
 		// initialise Strings for output
