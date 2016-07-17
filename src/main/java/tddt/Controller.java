@@ -325,11 +325,12 @@ public class Controller {
 		} else {
 			//on compile succeeded
 			passed = compiler.compileAndRunTests(code, testname);
-			if (!passed) {
-				//on tests failed
-				new TDDTDialog("testFail", compiler.getInfo());
+			if (passed) {
+				//on tests succeeded
+				new TDDTDialog("alert", "At least one test has to fail!");
 				return false;
 			}
+			
 		}
 		// settings for next phase
 		btnPrevStep.setDisable(false);
