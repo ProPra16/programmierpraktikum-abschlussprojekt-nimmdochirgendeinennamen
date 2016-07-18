@@ -311,26 +311,27 @@ public class Controller {
      * @return True if test is compilable and is failing. Otherwise false.
      */
 	private boolean checkTest() {
-		String code = txtTest.getText();
-		String testname = xmlLoader.getTestName(exerciseIDX, 0);
+		String code       	    = txtCode.getText();
+		String test				= txtTest.getText();
+		String codeClassName    = xmlLoader.getClassName(exerciseIDX, 0);
+        String testClassName    = xmlLoader.getTestName(exerciseIDX, 0);
 		// check if compilable
 		if (!checkIfCompilableClass(code))
 			return false;
 		// try to compile and run tests
-		boolean passed = compiler.compileCode(code, testname);
+		boolean passed = compiler.compileCode(test, testClassName);
 		if (!passed) {
 			//on compile failed
 			new TDDTDialog("compileError", compiler.getInfo());
 			return true;
 		} else {
 			//on compile succeeded
-			passed = compiler.compileAndRunTests(code, testname);
+			passed = compiler.compileAndRunTests(code, codeClassName, test, testClassName);
 			if (passed) {
 				//on tests succeeded
 				new TDDTDialog("alert", "At least one test has to fail!");
 				return false;
 			}
-			
 		}
 		// settings for next phase
 		btnPrevStep.setDisable(false);
@@ -342,20 +343,22 @@ public class Controller {
      * @return True if code and test are compilable
      */
 	private boolean checkCodeAndTest() {
-		String code         = txtCode.getText();
-		String classname    = xmlLoader.getClassName(exerciseIDX, 0);
-        String testname     = xmlLoader.getTestName(exerciseIDX,0);
+		String code       	    = txtCode.getText();
+		String test				= txtTest.getText();
+		String codeClassName    = xmlLoader.getClassName(exerciseIDX, 0);
+        String testClassName    = xmlLoader.getTestName(exerciseIDX, 0);
 		// check if compilable
 		if (!checkIfCompilableClass(code))
 			return false;
 		// try to compile code
-		boolean passed = compiler.compileCode(txtCode.getText(), classname);
+		//boolean passed = compiler.compileCodeAndRunTests(code, codeClassName, testname, testClassName)
+		boolean passed = compiler.compileCode(txtCode.getText(), codeClassName);
 		if (!passed) {
 			new TDDTDialog("compileError", compiler.getInfo());
 			return false;
 		}
 		// try to compile and run tests
-		passed = compiler.compileAndRunTests(txtTest.getText(), testname);
+		passed = compiler.compileAndRunTests(code, codeClassName, test, testClassName);
 		// display in Dialog if failed
 		if (!passed) {
 			new TDDTDialog("testFail", compiler.getInfo());

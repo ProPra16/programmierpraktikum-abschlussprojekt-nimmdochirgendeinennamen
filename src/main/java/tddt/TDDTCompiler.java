@@ -68,15 +68,16 @@ public class TDDTCompiler {
 	 * @param className The classname of the code
      * @return True if the test is compile- and runnable. Otherwise false.
      */
-	public boolean compileAndRunTests(String code, String className) {
-		//String className       = findClassName(code).trim();
-		CompilationUnit cu     = new CompilationUnit(className, code, true);
-		JavaStringCompiler jsc = CompilerFactory.getCompiler(cu);
+	public boolean compileAndRunTests(String code, String codeClassName, String test, String testClassName) {
+		CompilationUnit cuCode = new CompilationUnit(codeClassName, code, false);
+		CompilationUnit cuTest = new CompilationUnit(testClassName, test, true);
+		JavaStringCompiler jsc = CompilerFactory.getCompiler(cuCode, cuTest);
 		jsc.compileAndRunTests();
 		CompilerResult cr = jsc.getCompilerResult();
 
 		if (cr.hasCompileErrors()) {
-			info = formatCompileErrors(cr, cu);
+			info = formatCompileErrors(cr, cuCode);
+			info += formatCompileErrors(cr, cuTest);
 			return false;
 		}
 
