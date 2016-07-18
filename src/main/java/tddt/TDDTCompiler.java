@@ -64,10 +64,36 @@ public class TDDTCompiler {
 
 	/**
 	 * Compiles and runs the passed test and sets info to any error that may have occured.
-	 * @param code The code that is going to be compiled
-	 * @param className The classname of the code
-     * @return True if the test is compile- and runnable. Otherwise false.
-     */
+	 * @param code Code of code to be compiled
+	 * @param codeClassName Classname of the code
+	 * @param test Code of tests to be compiled
+	 * @param testClassName Classname of the test
+	 * @return True if the test is compile- and runnable. Otherwise false.
+	 */
+	public boolean compileCode(String code, String codeClassName, String test, String testClassName) {
+		CompilationUnit cuCode = new CompilationUnit(codeClassName, code, false);
+		CompilationUnit cuTest = new CompilationUnit(testClassName, test, true);
+		JavaStringCompiler jsc = CompilerFactory.getCompiler(cuCode, cuTest);
+
+		jsc.compileAndRunTests();
+		CompilerResult cr = jsc.getCompilerResult();
+
+		if (cr.hasCompileErrors()) {
+			info = formatCompileErrors(cr, cuTest);
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Compiles and runs the passed test and sets info to any error that may have occured.
+	 * @param code Code of code to be compiled
+	 * @param codeClassName Classname of the code
+	 * @param test Code of tests to be compiled
+	 * @param testClassName Classname of the test
+	 * @return True if the test is compile- and runnable. Otherwise false.
+	 */
 	public boolean compileAndRunTests(String code, String codeClassName, String test, String testClassName) {
 		CompilationUnit cuCode = new CompilationUnit(codeClassName, code, false);
 		CompilationUnit cuTest = new CompilationUnit(testClassName, test, true);

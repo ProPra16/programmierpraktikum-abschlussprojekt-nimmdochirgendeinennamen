@@ -323,10 +323,10 @@ public class Controller {
 		String codeClassName    = xmlLoader.getClassName(exerciseIDX, 0);
         String testClassName    = xmlLoader.getTestName(exerciseIDX, 0);
 		// check if compilable
-		if (!checkIfCompilableClass(code))
+		if (!checkIfCompilableClass(test))
 			return false;
 		// try to compile and run tests
-		boolean passed = compiler.compileCode(test, testClassName);
+		boolean passed = compiler.compileCode(code, codeClassName, test, testClassName);
 		if (!passed) {
 			//on compile failed
 			new TDDTDialog("compileError", compiler.getInfo());
@@ -358,8 +358,7 @@ public class Controller {
 		if (!checkIfCompilableClass(code))
 			return false;
 		// try to compile code
-		//boolean passed = compiler.compileCodeAndRunTests(code, codeClassName, testname, testClassName)
-		boolean passed = compiler.compileCode(txtCode.getText(), codeClassName);
+		boolean passed = compiler.compileCode(code, codeClassName, test, testClassName);
 		if (!passed) {
 			new TDDTDialog("compileError", compiler.getInfo());
 			return false;
