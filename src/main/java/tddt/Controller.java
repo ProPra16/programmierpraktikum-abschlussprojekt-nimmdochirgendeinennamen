@@ -67,6 +67,7 @@ public class Controller {
 
     /**
      * This method initializes some objects and disables the test textarea and the next step button.
+	 * Teammember continued to change it to not being an initialize method. Now its never used so whatever...
      */
     @FXML
 	public void initialize() {
@@ -241,16 +242,19 @@ public class Controller {
 
 
 	        m = new Thread(() -> {
-	            while (babysteps.timeLeft()) {
+				Thread thisThread = Thread.currentThread();
+	            while (m == thisThread) {
 	                try {
-	                    Thread.sleep(1000);
-	                    babysteps.update();
-	                    Platform.runLater(new Runnable() {
-	                        @Override
-	                        public void run() {
-	                             lblCounter.setText(babysteps.timeLeftR);
-	                       }
-	               });
+						Thread.sleep(1000);
+						Platform.runLater(() -> {
+							if(babysteps.timeLeft()) {
+								babysteps.update();
+								lblCounter.setText(babysteps.timeLeftR);
+							}else{
+								lblCounter.setText(String.valueOf((int)babysteps.duration));
+								babysteps.update();
+							}
+						});
 	                }
 	                catch (InterruptedException e) {
 	                    stopUpdate();
@@ -258,7 +262,10 @@ public class Controller {
 	            }
 	        });
 
-	        (txtCode.getScene().getWindow()).setOnCloseRequest(we -> stop());
+	        (txtCode.getScene().getWindow()).setOnCloseRequest(we ->  {
+				stop();
+				stopUpdate();
+			});
 
 	        m.start();
 	        t.start();
@@ -280,7 +287,7 @@ public class Controller {
 	/**
 	 * Interrupts the babysteps thread and sets babysteps to disabled.
 	 */
-	public void turnBabystepsOff() {
+	private void turnBabystepsOff() {
 		if (babysteps.isEnabled()) {
 			stop(); stopUpdate();
 		}
